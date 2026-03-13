@@ -82,7 +82,6 @@
   .hero-locked {
     font-family: 'Dancing Script', cursive;
     font-size: clamp(13px, 2.5vw, 18px);
-    font-weight: 600;
     color: var(--blush);
     opacity: 0.85;
     margin-top: 6px;
@@ -398,7 +397,7 @@
   .add-input:focus { border-color: var(--gold); }
 
   /* GUEST TABLE */
-  .guest-table { width: 100%; border-collapse: collapse; }
+  .guest-table { width: 100%; border-collapse: collapse; min-width: 380px; }
   .guest-table th {
     font-size: 10px;
     font-weight: 500;
@@ -416,8 +415,6 @@
     border-bottom: 1px solid var(--border);
     vertical-align: middle;
     font-size: 14px;
-    word-break: break-word;
-    overflow-wrap: anywhere;
   }
   .guest-table tr:last-child td { border-bottom: none; }
   .guest-table tr:hover td { background: #fdfaf7; }
@@ -572,11 +569,14 @@
     }
     .rsvp-num { font-size: 34px; }
     .rsvp-label { font-size: 9px; letter-spacing: 1.5px; }
-    .vendor-table { width: 100%; }
-    .vendor-table th, .vendor-table td { padding: 10px 10px; font-size: 13px; word-break: break-word; overflow-wrap: anywhere; }
-    .vendor-table td:first-child { min-width: 120px; }
+    .vendor-table th,
+    .vendor-table td { padding: 8px 6px; font-size: 11px; }
+    .vendor-table .editable-cell { font-size: 11px; }
+    .vendor-table .pill { font-size: 10px; padding: 3px 7px; white-space: nowrap; }
+    .vendor-table td:first-child { min-width: 90px; max-width: 120px; word-break: break-word; overflow-wrap: anywhere; }
+    .guest-table { min-width: 340px; }
     .guest-table th, .guest-table td { padding: 10px 10px; font-size: 13px; }
-    .pill { font-size: 11px; padding: 4px 10px; white-space: normal; }
+    .pill { font-size: 11px; padding: 4px 10px; }
     .checklist-item { padding: 11px 14px; gap: 10px; }
     .check-label { font-size: 13px; }
     .progress-label { padding: 8px 14px 4px; font-size: 11px; }
@@ -593,6 +593,10 @@
     .rsvp-summary { grid-template-columns: 1fr 1fr; }
     .rsvp-num { font-size: 28px; }
     .section-title-input { font-size: 15px; max-width: 150px; }
+    .vendor-table th,
+    .vendor-table td { padding: 6px 4px; font-size: 10px; }
+    .vendor-table .editable-cell { font-size: 10px; }
+    .vendor-table .pill { font-size: 9px; padding: 3px 6px; }
   }
 </style>
 </head>
