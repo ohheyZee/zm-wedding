@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Z & M's Wedding Dashboard</title>
+<title>Locked In!</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
 <style>
   :root {
@@ -36,103 +36,94 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    border-bottom: 1px solid rgba(200,169,110,0.25);
+    border-top: 3px solid transparent;
+    border-image: linear-gradient(90deg, transparent, var(--gold), transparent) 1;
   }
   .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(200,169,110,0.18) 0%, transparent 65%);
+    background: radial-gradient(ellipse at 50% 0%, rgba(200,169,110,0.22) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-dot {
     position: absolute;
     border-radius: 50%;
-    background: rgba(200,169,110,0.08);
+    background: rgba(200,169,110,0.12);
     animation: floatDot 6s ease-in-out infinite;
   }
-  .hero-dot:nth-child(1) { width:140px;height:140px;top:-40px;left:5%;animation-delay:0s; }
-  .hero-dot:nth-child(2) { width:80px;height:80px;top:10px;right:10%;animation-delay:1.5s; }
-  .hero-dot:nth-child(3) { width:55px;height:55px;bottom:8px;left:22%;animation-delay:3s; }
+  .hero-dot:nth-child(1) { width:120px;height:120px;top:-30px;left:8%;animation-delay:0s; }
+  .hero-dot:nth-child(2) { width:70px;height:70px;top:20px;right:12%;animation-delay:1.5s; }
+  .hero-dot:nth-child(3) { width:50px;height:50px;bottom:10px;left:20%;animation-delay:3s; }
   @keyframes floatDot {
     0%,100% { transform: translateY(0); }
     50% { transform: translateY(-12px); }
   }
-
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(32px, 7vw, 64px);
+    font-size: clamp(28px, 5vw, 48px);
     font-weight: 300;
-    letter-spacing: 3px;
     color: #fff;
+    letter-spacing: 2px;
     position: relative;
-    animation: fadeUp 0.6s ease both;
+    animation: fadeUp 0.7s ease both;
     animation-delay: 0.1s;
-    line-height: 1.1;
+    line-height: 1.2;
   }
-  .hero-title span {
+  .hero-title em {
+    font-style: italic;
     background: linear-gradient(135deg, #e8c97a 0%, #c8a96e 40%, #f0dfa0 70%, #c8a96e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    font-style: italic;
-    font-weight: 400;
   }
-
   .hero-divider {
     width: 48px;
     height: 1px;
-    background: rgba(200,169,110,0.45);
-    margin: 20px auto;
+    background: rgba(200,169,110,0.5);
+    margin: 18px auto 16px;
+    animation: fadeUp 0.7s ease both;
+    animation-delay: 0.25s;
     position: relative;
-    animation: fadeUp 0.6s ease both;
-    animation-delay: 0.22s;
   }
-
   .hero-date {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(15px, 2.5vw, 19px);
+    font-size: 18px;
     font-weight: 300;
     font-style: italic;
     color: var(--blush);
     position: relative;
-    animation: fadeUp 0.6s ease both;
-    animation-delay: 0.32s;
-    letter-spacing: 1px;
+    animation: fadeUp 0.7s ease both;
+    animation-delay: 0.35s;
   }
-
   .countdown-strip {
     display: inline-flex;
     align-items: baseline;
-    justify-content: center;
     gap: 10px;
-    margin-top: 28px;
+    margin-top: 24px;
     background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(200,169,110,0.22);
-    border-radius: 14px;
-    padding: 16px 40px;
+    border: 1px solid rgba(200,169,110,0.25);
+    border-radius: 40px;
+    padding: 10px 28px;
     position: relative;
-    animation: fadeUp 0.6s ease both;
-    animation-delay: 0.42s;
+    animation: fadeUp 0.7s ease both;
+    animation-delay: 0.45s;
   }
-  .countdown-num {
+  .countdown-strip .n {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(48px, 9vw, 76px);
+    font-size: 42px;
     font-weight: 300;
     color: var(--gold);
     line-height: 1;
   }
-  .countdown-label {
+  .countdown-strip .l {
     font-size: 11px;
-    letter-spacing: 3.5px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--muted);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
   }
-
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
+    from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
@@ -345,22 +336,6 @@
   .pill-blue   { background: #e6f0f8; color: #3a7aaa; }
   .pill-rose   { background: #fdeaea; color: #b05a5a; }
 
-  /* ADD ROW */
-  .add-row td { background: #fdfaf7; }
-  .add-input {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    color: var(--deep);
-    background: var(--cream);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 7px 12px;
-    width: 100%;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .add-input:focus { border-color: var(--gold); }
-
   /* GUEST TABLE */
   .guest-table { width: 100%; border-collapse: collapse; }
   .guest-table th {
@@ -496,22 +471,45 @@
     background: #fdfaf7;
   }
 
-  /* ADD VENDOR CATEGORY */
-  .add-category-row {
-    display: flex;
-    gap: 10px;
-    padding: 16px;
-    background: #fdfaf7;
-    border-top: 1px solid var(--border);
-    border-radius: 0 0 16px 16px;
+  /* ADD INPUT */
+  .add-input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--deep);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
   }
+  .add-input:focus { border-color: var(--gold); }
+
+  /* OVERVIEW PILLS ROW */
+  .overview-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    align-items: center;
+  }
+  .overview-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .overview-pill strong { color: var(--deep); font-weight: 500; }
 
   /* MOBILE RESPONSIVE */
   @media (max-width: 640px) {
     .content { padding: 20px 12px; }
-    .hero { padding: 36px 16px 32px; }
-    .countdown-strip { padding: 14px 28px; }
-    .countdown-num { font-size: 52px; }
+    .hero { padding: 32px 16px 28px; }
+    .countdown-strip .n { font-size: 34px; }
     .nav-wrap {
       padding: 0;
       overflow-x: auto;
@@ -546,9 +544,9 @@
       grid-template-columns: repeat(2, 1fr);
     }
     .rsvp-num { font-size: 36px; }
-    .add-category-row { flex-direction: column; }
     .checklist-add { flex-direction: column; }
     .checklist-add .btn { width: 100%; }
+    .overview-pill { font-size: 12px; padding: 6px 14px; }
   }
 </style>
 </head>
@@ -560,15 +558,14 @@
   <div class="hero-dot"></div>
   <div class="hero-dot"></div>
 
-  <div class="hero-title">Z &amp; M's <span>Wedding Dashboard</span></div>
-
+  <div class="hero-title">Z &amp; M's <em>Wedding Dashboard</em></div>
   <div class="hero-divider"></div>
-
   <div class="hero-date">Friday, July 31st, 2026</div>
-
-  <div class="countdown-strip">
-    <span class="countdown-num" id="cd-days">--</span>
-    <span class="countdown-label">days away</span>
+  <div style="display:flex;justify-content:center;margin-top:24px;animation:fadeUp 0.7s ease both;animation-delay:0.45s;">
+    <div class="countdown-strip">
+      <span class="n" id="cd-days">--</span>
+      <span class="l">days away</span>
+    </div>
   </div>
 </div>
 
@@ -591,10 +588,6 @@
   <!-- VENDORS TAB -->
   <div class="tab-panel" id="tab-vendors">
     <div id="vendor-sections"></div>
-    <div class="add-category-row" style="border-radius:16px;border:1px solid var(--border);">
-      <input class="add-input" id="new-cat-name" placeholder="New vendor category name..." style="flex:1"/>
-      <button class="btn btn-gold" onclick="addVendorCategory()">+ Add Category</button>
-    </div>
   </div>
 
   <!-- GUESTS TAB -->
@@ -627,51 +620,71 @@ let vendorData = [
   {
     id: 1, title: 'Venue',
     items: [
-      { id: 1, name: 'Royal King Event Centre', booked: 'booked', deposit: 'paid', link: '' },
+      { id: 1, name: 'Royal King Event Centre', booked: 'booked', deposit: 'paid' },
     ]
   },
   {
     id: 3, title: 'Catering',
     items: [
-      { id: 1, name: 'Maryan Afgooye Catering', booked: 'booked', deposit: 'none', link: '' },
-      { id: 2, name: 'Cake', booked: 'not booked', deposit: 'none', link: '' },
-      { id: 3, name: 'Dessert Table', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 1, name: 'Maryan Afgooye Catering', booked: 'booked', deposit: 'none' },
+      { id: 2, name: 'Cake', booked: 'not booked', deposit: 'none' },
+      { id: 3, name: 'Dessert Table', booked: 'not booked', deposit: 'none' },
     ]
   },
   {
     id: 2, title: 'Photography & Film',
     items: [
-      { id: 1, name: 'Photographer', booked: 'not booked', deposit: 'none', link: '' },
-      { id: 2, name: 'Photo Booth', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 1, name: 'Photographer', booked: 'not booked', deposit: 'none' },
+      { id: 2, name: 'Photo Booth', booked: 'not booked', deposit: 'none' },
     ]
   },
   {
     id: 4, title: 'Bride & Groom',
     items: [
-      { id: 1, name: 'Bridal Dress', booked: 'not booked', deposit: 'none', link: '' },
-      { id: 2, name: 'Bridal Hair Stylist', booked: 'not booked', deposit: 'none', link: '' },
-      { id: 3, name: 'Bridal Makeup Artist', booked: 'not booked', deposit: 'none', link: '' },
-      { id: 4, name: "Groom's Suit", booked: 'not booked', deposit: 'none', link: '' },
-      { id: 5, name: "Groom's Hair Cut", booked: 'not booked', deposit: 'none', link: '' },
+      { id: 1, name: 'Bridal Dress', booked: 'not booked', deposit: 'none' },
+      { id: 2, name: 'Bridal Hair Stylist', booked: 'not booked', deposit: 'none' },
+      { id: 3, name: 'Bridal Makeup Artist', booked: 'not booked', deposit: 'none' },
+      { id: 4, name: 'Groom\'s Suit', booked: 'not booked', deposit: 'none' },
+      { id: 5, name: 'Groom\'s Hair Cut', booked: 'not booked', deposit: 'none' },
     ]
   },
   {
     id: 5, title: 'Music & Entertainment',
     items: [
-      { id: 1, name: "Venue's Plug and Play", booked: 'not booked', deposit: 'none', link: '' },
-      { id: 2, name: 'Playlists', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 1, name: 'Venue\'s Plug and Play', booked: 'not booked', deposit: 'none' },
+      { id: 2, name: 'Playlists', booked: 'not booked', deposit: 'none' },
     ]
   },
   {
     id: 6, title: 'Decor',
     items: [
-      { id: 1, name: 'JN Events and Decor', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 1, name: 'JN Events and Decor', booked: 'not booked', deposit: 'none' },
+    ]
+  },
+  {
+    id: 7, title: 'Logistics',
+    items: [
+      { id: 1, name: 'Enterprise Markham', booked: 'booked', deposit: 'paid' },
+      { id: 2, name: 'Radisson Hotel', booked: 'booked', deposit: 'none' },
+      { id: 3, name: 'Nikkah Certificate', booked: 'not booked', deposit: 'none' },
+      { id: 4, name: 'Officiant (Imam)', booked: 'not booked', deposit: 'none' },
     ]
   },
 ];
 
 let guestData = [
-  { id: 1, title: "Bride's Family", items: [] },
+  {
+    id: 1, title: "Bride's Family",
+    items: [
+      { id: 1, firstName: 'Istanbul', lastName: 'Ali', rsvp: 'confirmed', event: 'both' },
+      { id: 2, firstName: 'Lul', lastName: 'Osman', rsvp: 'confirmed', event: 'both' },
+      { id: 3, firstName: 'Nadia', lastName: 'Ghedi', rsvp: 'confirmed', event: 'both' },
+      { id: 4, firstName: 'Nawal', lastName: 'Ghedi', rsvp: 'confirmed', event: 'both' },
+      { id: 5, firstName: 'Ayoub', lastName: 'Osman', rsvp: 'confirmed', event: 'both' },
+      { id: 6, firstName: 'Amin', lastName: 'Osman', rsvp: 'confirmed', event: 'both' },
+      { id: 7, firstName: 'Ismahan', lastName: 'Osman', rsvp: 'confirmed', event: 'both' },
+    ]
+  },
   { id: 2, title: "Groom's Family", items: [] },
   { id: 3, title: "Bride's Guest", items: [] },
   { id: 4, title: "Groom's Guest", items: [] },
@@ -767,7 +780,7 @@ function renderOverview() {
   `;
 }
 
-// VENDORS
+// VENDORS — no Link column, no Delete Category button
 function bookedPill(status) {
   if (status === 'booked') return `<span class="pill pill-green">Booked</span>`;
   return `<span class="pill pill-red">Not Booked</span>`;
@@ -801,35 +814,11 @@ function deleteVendorItem(catId, itemId) {
   cat.items = cat.items.filter(i=>i.id!==itemId);
   renderAll();
 }
-function addVendorItem(catId) {
-  const cat = vendorData.find(c=>c.id===catId);
-  const nameEl = document.getElementById(`add-vendor-name-${catId}`);
-  const name = nameEl.value.trim();
-  if (!name) return;
-  cat.items.push({ id: ++_vitId, name, booked: 'not booked', deposit: 'none', link: '' });
-  renderAll();
-}
-function deleteVendorCategory(catId) {
-  if (!confirm('Delete this category and all its vendors?')) return;
-  vendorData = vendorData.filter(c=>c.id!==catId);
-  renderAll();
-}
 function updateCategoryTitle(catId, val, type) {
   if (type === 'vendor') vendorData.find(c=>c.id===catId).title = val;
   else if (type === 'guest') guestData.find(c=>c.id===catId).title = val;
   else if (type === 'checklist') checklistData.find(c=>c.id===catId).title = val;
   renderOverview();
-}
-function addVendorCategory() {
-  const nameEl = document.getElementById('new-cat-name');
-  const name = nameEl.value.trim();
-  if (!name) return;
-  vendorData.push({ id: ++_vcatId, title: name, items: [] });
-  nameEl.value = '';
-  renderAll();
-}
-function openVendorLink(url) {
-  if (url && (url.startsWith('http'))) window.open(url, '_blank');
 }
 
 function renderVendors() {
@@ -842,17 +831,13 @@ function renderVendors() {
           <input class="section-title-input" value="${esc(cat.title)}" onchange="updateCategoryTitle(${cat.id},this.value,'vendor')" title="Click to rename"/>
           <span class="section-count">${cat.items.length}</span>
         </div>
-        <div class="section-actions">
-          <button class="btn btn-danger" onclick="deleteVendorCategory(${cat.id})">Delete Category</button>
-        </div>
       </div>
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
-      <table class="vendor-table" style="min-width:500px;">
+      <table class="vendor-table" style="min-width:360px;">
         <thead><tr>
-          <th style="width:32%">Vendor</th>
-          <th style="width:15%">Booked</th>
-          <th style="width:15%">Deposit</th>
-          <th>Link</th>
+          <th style="width:50%">Vendor</th>
+          <th style="width:20%">Booked</th>
+          <th style="width:20%">Deposit</th>
           <th style="width:40px"></th>
         </tr></thead>
         <tbody>
@@ -862,21 +847,10 @@ function renderVendors() {
         <td><input class="editable-cell" value="${esc(item.name)}" onchange="updateVendorField(${cat.id},${item.id},'name',this.value)" placeholder="Vendor name"/></td>
         <td><span onclick="cycleBooked(${cat.id},${item.id})">${bookedPill(item.booked)}</span></td>
         <td><span onclick="cycleDeposit(${cat.id},${item.id})">${depositPill(item.deposit)}</span></td>
-        <td>
-          <input class="editable-cell" value="${esc(item.link)}" placeholder="https://..."
-            onchange="updateVendorField(${cat.id},${item.id},'link',this.value)"
-            ondblclick="openVendorLink(this.value)"
-            title="Double-click to open link"/>
-        </td>
         <td><button class="btn-icon" onclick="deleteVendorItem(${cat.id},${item.id})" title="Delete">&#215;</button></td>
       </tr>`;
     });
     html += `
-        <tr class="add-row">
-          <td><input class="add-input" id="add-vendor-name-${cat.id}" placeholder="New vendor name..." onkeydown="if(event.key==='Enter')addVendorItem(${cat.id})"/></td>
-          <td colspan="3" style="color:var(--muted);font-size:12px;">Press Enter or click Add</td>
-          <td><button class="btn btn-gold" onclick="addVendorItem(${cat.id})" style="padding:7px 12px;">+</button></td>
-        </tr>
         </tbody>
       </table>
       </div>
