@@ -548,13 +548,76 @@
   }
   .overview-pill strong { color: var(--deep); font-weight: 500; }
 
-  /* MOBILE */
-  @media(max-width: 640px) {
-    .content { padding: 20px 16px; }
-    .nav-wrap { padding: 0 16px; }
-    .tab-btn { padding: 14px 14px; font-size: 11px; }
-    .hero { padding: 36px 20px 30px; }
-    .rsvp-summary { padding: 20px; gap: 16px; }
+  /* ── MOBILE RESPONSIVE ── */
+  @media (max-width: 640px) {
+    /* Content padding */
+    .content { padding: 20px 12px; }
+
+    /* Hero */
+    .hero { padding: 32px 16px 28px; }
+    .countdown-num { padding: 12px 24px; }
+    .countdown-num .n { font-size: 40px; }
+
+    /* Nav tabs: horizontally scrollable, no wrap */
+    .nav-wrap {
+      padding: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .nav-wrap::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      padding: 14px 16px;
+      font-size: 11px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Stats: 2-column grid on mobile */
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .stat-value { font-size: 32px; }
+    .stat-card { padding: 16px; }
+
+    /* Section headers wrap gracefully */
+    .section-header {
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px 16px;
+    }
+    .section-title-input {
+      min-width: 120px;
+      font-size: 18px;
+    }
+
+    /* RSVP summary: 2-column on mobile */
+    .rsvp-summary {
+      padding: 20px 16px;
+      gap: 16px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .rsvp-num { font-size: 36px; }
+
+    /* Add category row stacks vertically */
+    .add-category-row {
+      flex-direction: column;
+    }
+
+    /* Checklist add row stacks vertically */
+    .checklist-add {
+      flex-direction: column;
+    }
+    .checklist-add .btn {
+      width: 100%;
+    }
+
+    /* Overview pills tighten up */
+    .overview-pill {
+      font-size: 12px;
+      padding: 6px 14px;
+    }
   }
 </style>
 </head>
@@ -883,7 +946,8 @@ function renderVendors() {
           <button class="btn btn-danger" onclick="deleteVendorCategory(${cat.id})">Delete Category</button>
         </div>
       </div>
-      <table class="vendor-table">
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <table class="vendor-table" style="min-width:500px;">
         <thead><tr>
           <th style="width:32%">Vendor</th>
           <th style="width:15%">Booked</th>
@@ -915,6 +979,7 @@ function renderVendors() {
         </tr>
         </tbody>
       </table>
+      </div>
     </div>`;
   });
   document.getElementById('vendor-sections').innerHTML = html;
@@ -1005,7 +1070,8 @@ function renderGuests() {
           <span class="section-count">${cat.items.length}</span>
         </div>
       </div>
-      <table class="guest-table">
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <table class="guest-table" style="min-width:440px;">
         <thead><tr>
           <th style="width:28%">First Name</th>
           <th style="width:28%">Last Name</th>
@@ -1033,6 +1099,7 @@ function renderGuests() {
         </tr>
         </tbody>
       </table>
+      </div>
     </div>`;
   });
   document.getElementById('guest-sections').innerHTML = html;
