@@ -3,1398 +3,1181 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Z & M — Wedding Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<title>Z & M — Wedding Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --cream: #faf6f1;
-    --warm-white: #fff9f4;
-    --blush: #e8c4b0;
-    --blush-light: #f2ddd2;
-    --rose: #c47a6a;
-    --rose-deep: #a05a4a;
-    --sage: #8a9e8c;
-    --sage-light: #c2d0c4;
-    --charcoal: #2e2825;
-    --mid: #7a6e68;
-    --light: #b8ada8;
-    --gold: #c9a96e;
-    --gold-light: #e8d5b0;
+    --cream: #f5f0e8;
+    --cream-dark: #ede7d9;
+    --cream-border: #d9d0bc;
+    --ink: #1a1612;
+    --ink-light: #5a5045;
+    --ink-muted: #8c8070;
+    --gold: #b8974a;
+    --gold-light: #e8d9a8;
+    --green: #3a7d44;
+    --green-bg: #e8f3ea;
+    --green-light: #c8e6cc;
+    --amber: #c47b1a;
+    --amber-bg: #fdf3e0;
+    --amber-light: #f5d89a;
+    --red: #c0392b;
+    --red-bg: #fdecea;
+    --red-light: #f5b8b2;
+    --blue: #2563a8;
+    --blue-bg: #e8f0fc;
+    --blue-light: #b8d0f0;
+    --card: #ffffff;
+    --shadow: 0 2px 12px rgba(26,22,18,0.07);
+    --shadow-md: 0 4px 24px rgba(26,22,18,0.10);
   }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Jost', sans-serif;
     background: var(--cream);
-    color: var(--charcoal);
+    color: var(--ink);
     min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* Subtle grain overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
-
-  /* ── HEADER ── */
-  header {
-    position: relative;
-    text-align: center;
-    padding: 56px 24px 40px;
-    background: linear-gradient(160deg, #fff9f4 0%, #f5ede4 60%, #eeddd0 100%);
-    border-bottom: 1px solid var(--blush);
-    overflow: hidden;
-  }
-
-  header::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-
-  .header-ornament {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    font-weight: 300;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-    display: block;
-  }
-
-  header h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 10vw, 88px);
-    font-weight: 300;
-    font-style: italic;
-    color: var(--charcoal);
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-
-  header h1 span {
-    color: var(--rose);
-  }
-
-  .header-date {
-    margin-top: 14px;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--mid);
-  }
-
-  #wedding-date-display {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    color: var(--rose);
-    margin-top: 6px;
-  }
-
-  /* ── LAYOUT ── */
-  .dashboard {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 40px 20px 80px;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* ── SETTINGS BAR ── */
-  .settings-bar {
-    background: var(--warm-white);
-    border: 1px solid var(--blush-light);
-    border-radius: 14px;
-    padding: 20px 24px;
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .settings-bar label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--mid);
-    white-space: nowrap;
-  }
-
-  .settings-bar input[type="date"] {
-    font-family: 'Jost', sans-serif;
     font-size: 14px;
-    color: var(--charcoal);
+  }
+
+  /* ── NAV ── */
+  header {
     background: var(--cream);
-    border: 1px solid var(--blush);
-    border-radius: 8px;
-    padding: 8px 14px;
-    outline: none;
-    cursor: pointer;
-    transition: border-color 0.2s;
+    border-bottom: 1px solid var(--cream-border);
+    position: sticky; top: 0; z-index: 100;
   }
-
-  .settings-bar input[type="date"]:focus { border-color: var(--rose); }
-
-  .save-btn {
-    margin-left: auto;
-    background: var(--rose);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 9px 22px;
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; gap: 0;
+    padding: 0 24px;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 500; letter-spacing: 0.02em;
+    color: var(--ink); padding: 18px 20px 18px 0;
+    border-right: 1px solid var(--cream-border);
+    margin-right: 8px; white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .nav-logo em { font-style: italic; color: var(--gold); }
+  nav { display: flex; gap: 0; }
+  nav button {
+    background: none; border: none; cursor: pointer;
     font-family: 'Jost', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-muted);
+    padding: 20px 18px; border-bottom: 2px solid transparent;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  nav button:hover { color: var(--ink); }
+  nav button.active {
+    color: var(--ink); border-bottom-color: var(--gold);
   }
 
-  .save-btn:hover { background: var(--rose-deep); }
-  .save-btn:active { transform: scale(0.97); }
+  /* ── PAGE WRAPPER ── */
+  .page { display: none; }
+  .page.active { display: block; }
+  .content { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
 
-  /* ── COUNTDOWN ── */
-  .countdown-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 32px;
+  /* ── PAGE HEADERS ── */
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px; font-weight: 400; line-height: 1;
+    margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .page-title em { font-style: italic; color: var(--gold); margin-left: 10px; }
+  .page-title-badge {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; background: var(--gold-light);
+    color: var(--gold); padding: 6px 14px; border-radius: 20px;
   }
 
-  .countdown-card {
-    background: var(--warm-white);
-    border: 1px solid var(--blush-light);
+  /* ── OVERVIEW ── */
+  .overview-greeting {
+    background: var(--ink);
+    color: var(--cream);
     border-radius: 16px;
-    padding: 28px 16px 22px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 36px 40px;
+    margin-bottom: 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
   }
-
-  .countdown-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(196,122,106,0.12);
+  .overview-greeting h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 400; line-height: 1.3;
   }
-
-  .countdown-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--blush), var(--gold), var(--blush));
+  .overview-greeting h2 em { font-style: italic; color: var(--gold-light); }
+  .overview-greeting p { color: #b8a88a; font-size: 13px; margin-top: 6px; }
+  .countdown-box {
+    text-align: center; flex-shrink: 0;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px; padding: 20px 28px;
   }
-
   .countdown-number {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 7vw, 64px);
-    font-weight: 300;
-    color: var(--rose);
-    line-height: 1;
-    display: block;
+    font-size: 52px; font-weight: 300; line-height: 1;
+    color: var(--gold-light);
   }
-
   .countdown-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--light);
-    margin-top: 8px;
-    display: block;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #8c7a60; margin-top: 4px;
   }
 
-  /* ── PROGRESS OVERVIEW ── */
-  .overview-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
     margin-bottom: 32px;
   }
-
-  .card {
-    background: var(--warm-white);
-    border: 1px solid var(--blush-light);
-    border-radius: 16px;
-    padding: 28px;
+  .stat-card {
+    background: var(--card); border-radius: 12px;
+    padding: 22px 24px; box-shadow: var(--shadow);
+    border: 1px solid var(--cream-border);
   }
-
-  .card-title {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  .stat-card .stat-label {
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 8px;
   }
-
-  .card-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--blush-light);
-  }
-
-  /* Progress ring */
-  .progress-ring-wrap {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-  }
-
-  .ring-container {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    flex-shrink: 0;
-  }
-
-  .ring-container svg { transform: rotate(-90deg); }
-
-  .ring-bg { fill: none; stroke: var(--blush-light); stroke-width: 6; }
-
-  .ring-fill {
-    fill: none;
-    stroke: var(--rose);
-    stroke-width: 6;
-    stroke-linecap: round;
-    stroke-dasharray: 283;
-    stroke-dashoffset: 283;
-    transition: stroke-dashoffset 1s ease;
-  }
-
-  .ring-text {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .ring-pct {
+  .stat-card .stat-value {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 24px;
-    font-weight: 400;
-    color: var(--rose);
-    line-height: 1;
+    font-size: 36px; font-weight: 400; line-height: 1;
   }
+  .stat-card .stat-sub { font-size: 11px; color: var(--ink-muted); margin-top: 4px; }
+  .stat-green .stat-value { color: var(--green); }
+  .stat-amber .stat-value { color: var(--amber); }
+  .stat-red .stat-value { color: var(--red); }
+  .stat-gold .stat-value { color: var(--gold); }
 
-  .ring-sub {
-    font-size: 9px;
-    letter-spacing: 1px;
-    color: var(--light);
-    text-transform: uppercase;
+  .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .overview-card {
+    background: var(--card); border-radius: 12px;
+    padding: 24px; box-shadow: var(--shadow);
+    border: 1px solid var(--cream-border);
   }
-
-  .progress-stats { flex: 1; }
-
-  .stat-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 7px 0;
-    border-bottom: 1px solid var(--blush-light);
-    font-size: 13px;
-  }
-
-  .stat-row:last-child { border-bottom: none; }
-
-  .stat-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 8px;
-  }
-
-  .dot-booked { background: var(--sage); }
-  .dot-progress { background: var(--gold); }
-  .dot-none { background: var(--blush); }
-
-  .stat-num {
+  .overview-card h3 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--charcoal);
+    font-size: 18px; font-weight: 500; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .overview-card h3 em { font-style: italic; color: var(--gold); }
+  .overview-card h3 .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
   }
 
-  /* Budget tracker */
-  .budget-section { }
-
-  .budget-line {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    padding: 6px 0;
-    color: var(--mid);
-    border-bottom: 1px solid var(--blush-light);
+  /* Category progress rows */
+  .category-row { margin-bottom: 14px; }
+  .category-row-head {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 6px;
   }
-
-  .budget-line:last-child { border-bottom: none; }
-
-  .budget-val {
+  .category-name { font-size: 12px; font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
+  .category-pct {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    color: var(--charcoal);
-    font-weight: 400;
+    font-size: 15px; font-weight: 400; color: var(--ink-muted);
   }
-
-  .budget-total {
-    margin-top: 12px;
-    background: var(--cream);
-    border-radius: 10px;
-    padding: 12px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .bar-track {
+    height: 6px; background: var(--cream-dark);
+    border-radius: 99px; overflow: hidden;
   }
-
-  .budget-total-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--mid);
+  .bar-fill {
+    height: 100%; border-radius: 99px;
+    transition: width 0.6s ease;
   }
+  .bar-green { background: var(--green); }
+  .bar-amber { background: var(--amber); }
+  .bar-red { background: var(--red); }
 
-  .budget-total-val {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    color: var(--rose);
-  }
-
-  /* ── CHECKLIST ── */
-  .checklist-section { margin-bottom: 32px; }
-
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--charcoal);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-  }
-
-  .section-title span {
-    font-family: 'Jost', sans-serif;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--light);
-  }
-
-  .category-block {
-    background: var(--warm-white);
-    border: 1px solid var(--blush-light);
-    border-radius: 16px;
-    margin-bottom: 16px;
+  /* ── TABLE (Vendors) ── */
+  .table-wrap {
+    background: var(--card); border-radius: 14px;
+    box-shadow: var(--shadow); border: 1px solid var(--cream-border);
     overflow: hidden;
-    transition: box-shadow 0.2s;
   }
-
-  .category-block:hover {
-    box-shadow: 0 4px 20px rgba(196,122,106,0.08);
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--ink); }
+  thead th {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #a89878;
+    padding: 14px 16px; text-align: left; white-space: nowrap;
   }
-
-  .category-header {
-    display: flex;
-    align-items: center;
-    padding: 18px 24px;
-    cursor: pointer;
-    user-select: none;
-    gap: 14px;
-    background: transparent;
-    border: none;
-    width: 100%;
-    text-align: left;
+  .section-row td {
+    background: var(--cream-dark);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; font-style: italic; color: var(--ink-muted);
+    padding: 8px 16px; border-top: 1px solid var(--cream-border);
+  }
+  .section-row td span { margin-right: 8px; color: var(--gold); }
+  tbody tr:not(.section-row) {
+    border-top: 1px solid var(--cream-border);
     transition: background 0.15s;
   }
+  tbody tr:not(.section-row):hover { background: #faf7f2; }
+  td { padding: 13px 16px; vertical-align: middle; }
+  .vendor-name { font-weight: 500; font-size: 13px; }
+  .vendor-type { font-size: 11px; color: var(--ink-muted); margin-top: 2px; }
+  .notes-cell { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; color: var(--ink-muted); }
 
-  .category-header:hover { background: var(--blush-light); }
-
-  .cat-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    flex-shrink: 0;
-    background: var(--blush-light);
+  /* ── PILL BADGES (clickable) ── */
+  .pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px; border-radius: 20px;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
+    cursor: pointer; border: none; font-family: 'Jost', sans-serif;
+    text-transform: uppercase; transition: all 0.15s; white-space: nowrap;
+    user-select: none;
   }
+  .pill .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .pill-green { background: var(--green-bg); color: var(--green); }
+  .pill-green .dot { background: var(--green); }
+  .pill-amber { background: var(--amber-bg); color: var(--amber); }
+  .pill-amber .dot { background: var(--amber); }
+  .pill-red { background: var(--red-bg); color: var(--red); }
+  .pill-red .dot { background: var(--red); }
+  .pill-blue { background: var(--blue-bg); color: var(--blue); }
+  .pill-blue .dot { background: var(--blue); }
+  .pill-grey { background: var(--cream-dark); color: var(--ink-muted); }
+  .pill-grey .dot { background: var(--ink-muted); }
+  .pill:hover { filter: brightness(0.93); transform: scale(1.03); }
 
-  .cat-name {
-    flex: 1;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--charcoal);
+  /* Progress bar in table */
+  .progress-cell { min-width: 110px; }
+  .progress-label { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 10px; color: var(--ink-muted); }
+  .prog-bar { height: 5px; background: var(--cream-dark); border-radius: 99px; overflow: hidden; }
+  .prog-fill { height: 100%; border-radius: 99px; transition: width 0.4s; }
+
+  /* ── ADD ROW BUTTON ── */
+  .add-row-btn {
+    background: none; border: 1.5px dashed var(--cream-border);
+    color: var(--ink-muted); font-family: 'Jost', sans-serif;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; padding: 12px 20px; width: 100%;
+    transition: all 0.2s; border-radius: 0 0 14px 14px;
   }
+  .add-row-btn:hover { background: var(--cream-dark); color: var(--ink); }
 
-  .cat-progress-bar {
-    width: 80px;
-    height: 4px;
-    background: var(--blush-light);
-    border-radius: 99px;
-    overflow: hidden;
-    margin-right: 10px;
+  /* ── CHECKLIST ── */
+  .checklist-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
   }
-
-  .cat-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--rose), var(--gold));
-    border-radius: 99px;
-    transition: width 0.5s ease;
+  .checklist-card {
+    background: var(--card); border-radius: 12px;
+    padding: 22px; box-shadow: var(--shadow);
+    border: 1px solid var(--cream-border);
   }
-
-  .cat-count {
-    font-size: 11px;
-    color: var(--light);
-    letter-spacing: 1px;
-    margin-right: 10px;
-    white-space: nowrap;
+  .checklist-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-weight: 500; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--cream-border);
   }
-
-  .cat-chevron {
-    width: 18px;
-    height: 18px;
-    color: var(--light);
-    transition: transform 0.25s;
-    flex-shrink: 0;
+  .checklist-card h3 .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
   }
-
-  .category-block.open .cat-chevron {
-    transform: rotate(180deg);
-  }
-
-  .category-items {
-    display: none;
-    padding: 0 24px 20px;
-    border-top: 1px solid var(--blush-light);
-  }
-
-  .category-block.open .category-items { display: block; }
-
-  .checklist-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--cream);
-    animation: fadeIn 0.2s ease;
-  }
-
-  @keyframes fadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
-
-  .checklist-item:last-child { border-bottom: none; }
-
-  .item-status {
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .item-status select {
-    font-family: 'Jost', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    border-radius: 20px;
-    padding: 4px 10px;
-    border: 1px solid;
+  .check-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 0; border-bottom: 1px solid #f0ebe0;
     cursor: pointer;
-    appearance: none;
-    outline: none;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-box {
+    width: 16px; height: 16px; border-radius: 4px;
+    border: 1.5px solid var(--cream-border); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
     transition: all 0.2s;
   }
-
-  .status-none { background: var(--cream); color: var(--light); border-color: var(--blush-light) !important; }
-  .status-researching { background: #fef3cd; color: #8a6d00; border-color: #e8d080 !important; }
-  .status-contacted { background: #ddeeff; color: #3a6090; border-color: #a0c0e0 !important; }
-  .status-booked { background: #e0f0e4; color: #3a7050; border-color: #90c0a0 !important; }
-  .status-paid { background: var(--sage-light); color: #3a5a3c; border-color: var(--sage) !important; }
-  .status-done { background: #e8e8f0; color: #5a5a7a; border-color: #b0b0cc !important; }
-
-  .item-body { flex: 1; }
-
-  .item-name {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--charcoal);
-    margin-bottom: 2px;
+  .check-box.checked { background: var(--green); border-color: var(--green); }
+  .check-box.checked::after {
+    content: ''; display: block; width: 4px; height: 7px;
+    border: 2px solid #fff; border-top: none; border-left: none;
+    transform: rotate(45deg) translateY(-1px);
   }
+  .check-label { font-size: 12.5px; transition: all 0.2s; }
+  .check-label.done { text-decoration: line-through; color: var(--ink-muted); }
 
-  .item-note {
-    width: 100%;
-    font-family: 'Jost', sans-serif;
-    font-size: 12px;
-    color: var(--mid);
-    background: transparent;
-    border: none;
-    border-bottom: 1px dashed transparent;
-    outline: none;
-    padding: 2px 0;
-    transition: border-color 0.2s;
-    resize: none;
+  /* ── GUEST LIST ── */
+  .guest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .guest-card {
+    background: var(--card); border-radius: 12px;
+    box-shadow: var(--shadow); border: 1px solid var(--cream-border);
     overflow: hidden;
-    line-height: 1.4;
   }
-
-  .item-note:focus { border-color: var(--blush); }
-  .item-note::placeholder { color: var(--light); font-style: italic; }
-
-  .item-deadline {
-    font-family: 'Jost', sans-serif;
-    font-size: 11px;
-    color: var(--light);
-    background: transparent;
-    border: none;
-    border-bottom: 1px dashed transparent;
-    outline: none;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    margin-top: 3px;
+  .guest-card-head {
+    padding: 16px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--cream-border);
   }
-
-  .item-deadline:focus { border-color: var(--blush); }
-
-  .item-actions {
-    display: flex;
-    gap: 6px;
-    flex-shrink: 0;
-    margin-top: 2px;
+  .guest-card-head h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-weight: 500;
   }
-
-  .del-btn {
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
-    border: 1px solid var(--blush-light);
-    background: transparent;
-    color: var(--light);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    transition: all 0.2s;
-    line-height: 1;
+  .guest-card-head h3 em { font-style: italic; color: var(--gold); }
+  .guest-count {
+    background: var(--ink); color: var(--cream);
+    font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
+    padding: 4px 10px; border-radius: 20px;
   }
-
-  .del-btn:hover { background: #ffe0e0; color: var(--rose-deep); border-color: var(--rose); }
-
-  /* Add item row */
-  .add-item-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px dashed var(--blush-light);
+  .guest-table { width: 100%; border-collapse: collapse; }
+  .guest-table th {
+    background: var(--ink); color: #a89878;
+    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 8px 14px; text-align: left; font-weight: 500;
   }
-
-  .add-input {
-    flex: 1;
-    font-family: 'Jost', sans-serif;
-    font-size: 13px;
-    background: var(--cream);
-    border: 1px solid var(--blush-light);
-    border-radius: 8px;
-    padding: 8px 14px;
-    outline: none;
-    color: var(--charcoal);
-    transition: border-color 0.2s;
-  }
-
-  .add-input:focus { border-color: var(--rose); }
-  .add-input::placeholder { color: var(--light); }
-
-  .add-btn {
-    background: var(--rose);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 18px;
-    font-family: 'Jost', sans-serif;
+  .guest-table td {
+    padding: 9px 14px; border-bottom: 1px solid var(--cream-border);
     font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-    white-space: nowrap;
+  }
+  .guest-table tr:last-child td { border-bottom: none; }
+  .guest-table tr:hover td { background: #faf7f2; }
+  .empty-row td {
+    text-align: center; color: var(--ink-muted);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; padding: 20px; font-size: 13px;
   }
 
-  .add-btn:hover { background: var(--rose-deep); }
-  .add-btn:active { transform: scale(0.97); }
-
-  /* Add category */
-  .add-category-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 32px;
-    flex-wrap: wrap;
+  .rsvp-summary {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    padding: 20px;
   }
+  .rsvp-stat {
+    text-align: center; padding: 16px;
+    background: var(--cream); border-radius: 10px;
+    border: 1px solid var(--cream-border);
+  }
+  .rsvp-stat .n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px; font-weight: 400; line-height: 1;
+  }
+  .rsvp-stat .l { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-top: 4px; }
+
+  .add-guest-form {
+    padding: 12px 14px; background: var(--cream);
+    border-top: 1px solid var(--cream-border);
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .add-guest-form input, .add-guest-form select {
+    font-family: 'Jost', sans-serif; font-size: 11px;
+    border: 1px solid var(--cream-border); background: var(--card);
+    padding: 6px 10px; border-radius: 6px; outline: none;
+    color: var(--ink); flex: 1; min-width: 80px;
+  }
+  .add-guest-form input:focus, .add-guest-form select:focus {
+    border-color: var(--gold);
+  }
+  .add-guest-form button {
+    background: var(--ink); color: var(--cream);
+    border: none; cursor: pointer; font-family: 'Jost', sans-serif;
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 6px; transition: background 0.2s;
+  }
+  .add-guest-form button:hover { background: var(--gold); color: var(--ink); }
+
+  /* ── TIMELINE ── */
+  .timeline-list { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: flex; align-items: flex-start; gap: 0;
+    background: var(--card); border: 1px solid var(--cream-border);
+    border-bottom: none; padding: 0;
+    position: relative;
+  }
+  .timeline-item:first-child { border-radius: 12px 12px 0 0; }
+  .timeline-item:last-child { border-bottom: 1px solid var(--cream-border); border-radius: 0 0 12px 12px; }
+  .tl-dot-col {
+    width: 52px; display: flex; justify-content: center;
+    padding: 22px 0 22px;
+    position: relative; flex-shrink: 0;
+  }
+  .tl-dot-col::after {
+    content: ''; position: absolute; left: 50%; top: 0; bottom: -1px;
+    width: 1px; background: var(--cream-border); transform: translateX(-50%);
+    z-index: 0;
+  }
+  .tl-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid var(--cream-border); background: var(--card);
+    position: relative; z-index: 1; margin-top: 4px; flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .tl-dot.done { background: var(--green); border-color: var(--green); }
+  .tl-dot.upcoming { background: var(--cream); border-color: var(--ink-muted); }
+  .tl-dot.tbd { background: var(--cream); border-color: var(--cream-border); }
+  .tl-body { flex: 1; padding: 18px 20px 18px 0; }
+  .tl-title { font-size: 13.5px; font-weight: 500; }
+  .tl-note { font-size: 11.5px; color: var(--ink-muted); margin-top: 3px; font-family: 'Cormorant Garamond', serif; font-style: italic; }
+  .tl-right {
+    padding: 18px 24px 18px 8px; text-align: right; flex-shrink: 0;
+    min-width: 110px;
+  }
+  .tl-status { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; }
+  .tl-status.done { color: var(--green); }
+  .tl-status.upcoming { color: var(--ink-muted); }
+  .tl-tag { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px; }
 
   /* ── NOTES ── */
-  .notes-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 32px;
+  .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .notes-card {
+    background: var(--card); border-radius: 12px;
+    padding: 22px; box-shadow: var(--shadow);
+    border: 1px solid var(--cream-border);
   }
-
-  .notes-card { }
-
-  .note-area {
-    width: 100%;
-    font-family: 'Jost', sans-serif;
-    font-size: 13px;
-    color: var(--charcoal);
-    background: var(--cream);
-    border: 1px dashed var(--blush);
-    border-radius: 10px;
-    padding: 14px;
-    outline: none;
-    resize: vertical;
-    min-height: 100px;
-    line-height: 1.7;
-    transition: border-color 0.2s;
-    margin-top: 4px;
-  }
-
-  .note-area:focus { border-color: var(--rose); border-style: solid; }
-  .note-area::placeholder { color: var(--blush); font-style: italic; }
-
-  /* ── FOOTER ── */
-  footer {
-    text-align: center;
-    padding: 32px 24px;
-    border-top: 1px solid var(--blush-light);
-    background: linear-gradient(160deg, var(--warm-white), var(--cream));
-  }
-
-  .footer-text {
+  .notes-card h3 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-style: italic;
-    color: var(--light);
+    font-size: 17px; font-weight: 500; margin-bottom: 12px;
+    color: var(--ink);
   }
-
-  .footer-save {
-    margin-top: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 11px;
-    color: var(--light);
-    letter-spacing: 1px;
+  .notes-card textarea {
+    width: 100%; min-height: 180px; resize: vertical;
+    font-family: 'Cormorant Garamond', serif; font-size: 14px;
+    line-height: 1.7; color: var(--ink); background: var(--cream);
+    border: 1px solid var(--cream-border); border-radius: 8px;
+    padding: 12px 14px; outline: none; transition: border-color 0.2s;
   }
+  .notes-card textarea:focus { border-color: var(--gold); }
 
-  #last-saved { font-style: italic; color: var(--sage); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 700px) {
-    .countdown-grid { grid-template-columns: repeat(2, 1fr); }
-    .overview-row, .notes-grid { grid-template-columns: 1fr; }
-    .progress-ring-wrap { flex-direction: column; align-items: flex-start; }
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(26,22,18,0.5); z-index: 200;
+    align-items: center; justify-content: center;
   }
-
-  @media (max-width: 480px) {
-    .countdown-grid { grid-template-columns: repeat(2, 1fr); }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--card); border-radius: 16px;
+    padding: 32px; width: 420px; max-width: 90vw;
+    box-shadow: var(--shadow-md);
   }
-
-  /* Animations */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.6s ease forwards;
-  }
-
-  @keyframes fadeUp {
-    to { opacity: 1; transform: none; }
-  }
-
-  .fade-up:nth-child(1) { animation-delay: 0.05s; }
-  .fade-up:nth-child(2) { animation-delay: 0.1s; }
-  .fade-up:nth-child(3) { animation-delay: 0.15s; }
-  .fade-up:nth-child(4) { animation-delay: 0.2s; }
-  .fade-up:nth-child(5) { animation-delay: 0.25s; }
-
-  .pulse-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--sage);
-    display: inline-block;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  .tag {
-    display: inline-block;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 99px;
-    background: var(--gold-light);
-    color: #8a6d00;
-  }
-
-  /* Guest count */
-  .guest-counter {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 8px;
-  }
-
-  .counter-btn {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    border: 1px solid var(--blush);
-    background: var(--cream);
-    color: var(--rose);
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    transition: all 0.2s;
-    font-weight: 300;
-  }
-
-  .counter-btn:hover { background: var(--blush-light); }
-
-  .counter-display {
+  .modal h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 300;
-    color: var(--rose);
-    line-height: 1;
-    min-width: 50px;
-    text-align: center;
+    font-size: 22px; margin-bottom: 20px;
   }
+  .modal-field { margin-bottom: 14px; }
+  .modal-field label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); display: block; margin-bottom: 5px; }
+  .modal-field input, .modal-field select, .modal-field textarea {
+    width: 100%; font-family: 'Jost', sans-serif; font-size: 13px;
+    border: 1px solid var(--cream-border); background: var(--cream);
+    padding: 9px 12px; border-radius: 8px; outline: none; color: var(--ink);
+  }
+  .modal-field input:focus, .modal-field select:focus { border-color: var(--gold); }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+  .btn-cancel {
+    background: none; border: 1px solid var(--cream-border);
+    color: var(--ink-muted); font-family: 'Jost', sans-serif;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 9px 18px; border-radius: 8px; cursor: pointer;
+  }
+  .btn-save {
+    background: var(--ink); color: var(--cream);
+    border: none; font-family: 'Jost', sans-serif;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 9px 18px; border-radius: 8px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-save:hover { background: var(--gold); color: var(--ink); }
 
-  .counter-label {
-    font-size: 11px;
-    color: var(--mid);
-    letter-spacing: 1px;
-    text-transform: uppercase;
+  .add-section-btn {
+    background: none; border: 1.5px dashed var(--cream-border);
+    color: var(--ink-muted); font-family: 'Jost', sans-serif;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; padding: 14px 20px; width: 100%; margin-top: 16px;
+    border-radius: 10px; transition: all 0.2s;
+  }
+  .add-section-btn:hover { background: var(--cream-dark); color: var(--ink); }
+
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .overview-grid, .checklist-grid, .guest-grid, .notes-grid { grid-template-columns: 1fr; }
+    .checklist-grid { grid-template-columns: 1fr 1fr; }
+    .overview-greeting { flex-direction: column; }
+    .nav-inner { overflow-x: auto; }
+    nav button { padding: 16px 12px; font-size: 10px; }
+    table { font-size: 12px; }
+    thead th { padding: 10px 10px; font-size: 9px; }
+    td { padding: 10px 10px; }
   }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
-  <span class="header-ornament">Wedding Planning</span>
-  <h1>Z <span>&</span> M</h1>
-  <div class="header-date" id="today-date"></div>
-  <div id="wedding-date-display"></div>
+  <div class="nav-inner">
+    <div class="nav-logo">Z <em>&</em> M</div>
+    <nav>
+      <button class="active" onclick="showTab('overview', this)">Overview</button>
+      <button onclick="showTab('vendors', this)">Vendors</button>
+      <button onclick="showTab('guestlist', this)">Guest List</button>
+      <button onclick="showTab('checklist', this)">Checklist</button>
+      <button onclick="showTab('timeline', this)">Timeline</button>
+      <button onclick="showTab('notes', this)">Notes</button>
+    </nav>
+  </div>
 </header>
 
-<!-- DASHBOARD -->
-<div class="dashboard">
-
-  <!-- SETTINGS -->
-  <div class="settings-bar fade-up">
-    <label>Wedding Date</label>
-    <input type="date" id="wedding-date-input" />
-    <button class="save-btn" onclick="saveAll()">Save All Changes</button>
-  </div>
-
-  <!-- COUNTDOWN -->
-  <div class="countdown-grid">
-    <div class="countdown-card fade-up">
-      <span class="countdown-number" id="cnt-months">--</span>
-      <span class="countdown-label">Months</span>
-    </div>
-    <div class="countdown-card fade-up">
-      <span class="countdown-number" id="cnt-weeks">--</span>
-      <span class="countdown-label">Weeks</span>
-    </div>
-    <div class="countdown-card fade-up">
-      <span class="countdown-number" id="cnt-days">--</span>
-      <span class="countdown-label">Days</span>
-    </div>
-    <div class="countdown-card fade-up">
-      <span class="countdown-number" id="cnt-hours">--</span>
-      <span class="countdown-label">Hours</span>
-    </div>
-  </div>
-
-  <!-- OVERVIEW ROW -->
-  <div class="overview-row">
-
-    <!-- Progress -->
-    <div class="card fade-up">
-      <div class="card-title">Overall Progress</div>
-      <div class="progress-ring-wrap">
-        <div class="ring-container">
-          <svg width="100" height="100" viewBox="0 0 100 100">
-            <circle class="ring-bg" cx="50" cy="50" r="45"/>
-            <circle class="ring-fill" id="ring-fill" cx="50" cy="50" r="45"/>
-          </svg>
-          <div class="ring-text">
-            <span class="ring-pct" id="ring-pct">0%</span>
-            <span class="ring-sub">done</span>
-          </div>
-        </div>
-        <div class="progress-stats">
-          <div class="stat-row">
-            <span><span class="stat-dot dot-booked"></span>Booked / Paid</span>
-            <span class="stat-num" id="stat-booked">0</span>
-          </div>
-          <div class="stat-row">
-            <span><span class="stat-dot dot-progress"></span>In Progress</span>
-            <span class="stat-num" id="stat-progress">0</span>
-          </div>
-          <div class="stat-row">
-            <span><span class="stat-dot dot-none"></span>Not Started</span>
-            <span class="stat-num" id="stat-none">0</span>
-          </div>
-          <div class="stat-row" style="margin-top:6px; padding-top:8px; border-top:1px solid var(--blush-light);">
-            <span style="font-size:11px; color:var(--gold); font-weight:500; letter-spacing:1px; text-transform:uppercase;">Total Items</span>
-            <span class="stat-num" id="stat-total">0</span>
-          </div>
-        </div>
+<!-- ══════════════ OVERVIEW ══════════════ -->
+<div id="tab-overview" class="page active">
+  <div class="content">
+    <div class="overview-greeting">
+      <div>
+        <h2>You're doing <em>beautifully,</em> Z & M.</h2>
+        <p>Keep going — every small step is one closer to your perfect day.</p>
+      </div>
+      <div class="countdown-box">
+        <div class="countdown-number" id="countdown-num">—</div>
+        <div class="countdown-label">days to go</div>
+        <div style="font-size:10px;color:#6a5a40;margin-top:6px;letter-spacing:0.08em;">Sept 19, 2026</div>
       </div>
     </div>
 
-    <!-- Guests + Budget -->
-    <div class="card fade-up">
-      <div class="card-title">Guests &amp; Quick Notes</div>
-      <div style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;">
-        <div>
-          <div style="font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--mid); margin-bottom:4px;">Guest Count</div>
-          <div class="guest-counter">
-            <button class="counter-btn" onclick="adjustGuests(-1)">-</button>
-            <span class="counter-display" id="guest-count">0</span>
-            <button class="counter-btn" onclick="adjustGuests(1)">+</button>
-          </div>
-          <div class="counter-label" style="margin-top:4px;">Confirmed guests</div>
-        </div>
-        <div style="flex:1; min-width:140px;">
-          <div style="font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--mid); margin-bottom:6px;">Budget Tracker</div>
-          <div class="budget-line">
-            <span>Total Budget</span>
-            <input class="budget-val" id="budget-total-in" type="text" placeholder="e.g. 25000" style="font-family:'Cormorant Garamond',serif;font-size:16px;border:none;background:transparent;outline:none;text-align:right;width:80px;color:var(--charcoal);" oninput="saveBudget()"/>
-          </div>
-          <div class="budget-line">
-            <span>Spent So Far</span>
-            <input class="budget-val" id="budget-spent-in" type="text" placeholder="e.g. 5000" style="font-family:'Cormorant Garamond',serif;font-size:16px;border:none;background:transparent;outline:none;text-align:right;width:80px;color:var(--charcoal);" oninput="saveBudget()"/>
-          </div>
-          <div class="budget-total">
-            <span class="budget-total-label">Remaining</span>
-            <span class="budget-total-val" id="budget-remaining">--</span>
-          </div>
-        </div>
+    <div class="stats-grid">
+      <div class="stat-card stat-green">
+        <div class="stat-label">Vendors Booked</div>
+        <div class="stat-value" id="stat-booked">0</div>
+        <div class="stat-sub">confirmed & secured</div>
+      </div>
+      <div class="stat-card stat-amber">
+        <div class="stat-label">In Progress</div>
+        <div class="stat-value" id="stat-progress">0</div>
+        <div class="stat-sub">deposits / shortlisted</div>
+      </div>
+      <div class="stat-card stat-red">
+        <div class="stat-label">Not Started</div>
+        <div class="stat-value" id="stat-notstarted">0</div>
+        <div class="stat-sub">still to action</div>
+      </div>
+      <div class="stat-card stat-gold">
+        <div class="stat-label">Total Guests</div>
+        <div class="stat-value" id="stat-guests">0</div>
+        <div class="stat-sub">on the list</div>
+      </div>
+    </div>
+
+    <div class="overview-grid">
+      <div class="overview-card">
+        <h3><span class="dot"></span> Vendor Progress <em>by Category</em></h3>
+        <div id="overview-categories"></div>
+      </div>
+      <div class="overview-card">
+        <h3><span class="dot"></span> Checklist <em>Completion</em></h3>
+        <div id="overview-checklist"></div>
       </div>
     </div>
   </div>
-
-  <!-- CHECKLIST -->
-  <div class="checklist-section">
-    <div class="section-title">
-      Planning Checklist <span>click any section to expand</span>
-    </div>
-
-    <div id="categories-container"></div>
-
-    <!-- Add new category -->
-    <div class="add-category-row">
-      <input class="add-input" id="new-cat-name" placeholder="Add new category (e.g. Florist, DJ, Catering...)" style="flex:2;"/>
-      <button class="add-btn" onclick="addCategory()">+ Add Category</button>
-    </div>
-  </div>
-
-  <!-- NOTES -->
-  <div class="notes-grid">
-    <div class="card notes-card fade-up">
-      <div class="card-title">Venue &amp; Ceremony Notes</div>
-      <textarea class="note-area" id="note-venue" placeholder="Venue details, ceremony ideas, must-haves..." rows="5"></textarea>
-    </div>
-    <div class="card notes-card fade-up">
-      <div class="card-title">Suppliers &amp; Contacts</div>
-      <textarea class="note-area" id="note-contacts" placeholder="Name / Phone / Email for each vendor..." rows="5"></textarea>
-    </div>
-    <div class="card notes-card fade-up">
-      <div class="card-title">Honeymoon Ideas</div>
-      <textarea class="note-area" id="note-honey" placeholder="Destinations, dates, bookings to make..." rows="4"></textarea>
-    </div>
-    <div class="card notes-card fade-up">
-      <div class="card-title">Random Ideas &amp; Inspiration</div>
-      <textarea class="note-area" id="note-misc" placeholder="Colours, themes, songs, decor, food, anything..." rows="4"></textarea>
-    </div>
-  </div>
-
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-text">Z &amp; M — edited with love</div>
-  <div class="footer-save">
-    <span class="pulse-dot"></span>
-    <span>Auto-saves in browser &mdash; last saved: <span id="last-saved">never</span></span>
+<!-- ══════════════ VENDORS ══════════════ -->
+<div id="tab-vendors" class="page">
+  <div class="content">
+    <div class="page-title">
+      Vendor <em>Tracker</em>
+      <span class="page-title-badge" id="vendor-count-badge">0 Vendors</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Vendor / Task</th>
+            <th>Booked</th>
+            <th>Deposit Paid</th>
+            <th>Reserved / Secured</th>
+            <th>Balance Due</th>
+            <th>Due Date</th>
+            <th>Progress</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody id="vendor-tbody"></tbody>
+      </table>
+      <button class="add-row-btn" onclick="openAddVendorModal()">+ Add Vendor or Task</button>
+    </div>
   </div>
-</footer>
+</div>
+
+<!-- ══════════════ GUEST LIST ══════════════ -->
+<div id="tab-guestlist" class="page">
+  <div class="content">
+    <div class="page-title">
+      Guest <em>List</em>
+      <span class="page-title-badge">RSVP Tracker</span>
+    </div>
+    <div class="guest-grid" id="guest-grid"></div>
+    <div class="overview-card" style="margin-top:20px;">
+      <h3><span class="dot"></span> RSVP <em>Summary</em></h3>
+      <div class="rsvp-summary">
+        <div class="rsvp-stat"><div class="n" id="rsvp-confirmed" style="color:var(--green)">0</div><div class="l">Confirmed</div></div>
+        <div class="rsvp-stat"><div class="n" id="rsvp-awaiting" style="color:var(--amber)">0</div><div class="l">Awaiting</div></div>
+        <div class="rsvp-stat"><div class="n" id="rsvp-declined" style="color:var(--red)">0</div><div class="l">Declined</div></div>
+        <div class="rsvp-stat"><div class="n" id="rsvp-total" style="color:var(--gold)">0</div><div class="l">Total</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ CHECKLIST ══════════════ -->
+<div id="tab-checklist" class="page">
+  <div class="content">
+    <div class="page-title">
+      Wedding <em>Checklist</em>
+      <span class="page-title-badge">By Category</span>
+    </div>
+    <div class="checklist-grid" id="checklist-grid"></div>
+    <button class="add-section-btn" onclick="openAddChecklistModal()">+ Add New Checklist Category</button>
+  </div>
+</div>
+
+<!-- ══════════════ TIMELINE ══════════════ -->
+<div id="tab-timeline" class="page">
+  <div class="content">
+    <div class="page-title">
+      Planning <em>Timeline</em>
+      <span class="page-title-badge">Key Milestones</span>
+    </div>
+    <div class="table-wrap" style="padding:8px 0;">
+      <div class="timeline-list" id="timeline-list"></div>
+    </div>
+    <button class="add-section-btn" onclick="openAddTimelineModal()">+ Add Milestone</button>
+  </div>
+</div>
+
+<!-- ══════════════ NOTES ══════════════ -->
+<div id="tab-notes" class="page">
+  <div class="content">
+    <div class="page-title">Notes <em>& Ideas</em></div>
+    <div class="notes-grid">
+      <div class="notes-card">
+        <h3>Ceremony Ideas</h3>
+        <textarea placeholder="Jot down anything here — vow ideas, music, order of events..."></textarea>
+      </div>
+      <div class="notes-card">
+        <h3>Decor & Aesthetic</h3>
+        <textarea placeholder="Colour palette, florals, table settings, mood board links..."></textarea>
+      </div>
+      <div class="notes-card">
+        <h3>Reception Details</h3>
+        <textarea placeholder="Seating plan notes, speeches, first dance song..."></textarea>
+      </div>
+      <div class="notes-card">
+        <h3>To-Do This Week</h3>
+        <textarea placeholder="Quick action items to tackle soon..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ MODALS ══════════════ -->
+<div class="modal-overlay" id="vendor-modal">
+  <div class="modal">
+    <h2>Add Vendor / Task</h2>
+    <div class="modal-field"><label>Vendor Name</label><input id="m-name" placeholder="e.g. Royal King Centre"/></div>
+    <div class="modal-field"><label>Category</label>
+      <select id="m-cat">
+        <option>Ceremony</option><option>Venue & Reception</option>
+        <option>Photography</option><option>Bridal Appearance</option>
+        <option>Groom Appearance</option><option>Logistics</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="modal-field"><label>Notes</label><input id="m-notes" placeholder="e.g. Deposit confirmed"/></div>
+    <div class="modal-field"><label>Balance Due</label><input id="m-balance" placeholder="e.g. TBD or £2,000"/></div>
+    <div class="modal-field"><label>Due Date</label><input id="m-due" placeholder="e.g. Aug 2026"/></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('vendor-modal')">Cancel</button>
+      <button class="btn-save" onclick="saveVendor()">Add Vendor</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="checklist-modal">
+  <div class="modal">
+    <h2>Add Checklist Category</h2>
+    <div class="modal-field"><label>Category Name</label><input id="cl-cat" placeholder="e.g. Music & Entertainment"/></div>
+    <div class="modal-field"><label>First Item (optional)</label><input id="cl-item" placeholder="e.g. Book DJ"/></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('checklist-modal')">Cancel</button>
+      <button class="btn-save" onclick="saveChecklist()">Add Category</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="timeline-modal">
+  <div class="modal">
+    <h2>Add Timeline Milestone</h2>
+    <div class="modal-field"><label>Milestone Title</label><input id="tl-title" placeholder="e.g. Book Florist"/></div>
+    <div class="modal-field"><label>Note</label><input id="tl-note" placeholder="e.g. Review quotes and confirm"/></div>
+    <div class="modal-field"><label>Status</label>
+      <select id="tl-status">
+        <option value="done">Completed</option>
+        <option value="upcoming">Upcoming</option>
+        <option value="tbd">TBD</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('timeline-modal')">Cancel</button>
+      <button class="btn-save" onclick="saveTimeline()">Add Milestone</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="item-modal">
+  <div class="modal">
+    <h2>Add Checklist Item</h2>
+    <div class="modal-field"><label>Item</label><input id="item-input" placeholder="e.g. Arrange guest transport"/></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('item-modal')">Cancel</button>
+      <button class="btn-save" id="item-save-btn">Add Item</button>
+    </div>
+  </div>
+</div>
 
 <script>
-// ──────────────────────────────────────
-//  DATA
-// ──────────────────────────────────────
-const DEFAULT_CATEGORIES = [
-  {
-    name: "Venue",
-    icon: "V",
-    items: [
-      { name: "Book ceremony venue", status: "none", note: "", deadline: "" },
-      { name: "Book reception venue", status: "none", note: "", deadline: "" },
-      { name: "Confirm venue layout / floorplan", status: "none", note: "", deadline: "" },
-      { name: "Arrange wedding rehearsal date", status: "none", note: "", deadline: "" }
-    ]
-  },
-  {
-    name: "Catering & Cake",
-    icon: "C",
-    items: [
-      { name: "Book caterer / catering company", status: "none", note: "", deadline: "" },
-      { name: "Finalise menu & dietary requirements", status: "none", note: "", deadline: "" },
-      { name: "Order wedding cake", status: "none", note: "", deadline: "" },
-      { name: "Arrange drinks package", status: "none", note: "", deadline: "" }
-    ]
-  },
-  {
-    name: "Photography & Film",
-    icon: "P",
-    items: [
-      { name: "Book photographer", status: "none", note: "", deadline: "" },
-      { name: "Book videographer", status: "none", note: "", deadline: "" },
-      { name: "Prepare shot list", status: "none", note: "", deadline: "" },
-      { name: "Pre-wedding shoot", status: "none", note: "", deadline: "" }
-    ]
-  },
-  {
-    name: "Music & Entertainment",
-    icon: "M",
-    items: [
-      { name: "Book ceremony musician / singer", status: "none", note: "", deadline: "" },
-      { name: "Book DJ / band for reception", status: "none", note: "", deadline: "" },
-      { name: "Create playlist / song requests", status: "none", note: "", deadline: "" }
-    ]
-  },
-  {
-    name: "Attire",
-    icon: "A",
-    items: [
-      { name: "Wedding dress / outfit", status: "none", note: "", deadline: "" },
-      { name: "Bridesmaids outfits", status: "none", note: "", deadline: "" },
-      { name: "Suit / groom attire", status: "none", note: "", deadline: "" },
-      { name: "Accessories & shoes", status: "none", note: "", deadline: "" },
-      { name: "Final dress fitting", status: "none", note: "", deadline: "" }
-    ]
-  },
-  {
-    name: "Flowers & Decor",
-    icon: "F",
-    items: [
-      { name: "Book florist", status: "none", note: "", deadline: "" },
-      { name: "Decide on flowers & colours", status: "none", note: "", deadline: "" },
-      { name: "Table centrepieces", status: "none", note: "", deadline: "" },
-      { name: "Ceremony arch / backdrop", status: "none", note: "", deadline: "" }
-    ]
-  },
-  {
-    name: "Invitations & Stationery",
-    icon: "I",
-    items: [
-      { name: "Design & send save the dates", status: "none", note: "", deadline: "" },
-      { name: "Design & send invitations", status: "none", note: "", deadline: "" },
-      { name: "Order order-of-service / menus", status: "none", note: "", deadline: "" },
-      { name: "Collect RSVPs", status: "none", note: "", deadline: "" }
-    ]
-  },
-  {
-    name: "Hair & Beauty",
-    icon: "H",
-    items: [
-      { name: "Book hair stylist", status: "none", note: "", deadline: "" },
-      { name: "Book makeup artist", status: "none", note: "", deadline: "" },
-      { name: "Trial hair & makeup", status: "none", note: "", deadline: "" }
-    ]
-  },
-  {
-    name: "Transport",
-    icon: "T",
-    items: [
-      { name: "Wedding car / transport for couple", status: "none", note: "", deadline: "" },
-      { name: "Guest transport / shuttle", status: "none", note: "", deadline: "" },
-      { name: "Honeymoon airport transfers", status: "none", note: "", deadline: "" }
-    ]
-  },
-  {
-    name: "Legal & Admin",
-    icon: "L",
-    items: [
-      { name: "Give notice of marriage", status: "none", note: "", deadline: "" },
-      { name: "Confirm officiant / registrar", status: "none", note: "", deadline: "" },
-      { name: "Marriage licence / certificate", status: "none", note: "", deadline: "" },
-      { name: "Name change documents (if needed)", status: "none", note: "", deadline: "" }
-    ]
-  }
+/* ═══════════════════════════════════════════
+   DATA — Edit everything here to update the dashboard
+═══════════════════════════════════════════ */
+
+const WEDDING_DATE = "2026-09-19";
+
+// STATUS OPTIONS (vendor columns):
+// booked: "yes" | "no" | "pending"
+// deposit: "paid" | "no" | "pending"
+// reserved: "yes" | "no" | "pending"
+// progress: "complete" | "booked" | "confirmed" | "in-progress" | "shortlisted" | "not-started"
+
+let vendors = [
+  // ── Ceremony
+  { id:1, section:"Ceremony", name:"Nikkah Certificate", type:"Documentation", booked:"yes", deposit:"paid", reserved:"yes", balance:"—", due:"—", progress:"complete", pct:100, notes:"Required document" },
+  { id:2, section:"Ceremony", name:"Wedding Officiant (Imam)", type:"Ceremony", booked:"pending", deposit:"no", reserved:"no", balance:"—", due:"—", progress:"in-progress", pct:30, notes:"Contact local mosque" },
+  { id:3, section:"Ceremony", name:"UK Marriage License", type:"Legal", booked:"pending", deposit:"no", reserved:"no", balance:"—", due:"—", progress:"not-started", pct:0, notes:"Register office appt" },
+
+  // ── Venue & Reception
+  { id:4, section:"Venue & Reception", name:"Royal King Centre", type:"Venue", booked:"yes", deposit:"paid", reserved:"yes", balance:"TBD", due:"TBD", progress:"booked", pct:80, notes:"Deposit confirmed" },
+  { id:5, section:"Venue & Reception", name:"Maryan Afgooye Catering", type:"Catering", booked:"yes", deposit:"paid", reserved:"yes", balance:"TBD", due:"TBD", progress:"confirmed", pct:75, notes:"Menu to finalise" },
+  { id:6, section:"Venue & Reception", name:"JN Events and Decor", type:"Decor", booked:"yes", deposit:"pending", reserved:"pending", balance:"TBD", due:"TBD", progress:"in-progress", pct:50, notes:"Theme discussion due" },
+  { id:7, section:"Venue & Reception", name:"Wedding Cake Vendor", type:"Catering", booked:"yes", deposit:"paid", reserved:"yes", balance:"TBD", due:"TBD", progress:"booked", pct:80, notes:"Design to confirm" },
+
+  // ── Photography
+  { id:8, section:"Photography", name:"Photographer", type:"Photo", booked:"no", deposit:"no", reserved:"no", balance:"—", due:"—", progress:"not-started", pct:0, notes:"Shortlist portfolios" },
+  { id:9, section:"Photography", name:"Videographer", type:"Video", booked:"no", deposit:"no", reserved:"no", balance:"—", due:"—", progress:"not-started", pct:0, notes:"Shortlist portfolios" },
+
+  // ── Bridal Appearance
+  { id:10, section:"Bridal Appearance", name:"Wedding Dress — Ilwaad Shop UK", type:"Attire", booked:"yes", deposit:"paid", reserved:"yes", balance:"—", due:"—", progress:"complete", pct:100, notes:"Alterations to schedule" },
+  { id:11, section:"Bridal Appearance", name:"Makeup Artist", type:"Beauty", booked:"yes", deposit:"paid", reserved:"yes", balance:"TBD", due:"TBD", progress:"booked", pct:80, notes:"Trial booked" },
+  { id:12, section:"Bridal Appearance", name:"Hair Stylist", type:"Beauty", booked:"no", deposit:"no", reserved:"no", balance:"—", due:"—", progress:"not-started", pct:0, notes:"Book hair appointment" },
+
+  // ── Logistics
+  { id:13, section:"Logistics", name:"Hire Car — Enterprise Markham Car", type:"Transport", booked:"yes", deposit:"paid", reserved:"yes", balance:"—", due:"—", progress:"confirmed", pct:75, notes:"Confirmed booking" },
+  { id:14, section:"Logistics", name:"Ramerson Hotel Rooms", type:"Accommodation", booked:"yes", deposit:"paid", reserved:"yes", balance:"—", due:"—", progress:"booked", pct:80, notes:"Rooms reserved" },
 ];
 
-// ──────────────────────────────────────
-//  STATE
-// ──────────────────────────────────────
-let state = {
-  weddingDate: "",
-  guestCount: 0,
-  budgetTotal: "",
-  budgetSpent: "",
-  categories: JSON.parse(JSON.stringify(DEFAULT_CATEGORIES)),
-  notes: { venue: "", contacts: "", honey: "", misc: "" }
+let checklistData = [
+  { id:1, title:"Ceremony", items:[
+    { text:"Obtain Nikkah Certificate", done:true },
+    { text:"Book Wedding Officiant (Imam)", done:false },
+    { text:"Apply for UK Marriage License", done:true },
+    { text:"Write Ceremony Vows", done:false },
+    { text:"Plan Ceremony Order of Events", done:false },
+  ]},
+  { id:2, title:"Venue & Reception", items:[
+    { text:"Book Royal King Centre", done:true },
+    { text:"Book Maryan Afgooye Catering", done:true },
+    { text:"Finalise Decor with JN Events", done:true },
+    { text:"Book Wedding Cake Vendor", done:true },
+    { text:"Arrange Dessert Table", done:false },
+    { text:"Finalise Seating Plan", done:false },
+  ]},
+  { id:3, title:"Photography", items:[
+    { text:"Shortlist Photographers", done:false },
+    { text:"Book Photographer", done:false },
+    { text:"Book Photo Booth", done:false },
+    { text:"Plan Shot List", done:false },
+    { text:"Book Videographer", done:false },
+  ]},
+  { id:4, title:"Bridal Appearance", items:[
+    { text:"Purchase Wedding Dress — Ilwaad", done:true },
+    { text:"Book Makeup Artist", done:true },
+    { text:"Book Hair Stylist", done:false },
+    { text:"Schedule Dress Alterations", done:false },
+    { text:"Bridal Accessories", done:false },
+  ]},
+  { id:5, title:"Groom Appearance", items:[
+    { text:"Purchase / Tailor Wedding Suit", done:false },
+    { text:"Choose Accessories", done:false },
+    { text:"Grooming Appointment", done:false },
+  ]},
+  { id:6, title:"Logistics", items:[
+    { text:"Confirm Enterprise Markham Car", done:true },
+    { text:"Confirm Ramerson Hotel Rooms", done:true },
+    { text:"Arrange Guest Transportation", done:true },
+    { text:"Finalise Day-of Schedule", done:false },
+  ]},
+];
+
+let guestData = {
+  "Bride's Family": [],
+  "Groom's Family": [],
+  "Friends & Others": [],
 };
 
-function loadState() {
-  const saved = localStorage.getItem("zm_wedding_v2");
-  if (saved) {
-    try { state = JSON.parse(saved); } catch(e) {}
-  }
+let timelineData = [
+  { id:1, title:"Nikkah Certificate Obtained", note:"Ceremony documentation secured", status:"done" },
+  { id:2, title:"Venue Booked — Royal King Centre", note:"Deposit paid and date reserved", status:"done" },
+  { id:3, title:"Catering Confirmed — Maryan Afgooye", note:"Menu finalisation pending", status:"done" },
+  { id:4, title:"Wedding Dress Purchased — Ilwaad Shop UK", note:"Alterations to be scheduled", status:"done" },
+  { id:5, title:"Book Photographer", note:"Review portfolios and confirm", status:"tbd" },
+  { id:6, title:"Finalise Decor with JN Events", note:"Theme and colour palette to confirm", status:"upcoming" },
+  { id:7, title:"Send Invitations", note:"Guest list to be finalised first", status:"tbd" },
+  { id:8, title:"Wedding Day", note:"Royal King Centre — September 19, 2026", status:"upcoming" },
+];
+
+/* ════════════ PILL HELPERS ════════════ */
+const pillMap = {
+  "yes":         { cls:"pill-green",  label:"Yes" },
+  "paid":        { cls:"pill-green",  label:"Paid" },
+  "confirmed":   { cls:"pill-green",  label:"Confirmed" },
+  "complete":    { cls:"pill-green",  label:"Complete" },
+  "no":          { cls:"pill-red",    label:"No" },
+  "pending":     { cls:"pill-amber",  label:"Pending" },
+  "in-progress": { cls:"pill-amber",  label:"In Progress" },
+  "shortlisted": { cls:"pill-blue",   label:"Shortlisted" },
+  "booked":      { cls:"pill-green",  label:"Booked" },
+  "not-started": { cls:"pill-red",    label:"Not Started" },
+  "reserved":    { cls:"pill-green",  label:"Reserved" },
+};
+
+const bookedCycle   = ["no","pending","yes"];
+const depositCycle  = ["no","pending","paid"];
+const reservedCycle = ["no","pending","yes"];
+const progressCycle = ["not-started","shortlisted","in-progress","confirmed","booked","complete"];
+
+function pillHTML(val) {
+  const p = pillMap[val] || { cls:"pill-grey", label: val };
+  return `<span class="pill ${p.cls}"><span class="dot"></span>${p.label}</span>`;
 }
 
-function saveAll() {
-  // Collect notes
-  state.notes.venue    = document.getElementById("note-venue").value;
-  state.notes.contacts = document.getElementById("note-contacts").value;
-  state.notes.honey    = document.getElementById("note-honey").value;
-  state.notes.misc     = document.getElementById("note-misc").value;
-  state.weddingDate    = document.getElementById("wedding-date-input").value;
-  state.budgetTotal    = document.getElementById("budget-total-in").value;
-  state.budgetSpent    = document.getElementById("budget-spent-in").value;
-  state.guestCount     = parseInt(document.getElementById("guest-count").textContent) || 0;
-
-  localStorage.setItem("zm_wedding_v2", JSON.stringify(state));
-  const now = new Date();
-  document.getElementById("last-saved").textContent = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+function progressColor(pct) {
+  if (pct >= 80) return "#3a7d44";
+  if (pct >= 40) return "#c47b1a";
+  return "#c0392b";
 }
 
-// Auto-save on any input change
-document.addEventListener("input", () => saveAll());
-document.addEventListener("change", () => saveAll());
-
-// ──────────────────────────────────────
-//  COUNTDOWN
-// ──────────────────────────────────────
-function updateCountdown() {
-  const dateVal = state.weddingDate || document.getElementById("wedding-date-input").value;
-  if (!dateVal) return;
-
-  const now   = new Date();
-  const wed   = new Date(dateVal + "T09:00:00");
-  const diffMs = wed - now;
-
-  if (diffMs < 0) {
-    ["cnt-months","cnt-weeks","cnt-days","cnt-hours"].forEach(id => {
-      document.getElementById(id).textContent = "0";
-    });
-    document.getElementById("wedding-date-display").textContent = "It's your wedding day! Congratulations!";
-    return;
-  }
-
-  const totalHours = Math.floor(diffMs / (1000*60*60));
-  const days       = Math.floor(diffMs / (1000*60*60*24));
-  const weeks      = Math.floor(days / 7);
-  const months     = Math.floor(days / 30.44);
-
-  document.getElementById("cnt-months").textContent = months;
-  document.getElementById("cnt-weeks").textContent  = weeks;
-  document.getElementById("cnt-days").textContent   = days;
-  document.getElementById("cnt-hours").textContent  = totalHours.toLocaleString();
-
-  const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
-  document.getElementById("wedding-date-display").textContent =
-    "Wedding: " + wed.toLocaleDateString(undefined, opts);
-}
-
-// ──────────────────────────────────────
-//  BUDGET
-// ──────────────────────────────────────
-function saveBudget() {
-  const total = parseFloat(document.getElementById("budget-total-in").value.replace(/[^0-9.]/g,'')) || 0;
-  const spent = parseFloat(document.getElementById("budget-spent-in").value.replace(/[^0-9.]/g,'')) || 0;
-  const rem   = total - spent;
-  const fmt   = new Intl.NumberFormat('en-GB', {style:'currency',currency:'GBP',minimumFractionDigits:0});
-  document.getElementById("budget-remaining").textContent = total > 0 ? fmt.format(rem) : "--";
-}
-
-// ──────────────────────────────────────
-//  GUESTS
-// ──────────────────────────────────────
-function adjustGuests(delta) {
-  let val = parseInt(document.getElementById("guest-count").textContent) || 0;
-  val = Math.max(0, val + delta);
-  document.getElementById("guest-count").textContent = val;
-  state.guestCount = val;
-  saveAll();
-}
-
-// ──────────────────────────────────────
-//  PROGRESS
-// ──────────────────────────────────────
-function updateProgress() {
-  let booked = 0, inprog = 0, none = 0, total = 0;
-  state.categories.forEach(cat => {
-    cat.items.forEach(item => {
-      total++;
-      if (item.status === "booked" || item.status === "paid" || item.status === "done") booked++;
-      else if (item.status === "researching" || item.status === "contacted") inprog++;
-      else none++;
+/* ════════════ RENDER VENDORS ════════════ */
+function renderVendors() {
+  const tbody = document.getElementById("vendor-tbody");
+  const sections = [...new Set(vendors.map(v => v.section))];
+  let html = "";
+  sections.forEach(sec => {
+    html += `<tr class="section-row"><td colspan="8"><span>—</span>${sec}</td></tr>`;
+    vendors.filter(v => v.section === sec).forEach(v => {
+      const pc = progressColor(v.pct);
+      html += `<tr>
+        <td><div class="vendor-name">${v.name}</div><div class="vendor-type">${v.type}</div></td>
+        <td><button class="pill ${pillMap[v.booked]?.cls||'pill-grey'}" onclick="cycleVendor(${v.id},'booked')"><span class="dot"></span>${pillMap[v.booked]?.label||v.booked}</button></td>
+        <td><button class="pill ${pillMap[v.deposit]?.cls||'pill-grey'}" onclick="cycleVendor(${v.id},'deposit')"><span class="dot"></span>${pillMap[v.deposit]?.label||v.deposit}</button></td>
+        <td><button class="pill ${pillMap[v.reserved]?.cls||'pill-grey'}" onclick="cycleVendor(${v.id},'reserved')"><span class="dot"></span>${pillMap[v.reserved]?.label||v.reserved}</button></td>
+        <td style="color:var(--ink-muted);font-size:12px;">${v.balance}</td>
+        <td style="color:var(--ink-muted);font-size:12px;">${v.due}</td>
+        <td class="progress-cell">
+          <div class="progress-label">
+            <button class="pill ${pillMap[v.progress]?.cls||'pill-grey'}" style="padding:2px 8px;font-size:9px;" onclick="cycleVendorProgress(${v.id})"><span class="dot"></span>${pillMap[v.progress]?.label||v.progress}</button>
+            <span>${v.pct}%</span>
+          </div>
+          <div class="prog-bar"><div class="prog-fill" style="width:${v.pct}%;background:${pc}"></div></div>
+        </td>
+        <td class="notes-cell">${v.notes}</td>
+      </tr>`;
     });
   });
-  const pct = total > 0 ? Math.round((booked / total) * 100) : 0;
-  document.getElementById("ring-pct").textContent = pct + "%";
-  document.getElementById("stat-booked").textContent   = booked;
-  document.getElementById("stat-progress").textContent = inprog;
-  document.getElementById("stat-none").textContent     = none;
-  document.getElementById("stat-total").textContent    = total;
-
-  // Ring
-  const circumference = 283;
-  const offset = circumference - (pct / 100) * circumference;
-  document.getElementById("ring-fill").style.strokeDashoffset = offset;
+  tbody.innerHTML = html;
+  const total = vendors.length;
+  document.getElementById("vendor-count-badge").textContent = `${total} Vendors`;
+  updateStats();
 }
 
-// ──────────────────────────────────────
-//  RENDER CHECKLIST
-// ──────────────────────────────────────
-function renderCategories() {
-  const container = document.getElementById("categories-container");
-  container.innerHTML = "";
+function cycleVendor(id, field) {
+  const v = vendors.find(x => x.id === id);
+  if (!v) return;
+  const cycles = { booked: bookedCycle, deposit: depositCycle, reserved: reservedCycle };
+  const cycle = cycles[field];
+  const cur = cycle.indexOf(v[field]);
+  v[field] = cycle[(cur + 1) % cycle.length];
+  renderVendors();
+}
 
-  state.categories.forEach((cat, catIdx) => {
-    const block = document.createElement("div");
-    block.className = "category-block fade-up";
-    if (cat.open) block.classList.add("open");
+function cycleVendorProgress(id) {
+  const v = vendors.find(x => x.id === id);
+  if (!v) return;
+  const cur = progressCycle.indexOf(v.progress);
+  v.progress = progressCycle[(cur + 1) % progressCycle.length];
+  const pctMap = {"not-started":0,"shortlisted":20,"in-progress":50,"confirmed":75,"booked":80,"complete":100};
+  v.pct = pctMap[v.progress] || 0;
+  renderVendors();
+  renderOverview();
+}
 
-    // Calculate per-cat progress
-    const total  = cat.items.length;
-    const done   = cat.items.filter(i => ["booked","paid","done"].includes(i.status)).length;
-    const pct    = total > 0 ? Math.round((done/total)*100) : 0;
+/* ════════════ RENDER CHECKLIST ════════════ */
+function renderChecklist() {
+  const grid = document.getElementById("checklist-grid");
+  grid.innerHTML = checklistData.map((cat, ci) => {
+    const items = cat.items.map((item, ii) =>
+      `<div class="check-item" onclick="toggleCheck(${ci},${ii})">
+        <div class="check-box ${item.done ? 'checked' : ''}"></div>
+        <span class="check-label ${item.done ? 'done' : ''}">${item.text}</span>
+      </div>`
+    ).join('');
+    return `<div class="checklist-card">
+      <h3><span class="dot"></span>${cat.title}
+        <button class="pill pill-grey" style="margin-left:auto;font-size:9px;padding:3px 8px;" onclick="openAddItemModal(${ci})">+ Add</button>
+      </h3>
+      ${items}
+    </div>`;
+  }).join('');
+  renderOverview();
+}
 
-    block.innerHTML = `
-      <button class="category-header" onclick="toggleCategory(${catIdx})">
-        <div class="cat-icon">${escHtml(cat.icon || cat.name[0])}</div>
-        <span class="cat-name">${escHtml(cat.name)}</span>
-        <div class="cat-progress-bar"><div class="cat-progress-fill" style="width:${pct}%"></div></div>
-        <span class="cat-count">${done}/${total}</span>
-        <svg class="cat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="6 9 12 15 18 9"/>
-        </svg>
-      </button>
-      <div class="category-items" id="cat-items-${catIdx}">
-        <div id="items-list-${catIdx}"></div>
-        <div class="add-item-row">
-          <input class="add-input" id="new-item-${catIdx}" placeholder="Add a task to ${escHtml(cat.name)}..." />
-          <button class="add-btn" onclick="addItem(${catIdx})">+ Add</button>
-        </div>
+function toggleCheck(ci, ii) {
+  checklistData[ci].items[ii].done = !checklistData[ci].items[ii].done;
+  renderChecklist();
+}
+
+/* ════════════ RENDER GUEST LIST ════════════ */
+function renderGuests() {
+  const grid = document.getElementById("guest-grid");
+  const sections = Object.keys(guestData);
+  grid.innerHTML = sections.map(sec => {
+    const guests = guestData[sec];
+    const rows = guests.length > 0
+      ? guests.map((g, gi) =>
+          `<tr>
+            <td>${g.name}</td>
+            <td><button class="pill ${g.rsvp==='confirmed'?'pill-green':g.rsvp==='declined'?'pill-red':'pill-amber'}" onclick="cycleRsvp('${sec}',${gi})" style="font-size:9px;padding:3px 8px;">
+              <span class="dot"></span>${g.rsvp==='confirmed'?'Confirmed':g.rsvp==='declined'?'Declined':'Awaiting'}
+            </button></td>
+            <td>${g.plus1||'—'}</td>
+            <td>${g.table||'—'}</td>
+            <td class="notes-cell">${g.notes||''}</td>
+          </tr>`
+        ).join('')
+      : `<tr class="empty-row"><td colspan="5">No guests added yet — fill in your list here.</td></tr>`;
+    return `<div class="guest-card">
+      <div class="guest-card-head">
+        <h3>${sec.split(' ')[0]} <em>${sec.split(' ').slice(1).join(' ')}</em></h3>
+        <span class="guest-count">${guests.length} guests</span>
       </div>
-    `;
-
-    if (cat.open) {
-      block.querySelector(".category-items").style.display = "block";
-    }
-
-    container.appendChild(block);
-    renderItems(catIdx);
-  });
-}
-
-function escHtml(s) {
-  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-}
-
-function renderItems(catIdx) {
-  const cat  = state.categories[catIdx];
-  const list = document.getElementById("items-list-" + catIdx);
-  if (!list) return;
-  list.innerHTML = "";
-
-  cat.items.forEach((item, itemIdx) => {
-    const row = document.createElement("div");
-    row.className = "checklist-item";
-    row.innerHTML = `
-      <div class="item-status">
-        <select class="item-status ${getStatusClass(item.status)}" onchange="setStatus(${catIdx},${itemIdx},this.value)" style="border-color:inherit;">
-          <option value="none"      ${item.status==="none"      ?"selected":""}>Not Started</option>
-          <option value="researching" ${item.status==="researching"?"selected":""}>Researching</option>
-          <option value="contacted" ${item.status==="contacted" ?"selected":""}>Contacted</option>
-          <option value="booked"    ${item.status==="booked"    ?"selected":""}>Booked</option>
-          <option value="paid"      ${item.status==="paid"      ?"selected":""}>Paid</option>
-          <option value="done"      ${item.status==="done"      ?"selected":""}>Done</option>
+      <table class="guest-table">
+        <thead><tr><th>Name</th><th>RSVP</th><th>+1</th><th>Table</th><th>Notes</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div class="add-guest-form">
+        <input id="g-name-${sec.replace(/\s/g,'_')}" placeholder="Full name"/>
+        <select id="g-rsvp-${sec.replace(/\s/g,'_')}">
+          <option value="awaiting">Awaiting</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="declined">Declined</option>
         </select>
+        <input id="g-plus1-${sec.replace(/\s/g,'_')}" placeholder="+1?" style="max-width:60px;"/>
+        <input id="g-notes-${sec.replace(/\s/g,'_')}" placeholder="Notes"/>
+        <button onclick="addGuest('${sec}')">Add</button>
       </div>
-      <div class="item-body">
-        <div class="item-name">${escHtml(item.name)}</div>
-        <textarea class="item-note" rows="1" placeholder="Add a note..." oninput="setNote(${catIdx},${itemIdx},this.value);autoResize(this)">${escHtml(item.note)}</textarea>
-        <input class="item-deadline" type="date" value="${escHtml(item.deadline)}" onchange="setDeadline(${catIdx},${itemIdx},this.value)" title="Set a deadline" />
-      </div>
-      <div class="item-actions">
-        <button class="del-btn" onclick="deleteItem(${catIdx},${itemIdx})" title="Remove item">x</button>
-      </div>
-    `;
-    list.appendChild(row);
+    </div>`;
+  }).join('');
+  updateRsvpSummary();
+}
+
+function addGuest(sec) {
+  const key = sec.replace(/\s/g,'_');
+  const name = document.getElementById(`g-name-${key}`).value.trim();
+  if (!name) return;
+  guestData[sec].push({
+    name,
+    rsvp: document.getElementById(`g-rsvp-${key}`).value,
+    plus1: document.getElementById(`g-plus1-${key}`).value.trim(),
+    notes: document.getElementById(`g-notes-${key}`).value.trim(),
+    table: '',
   });
+  renderGuests();
+  updateStats();
 }
 
-function autoResize(el) {
-  el.style.height = "auto";
-  el.style.height = el.scrollHeight + "px";
+function cycleRsvp(sec, gi) {
+  const states = ['awaiting','confirmed','declined'];
+  const g = guestData[sec][gi];
+  g.rsvp = states[(states.indexOf(g.rsvp)+1)%states.length];
+  renderGuests();
+  updateStats();
 }
 
-function getStatusClass(s) {
-  return { none:"status-none", researching:"status-researching", contacted:"status-contacted", booked:"status-booked", paid:"status-paid", done:"status-done" }[s] || "status-none";
+function updateRsvpSummary() {
+  let confirmed=0, awaiting=0, declined=0, total=0;
+  Object.values(guestData).forEach(list => {
+    list.forEach(g => {
+      total++;
+      if (g.rsvp==='confirmed') confirmed++;
+      else if (g.rsvp==='declined') declined++;
+      else awaiting++;
+    });
+  });
+  document.getElementById('rsvp-confirmed').textContent = confirmed;
+  document.getElementById('rsvp-awaiting').textContent = awaiting;
+  document.getElementById('rsvp-declined').textContent = declined;
+  document.getElementById('rsvp-total').textContent = total;
 }
 
-// ──────────────────────────────────────
-//  ACTIONS
-// ──────────────────────────────────────
-function toggleCategory(catIdx) {
-  state.categories[catIdx].open = !state.categories[catIdx].open;
-  renderCategories();
-  updateProgress();
-  saveAll();
+/* ════════════ RENDER TIMELINE ════════════ */
+function renderTimeline() {
+  const list = document.getElementById("timeline-list");
+  list.innerHTML = timelineData.map((t,i) => {
+    const statusLabel = t.status==='done' ? 'Completed' : t.status==='upcoming' ? 'Upcoming' : 'TBD';
+    const tag = t.status==='done' ? 'DONE' : t.status==='upcoming' ? 'UPCOMING' : 'TBD';
+    return `<div class="timeline-item" style="${i===0?'border-radius:12px 12px 0 0':''};${i===timelineData.length-1?'border-radius:0 0 12px 12px;border-bottom:1px solid var(--cream-border)':''}">
+      <div class="tl-dot-col"><div class="tl-dot ${t.status}"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">${t.title}</div>
+        <div class="tl-note">${t.note}</div>
+      </div>
+      <div class="tl-right">
+        <div class="tl-status ${t.status}">${statusLabel}</div>
+        <div class="tl-tag">${tag}</div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
-function setStatus(catIdx, itemIdx, val) {
-  state.categories[catIdx].items[itemIdx].status = val;
-  renderCategories();
-  updateProgress();
-  saveAll();
+/* ════════════ OVERVIEW ════════════ */
+function renderOverview() {
+  // Category progress
+  const sections = [...new Set(vendors.map(v => v.section))];
+  const catDiv = document.getElementById("overview-categories");
+  catDiv.innerHTML = sections.map(sec => {
+    const vv = vendors.filter(v => v.section === sec);
+    const avg = Math.round(vv.reduce((s,v) => s+v.pct, 0) / vv.length);
+    const col = avg>=75?"bar-green":avg>=40?"bar-amber":"bar-red";
+    return `<div class="category-row">
+      <div class="category-row-head">
+        <span class="category-name">${sec}</span>
+        <span class="category-pct">${avg}%</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill ${col}" style="width:${avg}%"></div></div>
+    </div>`;
+  }).join('');
+
+  // Checklist progress
+  const clDiv = document.getElementById("overview-checklist");
+  clDiv.innerHTML = checklistData.map(cat => {
+    const done = cat.items.filter(i=>i.done).length;
+    const total = cat.items.length;
+    const pct = total ? Math.round(done/total*100) : 0;
+    const col = pct>=75?"bar-green":pct>=40?"bar-amber":"bar-red";
+    return `<div class="category-row">
+      <div class="category-row-head">
+        <span class="category-name">${cat.title}</span>
+        <span class="category-pct">${done}/${total}</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill ${col}" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
 }
 
-function setNote(catIdx, itemIdx, val) {
-  state.categories[catIdx].items[itemIdx].note = val;
-  saveAll();
+function updateStats() {
+  const booked = vendors.filter(v => v.progress==='complete'||v.progress==='booked').length;
+  const inprog = vendors.filter(v => v.progress==='in-progress'||v.progress==='confirmed'||v.progress==='shortlisted').length;
+  const ns = vendors.filter(v => v.progress==='not-started').length;
+  const totalGuests = Object.values(guestData).reduce((s,l)=>s+l.length,0);
+  document.getElementById('stat-booked').textContent = booked;
+  document.getElementById('stat-progress').textContent = inprog;
+  document.getElementById('stat-notstarted').textContent = ns;
+  document.getElementById('stat-guests').textContent = totalGuests;
 }
 
-function setDeadline(catIdx, itemIdx, val) {
-  state.categories[catIdx].items[itemIdx].deadline = val;
-  saveAll();
-}
-
-function deleteItem(catIdx, itemIdx) {
-  state.categories[catIdx].items.splice(itemIdx, 1);
-  renderItems(catIdx);
-  renderCategories();
-  updateProgress();
-  saveAll();
-}
-
-function addItem(catIdx) {
-  const input = document.getElementById("new-item-" + catIdx);
-  const name  = input.value.trim();
-  if (!name) return;
-  state.categories[catIdx].items.push({ name, status:"none", note:"", deadline:"" });
-  input.value = "";
-  renderCategories();
-  state.categories[catIdx].open = true;
-  renderCategories();
-  updateProgress();
-  saveAll();
-}
-
-function addCategory() {
-  const input = document.getElementById("new-cat-name");
-  const name  = input.value.trim();
-  if (!name) return;
-  state.categories.push({ name, icon: name[0].toUpperCase(), items: [], open: true });
-  input.value = "";
-  renderCategories();
-  updateProgress();
-  saveAll();
-}
-
-// ──────────────────────────────────────
-//  INIT
-// ──────────────────────────────────────
-function init() {
-  loadState();
-
-  // Today
+function updateCountdown() {
   const today = new Date();
-  document.getElementById("today-date").textContent = today.toLocaleDateString(undefined, { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-
-  // Restore inputs
-  if (state.weddingDate) document.getElementById("wedding-date-input").value = state.weddingDate;
-  document.getElementById("guest-count").textContent = state.guestCount || 0;
-  if (state.budgetTotal) document.getElementById("budget-total-in").value = state.budgetTotal;
-  if (state.budgetSpent) document.getElementById("budget-spent-in").value = state.budgetSpent;
-
-  // Notes
-  if (state.notes) {
-    document.getElementById("note-venue").value    = state.notes.venue    || "";
-    document.getElementById("note-contacts").value = state.notes.contacts || "";
-    document.getElementById("note-honey").value    = state.notes.honey    || "";
-    document.getElementById("note-misc").value     = state.notes.misc     || "";
-  }
-
-  renderCategories();
-  updateProgress();
-  updateCountdown();
-  saveBudget();
-
-  // Live countdown refresh
-  setInterval(updateCountdown, 60000);
-
-  // Watch date input
-  document.getElementById("wedding-date-input").addEventListener("change", () => {
-    state.weddingDate = document.getElementById("wedding-date-input").value;
-    updateCountdown();
-    saveAll();
-  });
-
-  // Watch budget inputs
-  document.getElementById("budget-total-in").addEventListener("input", saveBudget);
-  document.getElementById("budget-spent-in").addEventListener("input", saveBudget);
+  const wedding = new Date(WEDDING_DATE);
+  const diff = Math.ceil((wedding - today) / (1000*60*60*24));
+  document.getElementById('countdown-num').textContent = diff > 0 ? diff : 'Today!';
 }
 
-document.addEventListener("DOMContentLoaded", init);
+/* ════════════ MODALS ════════════ */
+function openAddVendorModal() { document.getElementById('vendor-modal').classList.add('open'); }
+function openAddChecklistModal() { document.getElementById('checklist-modal').classList.add('open'); }
+function openAddTimelineModal() { document.getElementById('timeline-modal').classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+let pendingChecklistIndex = null;
+function openAddItemModal(ci) {
+  pendingChecklistIndex = ci;
+  document.getElementById('item-input').value = '';
+  document.getElementById('item-modal').classList.add('open');
+  document.getElementById('item-save-btn').onclick = () => {
+    const val = document.getElementById('item-input').value.trim();
+    if (!val) return;
+    checklistData[pendingChecklistIndex].items.push({ text: val, done: false });
+    closeModal('item-modal');
+    renderChecklist();
+  };
+}
+
+function saveVendor() {
+  const name = document.getElementById('m-name').value.trim();
+  if (!name) return;
+  vendors.push({
+    id: Date.now(),
+    section: document.getElementById('m-cat').value,
+    name, type: document.getElementById('m-cat').value,
+    booked:"no", deposit:"no", reserved:"no",
+    balance: document.getElementById('m-balance').value || "—",
+    due: document.getElementById('m-due').value || "—",
+    progress:"not-started", pct:0,
+    notes: document.getElementById('m-notes').value || "",
+  });
+  closeModal('vendor-modal');
+  renderVendors();
+  renderOverview();
+}
+
+function saveChecklist() {
+  const cat = document.getElementById('cl-cat').value.trim();
+  if (!cat) return;
+  const firstItem = document.getElementById('cl-item').value.trim();
+  const items = firstItem ? [{ text: firstItem, done: false }] : [];
+  checklistData.push({ id: Date.now(), title: cat, items });
+  closeModal('checklist-modal');
+  renderChecklist();
+}
+
+function saveTimeline() {
+  const title = document.getElementById('tl-title').value.trim();
+  if (!title) return;
+  timelineData.push({
+    id: Date.now(),
+    title,
+    note: document.getElementById('tl-note').value.trim() || "",
+    status: document.getElementById('tl-status').value,
+  });
+  closeModal('timeline-modal');
+  renderTimeline();
+}
+
+/* ════════════ TAB SWITCHING ════════════ */
+function showTab(tab, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ════════════ CLOSE MODALS ON OVERLAY CLICK ════════════ */
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
+});
+
+/* ════════════ INIT ════════════ */
+updateCountdown();
+renderVendors();
+renderChecklist();
+renderGuests();
+renderTimeline();
+renderOverview();
+updateStats();
 </script>
 </body>
 </html>
-Chatly can make mistakes. Check important info.
