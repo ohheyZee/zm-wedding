@@ -27,6 +27,7 @@
     background: var(--cream);
     color: var(--deep);
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   /* HERO HEADER */
@@ -61,14 +62,15 @@
   }
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 5vw, 48px);
+    font-size: clamp(26px, 6vw, 54px);
     font-weight: 300;
-    color: #fff;
-    letter-spacing: 2px;
+    color: var(--blush);
+    line-height: 1.25;
+    letter-spacing: 1px;
     position: relative;
-    animation: fadeUp 0.7s ease both;
+    animation: fadeUp 0.6s ease both;
     animation-delay: 0.1s;
-    line-height: 1.2;
+    word-break: break-word;
   }
   .hero-title em {
     font-style: italic;
@@ -80,45 +82,52 @@
   .hero-divider {
     width: 48px;
     height: 1px;
-    background: rgba(200,169,110,0.5);
+    background: var(--gold);
     margin: 18px auto 16px;
-    animation: fadeUp 0.7s ease both;
-    animation-delay: 0.25s;
+    opacity: 0.6;
     position: relative;
+    animation: fadeUp 0.6s ease both;
+    animation-delay: 0.25s;
   }
   .hero-date {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
+    font-size: clamp(15px, 3.5vw, 20px);
     font-weight: 300;
     font-style: italic;
     color: var(--blush);
+    opacity: 0.85;
     position: relative;
-    animation: fadeUp 0.7s ease both;
+    animation: fadeUp 0.6s ease both;
     animation-delay: 0.35s;
   }
   .countdown-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 22px;
+    position: relative;
+    animation: fadeUp 0.6s ease both;
+    animation-delay: 0.45s;
+  }
+  .countdown-pill {
     display: inline-flex;
     align-items: baseline;
     gap: 10px;
-    margin-top: 24px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.06);
     border: 1px solid rgba(200,169,110,0.25);
     border-radius: 40px;
     padding: 10px 28px;
-    position: relative;
-    animation: fadeUp 0.7s ease both;
-    animation-delay: 0.45s;
   }
-  .countdown-strip .n {
+  .countdown-pill .n {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 42px;
+    font-size: clamp(32px, 7vw, 48px);
     font-weight: 300;
     color: var(--gold);
     line-height: 1;
   }
-  .countdown-strip .l {
-    font-size: 11px;
-    letter-spacing: 3px;
+  .countdown-pill .l {
+    font-size: clamp(10px, 2vw, 13px);
+    letter-spacing: 2.5px;
     text-transform: uppercase;
     color: var(--muted);
   }
@@ -137,7 +146,11 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .nav-wrap::-webkit-scrollbar { display: none; }
   .tab-btn {
     font-family: 'DM Sans', sans-serif;
     font-size: 13px;
@@ -151,6 +164,8 @@
     padding: 18px 24px;
     border-bottom: 2px solid transparent;
     transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .tab-btn:hover { color: var(--deep); }
   .tab-btn.active {
@@ -175,6 +190,7 @@
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 24px;
+    min-width: 0;
   }
   .stat-label {
     font-size: 10px;
@@ -212,8 +228,10 @@
     padding: 18px 24px;
     border-bottom: 1px solid var(--border);
     background: #fdfaf7;
+    flex-wrap: wrap;
+    gap: 8px;
   }
-  .section-title-wrap { display: flex; align-items: center; gap: 10px; }
+  .section-title-wrap { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
   .section-title-input {
     font-family: 'Cormorant Garamond', serif;
     font-size: 22px;
@@ -224,7 +242,9 @@
     outline: none;
     border-bottom: 1px dashed transparent;
     transition: border-color 0.2s;
-    min-width: 160px;
+    min-width: 0;
+    width: 100%;
+    max-width: 260px;
   }
   .section-title-input:hover, .section-title-input:focus {
     border-bottom-color: var(--gold);
@@ -236,6 +256,7 @@
     padding: 3px 10px;
     border-radius: 20px;
     font-weight: 500;
+    flex-shrink: 0;
   }
   .section-actions { display: flex; gap: 8px; align-items: center; }
 
@@ -250,6 +271,7 @@
     cursor: pointer;
     transition: all 0.15s;
     letter-spacing: 0.5px;
+    white-space: nowrap;
   }
   .btn-gold { background: var(--gold); color: #fff; }
   .btn-gold:hover { background: #b8943d; }
@@ -278,11 +300,17 @@
     background: transparent;
     color: var(--muted);
     transition: all 0.15s;
+    flex-shrink: 0;
   }
   .btn-icon:hover { background: #fde8e8; color: #c07070; }
 
   /* VENDOR TABLE */
-  .vendor-table { width: 100%; border-collapse: collapse; }
+  .table-scroll-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+  .vendor-table { width: 100%; border-collapse: collapse; min-width: 380px; }
   .vendor-table th {
     font-size: 10px;
     font-weight: 500;
@@ -293,6 +321,7 @@
     text-align: left;
     background: #fdfaf7;
     border-bottom: 1px solid var(--border);
+    white-space: nowrap;
   }
   .vendor-table td {
     padding: 12px 16px;
@@ -309,6 +338,7 @@
     font-size: 14px;
     color: var(--deep);
     width: 100%;
+    min-width: 0;
     outline: none;
     border-bottom: 1px dashed transparent;
     transition: border-color 0.2s;
@@ -336,8 +366,25 @@
   .pill-blue   { background: #e6f0f8; color: #3a7aaa; }
   .pill-rose   { background: #fdeaea; color: #b05a5a; }
 
+  /* ADD ROW */
+  .add-row td { background: #fdfaf7; }
+  .add-input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--deep);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    width: 100%;
+    min-width: 0;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .add-input:focus { border-color: var(--gold); }
+
   /* GUEST TABLE */
-  .guest-table { width: 100%; border-collapse: collapse; }
+  .guest-table { width: 100%; border-collapse: collapse; min-width: 380px; }
   .guest-table th {
     font-size: 10px;
     font-weight: 500;
@@ -348,6 +395,7 @@
     text-align: left;
     background: #fdfaf7;
     border-bottom: 1px solid var(--border);
+    white-space: nowrap;
   }
   .guest-table td {
     padding: 10px 16px;
@@ -365,7 +413,7 @@
     padding: 28px 32px;
     margin-bottom: 24px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 24px;
   }
   .rsvp-stat { text-align: center; }
@@ -437,7 +485,8 @@
     outline: none;
     border-bottom: 1px dashed transparent;
     transition: all 0.2s;
-    min-width: 80px;
+    min-width: 0;
+    word-break: break-word;
   }
   .check-label:hover, .check-label:focus { border-bottom-color: var(--gold); }
   .check-label.done { text-decoration: line-through; color: var(--muted); }
@@ -460,6 +509,8 @@
     padding: 8px 20px 4px;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px;
   }
 
   /* ADD CHECKLIST */
@@ -469,84 +520,62 @@
     padding: 14px 20px;
     border-top: 1px solid var(--border);
     background: #fdfaf7;
-  }
-
-  /* ADD INPUT */
-  .add-input {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    color: var(--deep);
-    background: var(--cream);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 7px 12px;
-    width: 100%;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .add-input:focus { border-color: var(--gold); }
-
-  /* OVERVIEW PILLS ROW */
-  .overview-meta {
-    display: flex;
-    gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 32px;
-    align-items: center;
   }
-  .overview-pill {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 8px 20px;
-    font-size: 13px;
-    color: var(--muted);
-    font-family: 'DM Sans', sans-serif;
+  .checklist-add .add-input { flex: 1; min-width: 160px; }
+
+  /* ADD VENDOR CATEGORY */
+  .add-category-row {
+    display: flex;
+    gap: 10px;
+    padding: 16px;
+    background: #fdfaf7;
+    border-top: 1px solid var(--border);
+    border-radius: 0 0 16px 16px;
+    flex-wrap: wrap;
   }
-  .overview-pill strong { color: var(--deep); font-weight: 500; }
+  .add-category-row .add-input { flex: 1; min-width: 160px; }
 
   /* MOBILE RESPONSIVE */
   @media (max-width: 640px) {
-    .content { padding: 20px 12px; }
-    .hero { padding: 32px 16px 28px; }
-    .countdown-strip .n { font-size: 34px; }
-    .nav-wrap {
-      padding: 0;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .nav-wrap::-webkit-scrollbar { display: none; }
-    .tab-btn {
-      padding: 14px 16px;
-      font-size: 11px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .stats-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
+    .content { padding: 16px 12px; }
+    .hero { padding: 36px 16px 32px; }
+    .hero-title { font-size: clamp(22px, 7vw, 36px); }
+    .countdown-pill { padding: 9px 20px; }
+    .nav-wrap { padding: 0; }
+    .tab-btn { padding: 14px 14px; font-size: 11px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .stat-value { font-size: 32px; }
     .stat-card { padding: 16px; }
-    .section-header {
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 14px 16px;
-    }
-    .section-title-input {
-      min-width: 120px;
-      font-size: 18px;
-    }
+    .section-header { padding: 12px 14px; }
+    .section-title-input { font-size: 17px; max-width: 180px; }
     .rsvp-summary {
-      padding: 20px 16px;
-      gap: 16px;
+      padding: 18px 14px;
+      gap: 14px;
       grid-template-columns: repeat(2, 1fr);
     }
-    .rsvp-num { font-size: 36px; }
-    .checklist-add { flex-direction: column; }
-    .checklist-add .btn { width: 100%; }
-    .overview-pill { font-size: 12px; padding: 6px 14px; }
+    .rsvp-num { font-size: 34px; }
+    .rsvp-label { font-size: 9px; letter-spacing: 1.5px; }
+    .vendor-table, .guest-table { min-width: 340px; }
+    .vendor-table th, .vendor-table td,
+    .guest-table th, .guest-table td { padding: 10px 10px; font-size: 13px; }
+    .pill { font-size: 11px; padding: 4px 10px; }
+    .checklist-item { padding: 11px 14px; gap: 10px; }
+    .check-label { font-size: 13px; }
+    .progress-label { padding: 8px 14px 4px; font-size: 11px; }
+    .progress-bar-wrap { margin: 0 14px 14px; }
+    .checklist-add { padding: 12px 14px; }
+    .add-category-row { padding: 12px; }
+    .add-input { font-size: 13px; padding: 7px 10px; }
+  }
+
+  @media (max-width: 380px) {
+    .hero-title { font-size: 20px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .stat-value { font-size: 28px; }
+    .rsvp-summary { grid-template-columns: 1fr 1fr; }
+    .rsvp-num { font-size: 28px; }
+    .section-title-input { font-size: 15px; max-width: 150px; }
   }
 </style>
 </head>
@@ -561,8 +590,8 @@
   <div class="hero-title">Z &amp; M's <em>Wedding Dashboard</em></div>
   <div class="hero-divider"></div>
   <div class="hero-date">Friday, July 31st, 2026</div>
-  <div style="display:flex;justify-content:center;margin-top:24px;animation:fadeUp 0.7s ease both;animation-delay:0.45s;">
-    <div class="countdown-strip">
+  <div class="countdown-strip">
+    <div class="countdown-pill">
       <span class="n" id="cd-days">--</span>
       <span class="l">days away</span>
     </div>
@@ -588,6 +617,10 @@
   <!-- VENDORS TAB -->
   <div class="tab-panel" id="tab-vendors">
     <div id="vendor-sections"></div>
+    <div class="add-category-row" style="border-radius:16px;border:1px solid var(--border);">
+      <input class="add-input" id="new-cat-name" placeholder="New vendor category name..."/>
+      <button class="btn btn-gold" onclick="addVendorCategory()">+ Add Category</button>
+    </div>
   </div>
 
   <!-- GUESTS TAB -->
@@ -644,14 +677,14 @@ let vendorData = [
       { id: 1, name: 'Bridal Dress', booked: 'not booked', deposit: 'none' },
       { id: 2, name: 'Bridal Hair Stylist', booked: 'not booked', deposit: 'none' },
       { id: 3, name: 'Bridal Makeup Artist', booked: 'not booked', deposit: 'none' },
-      { id: 4, name: 'Groom\'s Suit', booked: 'not booked', deposit: 'none' },
-      { id: 5, name: 'Groom\'s Hair Cut', booked: 'not booked', deposit: 'none' },
+      { id: 4, name: "Groom's Suit", booked: 'not booked', deposit: 'none' },
+      { id: 5, name: "Groom's Hair Cut", booked: 'not booked', deposit: 'none' },
     ]
   },
   {
     id: 5, title: 'Music & Entertainment',
     items: [
-      { id: 1, name: 'Venue\'s Plug and Play', booked: 'not booked', deposit: 'none' },
+      { id: 1, name: "Venue's Plug and Play", booked: 'not booked', deposit: 'none' },
       { id: 2, name: 'Playlists', booked: 'not booked', deposit: 'none' },
     ]
   },
@@ -676,49 +709,49 @@ let guestData = [
   {
     id: 1, title: "Bride's Family",
     items: [
-      { id: 1, firstName: 'Istanbul', lastName: 'Ali', rsvp: 'confirmed', event: 'both' },
-      { id: 2, firstName: 'Lul', lastName: 'Osman', rsvp: 'confirmed', event: 'both' },
-      { id: 3, firstName: 'Nadia', lastName: 'Ghedi', rsvp: 'confirmed', event: 'both' },
-      { id: 4, firstName: 'Nawal', lastName: 'Ghedi', rsvp: 'confirmed', event: 'both' },
-      { id: 5, firstName: 'Ayoub', lastName: 'Osman', rsvp: 'confirmed', event: 'both' },
-      { id: 6, firstName: 'Amin', lastName: 'Osman', rsvp: 'confirmed', event: 'both' },
-      { id: 7, firstName: 'Ismahan', lastName: 'Osman', rsvp: 'confirmed', event: 'both' },
+      { id: 1,  firstName: 'Istanbul', lastName: 'Ali',    rsvp: 'confirmed', event: 'both' },
+      { id: 2,  firstName: 'Lul',      lastName: 'Osman',  rsvp: 'confirmed', event: 'both' },
+      { id: 3,  firstName: 'Nadia',    lastName: 'Ghedi',  rsvp: 'confirmed', event: 'both' },
+      { id: 4,  firstName: 'Nawal',    lastName: 'Ghedi',  rsvp: 'confirmed', event: 'both' },
+      { id: 5,  firstName: 'Ayoub',    lastName: 'Osman',  rsvp: 'confirmed', event: 'both' },
+      { id: 6,  firstName: 'Amin',     lastName: 'Osman',  rsvp: 'confirmed', event: 'both' },
+      { id: 7,  firstName: 'Ismahan',  lastName: 'Osman',  rsvp: 'confirmed', event: 'both' },
     ]
   },
   { id: 2, title: "Groom's Family", items: [] },
-  { id: 3, title: "Bride's Guest", items: [] },
-  { id: 4, title: "Groom's Guest", items: [] },
+  { id: 3, title: "Bride's Guest",  items: [] },
+  { id: 4, title: "Groom's Guest",  items: [] },
 ];
 
 let checklistData = [
   {
     id: 1, title: 'Overall Checklist',
     items: [
-      { id: 1, text: 'Set a budget', done: false },
-      { id: 2, text: 'Book ceremony venue', done: false },
-      { id: 3, text: 'Book reception venue', done: false },
-      { id: 4, text: 'Send save the dates', done: false },
-      { id: 5, text: 'Book photographer', done: false },
-      { id: 6, text: 'Book videographer', done: false },
-      { id: 7, text: 'Choose wedding dress', done: false },
-      { id: 8, text: 'Book caterer', done: false },
-      { id: 9, text: 'Finalize guest list', done: false },
-      { id: 10, text: 'Send invitations', done: false },
+      { id: 1,  text: 'Set a budget',           done: false },
+      { id: 2,  text: 'Book ceremony venue',     done: false },
+      { id: 3,  text: 'Book reception venue',    done: false },
+      { id: 4,  text: 'Send save the dates',     done: false },
+      { id: 5,  text: 'Book photographer',       done: false },
+      { id: 6,  text: 'Book videographer',       done: false },
+      { id: 7,  text: 'Choose wedding dress',    done: false },
+      { id: 8,  text: 'Book caterer',            done: false },
+      { id: 9,  text: 'Finalize guest list',     done: false },
+      { id: 10, text: 'Send invitations',        done: false },
     ]
   },
   {
     id: 2, title: 'Day-of Checklist',
     items: [
-      { id: 1, text: 'Confirm all vendors', done: false },
-      { id: 2, text: 'Bridal party hair & makeup', done: false },
-      { id: 3, text: 'Bride gets ready', done: false },
-      { id: 4, text: 'First look / photos', done: false },
-      { id: 5, text: 'Nikkah ceremony', done: false },
-      { id: 6, text: 'Cocktail hour', done: false },
-      { id: 7, text: 'Reception entrance', done: false },
-      { id: 8, text: 'First dance', done: false },
-      { id: 9, text: 'Dinner & speeches', done: false },
-      { id: 10, text: 'Cake cutting', done: false },
+      { id: 1,  text: 'Confirm all vendors',        done: false },
+      { id: 2,  text: 'Bridal party hair & makeup', done: false },
+      { id: 3,  text: 'Bride gets ready',           done: false },
+      { id: 4,  text: 'First look / photos',        done: false },
+      { id: 5,  text: 'Nikkah ceremony',            done: false },
+      { id: 6,  text: 'Cocktail hour',              done: false },
+      { id: 7,  text: 'Reception entrance',         done: false },
+      { id: 8,  text: 'First dance',                done: false },
+      { id: 9,  text: 'Dinner & speeches',          done: false },
+      { id: 10, text: 'Cake cutting',               done: false },
     ]
   }
 ];
@@ -736,22 +769,14 @@ function guestStats() {
   }));
   return { invited, confirmed, declined, awaiting, remaining: Math.max(0, 300 - invited) };
 }
-
 function vendorStats() {
   let total = 0, booked = 0;
-  vendorData.forEach(c => c.items.forEach(v => {
-    total++;
-    if (v.booked === 'booked') booked++;
-  }));
+  vendorData.forEach(c => c.items.forEach(v => { total++; if (v.booked === 'booked') booked++; }));
   return { total, booked };
 }
-
 function checklistStats() {
   let total = 0, done = 0;
-  checklistData.forEach(c => c.items.forEach(i => {
-    total++;
-    if (i.done) done++;
-  }));
+  checklistData.forEach(c => c.items.forEach(i => { total++; if (i.done) done++; }));
   return { total, done };
 }
 
@@ -760,7 +785,6 @@ function renderOverview() {
   const gs = guestStats();
   const vs = vendorStats();
   const cs = checklistStats();
-
   document.getElementById('overview-stats').innerHTML = `
     <div class="stat-card">
       <div class="stat-label">Guests Invited</div>
@@ -780,7 +804,7 @@ function renderOverview() {
   `;
 }
 
-// VENDORS — no Link column, no Delete Category button
+// VENDORS
 function bookedPill(status) {
   if (status === 'booked') return `<span class="pill pill-green">Booked</span>`;
   return `<span class="pill pill-red">Not Booked</span>`;
@@ -814,6 +838,14 @@ function deleteVendorItem(catId, itemId) {
   cat.items = cat.items.filter(i=>i.id!==itemId);
   renderAll();
 }
+function addVendorCategory() {
+  const nameEl = document.getElementById('new-cat-name');
+  const name = nameEl.value.trim();
+  if (!name) return;
+  vendorData.push({ id: ++_vcatId, title: name, items: [] });
+  nameEl.value = '';
+  renderAll();
+}
 function updateCategoryTitle(catId, val, type) {
   if (type === 'vendor') vendorData.find(c=>c.id===catId).title = val;
   else if (type === 'guest') guestData.find(c=>c.id===catId).title = val;
@@ -832,12 +864,12 @@ function renderVendors() {
           <span class="section-count">${cat.items.length}</span>
         </div>
       </div>
-      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
-      <table class="vendor-table" style="min-width:360px;">
+      <div class="table-scroll-wrap">
+      <table class="vendor-table">
         <thead><tr>
-          <th style="width:50%">Vendor</th>
-          <th style="width:20%">Booked</th>
-          <th style="width:20%">Deposit</th>
+          <th>Vendor</th>
+          <th style="width:120px">Booked</th>
+          <th style="width:120px">Deposit</th>
           <th style="width:40px"></th>
         </tr></thead>
         <tbody>
@@ -845,16 +877,12 @@ function renderVendors() {
     cat.items.forEach(item => {
       html += `<tr>
         <td><input class="editable-cell" value="${esc(item.name)}" onchange="updateVendorField(${cat.id},${item.id},'name',this.value)" placeholder="Vendor name"/></td>
-        <td><span onclick="cycleBooked(${cat.id},${item.id})">${bookedPill(item.booked)}</span></td>
-        <td><span onclick="cycleDeposit(${cat.id},${item.id})">${depositPill(item.deposit)}</span></td>
+        <td><span onclick="cycleBooked(${cat.id},${item.id})" style="cursor:pointer">${bookedPill(item.booked)}</span></td>
+        <td><span onclick="cycleDeposit(${cat.id},${item.id})" style="cursor:pointer">${depositPill(item.deposit)}</span></td>
         <td><button class="btn-icon" onclick="deleteVendorItem(${cat.id},${item.id})" title="Delete">&#215;</button></td>
       </tr>`;
     });
-    html += `
-        </tbody>
-      </table>
-      </div>
-    </div>`;
+    html += `</tbody></table></div></div>`;
   });
   document.getElementById('vendor-sections').innerHTML = html;
 }
@@ -862,11 +890,11 @@ function renderVendors() {
 // GUESTS
 function rsvpPill(status) {
   if (status === 'confirmed') return `<span class="pill pill-green">Confirmed</span>`;
-  if (status === 'declined') return `<span class="pill pill-rose">Declined</span>`;
+  if (status === 'declined')  return `<span class="pill pill-rose">Declined</span>`;
   return `<span class="pill pill-grey">Awaiting</span>`;
 }
 function eventPill(status) {
-  if (status === 'nikkah') return `<span class="pill pill-amber">Nikkah</span>`;
+  if (status === 'nikkah')    return `<span class="pill pill-amber">Nikkah</span>`;
   if (status === 'reception') return `<span class="pill pill-blue">Reception</span>`;
   return `<span class="pill pill-green">Both</span>`;
 }
@@ -942,13 +970,13 @@ function renderGuests() {
           <span class="section-count">${cat.items.length}</span>
         </div>
       </div>
-      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
-      <table class="guest-table" style="min-width:440px;">
+      <div class="table-scroll-wrap">
+      <table class="guest-table">
         <thead><tr>
-          <th style="width:28%">First Name</th>
-          <th style="width:28%">Last Name</th>
-          <th style="width:18%">Event</th>
-          <th style="width:18%">RSVP</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th style="width:110px">Event</th>
+          <th style="width:110px">RSVP</th>
           <th style="width:40px"></th>
         </tr></thead>
         <tbody>
@@ -1033,7 +1061,7 @@ function renderChecklist() {
     });
     html += `
       <div class="checklist-add">
-        <input class="add-input" id="add-check-${cat.id}" placeholder="Add new task..." style="flex:1"
+        <input class="add-input" id="add-check-${cat.id}" placeholder="Add new task..."
           onkeydown="if(event.key==='Enter')addCheckItem(${cat.id})"/>
         <button class="btn btn-gold" onclick="addCheckItem(${cat.id})">+ Add</button>
       </div>
@@ -1042,19 +1070,17 @@ function renderChecklist() {
   document.getElementById('checklist-sections').innerHTML = html;
 }
 
-// TABS & RENDER
+// UTILITY
 function esc(str) {
   if (!str) return '';
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-
 function renderAll() {
   renderOverview();
   renderVendors();
   renderGuests();
   renderChecklist();
 }
-
 function switchTab(name, btn) {
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
