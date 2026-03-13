@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Locked In!</title>
+<title>Z & M's Wedding Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
 <style>
   :root {
@@ -32,130 +32,107 @@
   /* HERO HEADER */
   .hero {
     background: var(--deep);
-    padding: 48px 32px 40px;
+    padding: 52px 32px 44px;
     text-align: center;
     position: relative;
     overflow: hidden;
-    border-top: 3px solid transparent;
-    border-image: linear-gradient(90deg, transparent, var(--gold), transparent) 1;
+    border-bottom: 1px solid rgba(200,169,110,0.25);
   }
   .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(200,169,110,0.22) 0%, transparent 70%);
+    background: radial-gradient(ellipse at 50% 0%, rgba(200,169,110,0.18) 0%, transparent 65%);
     pointer-events: none;
   }
   .hero-dot {
     position: absolute;
     border-radius: 50%;
-    background: rgba(200,169,110,0.12);
+    background: rgba(200,169,110,0.08);
     animation: floatDot 6s ease-in-out infinite;
   }
-  .hero-dot:nth-child(1) { width:120px;height:120px;top:-30px;left:8%;animation-delay:0s; }
-  .hero-dot:nth-child(2) { width:70px;height:70px;top:20px;right:12%;animation-delay:1.5s; }
-  .hero-dot:nth-child(3) { width:50px;height:50px;bottom:10px;left:20%;animation-delay:3s; }
+  .hero-dot:nth-child(1) { width:140px;height:140px;top:-40px;left:5%;animation-delay:0s; }
+  .hero-dot:nth-child(2) { width:80px;height:80px;top:10px;right:10%;animation-delay:1.5s; }
+  .hero-dot:nth-child(3) { width:55px;height:55px;bottom:8px;left:22%;animation-delay:3s; }
   @keyframes floatDot {
     0%,100% { transform: translateY(0); }
     50% { transform: translateY(-12px); }
   }
-  .hero-eyebrow {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 7vw, 64px);
+    font-weight: 300;
     letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(200,169,110,0.7);
-    margin-bottom: 16px;
+    color: #fff;
     position: relative;
     animation: fadeUp 0.6s ease both;
     animation-delay: 0.1s;
+    line-height: 1.1;
   }
-  .hero-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: clamp(58px, 10vw, 100px);
-    font-weight: 700;
+  .hero-title span {
     background: linear-gradient(135deg, #e8c97a 0%, #c8a96e 40%, #f0dfa0 70%, #c8a96e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    line-height: 1.05;
-    letter-spacing: 1px;
-    position: relative;
-    animation: fadeUp 0.7s ease both;
-    animation-delay: 0.25s;
+    font-style: italic;
+    font-weight: 400;
   }
-  .hero-flourish {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    margin: 14px 0 10px;
-    position: relative;
-    animation: fadeUp 0.7s ease both;
-    animation-delay: 0.35s;
-  }
-  .hero-flourish-line {
-    width: 60px;
+
+  .hero-divider {
+    width: 48px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(200,169,110,0.5));
+    background: rgba(200,169,110,0.45);
+    margin: 20px auto;
+    position: relative;
+    animation: fadeUp 0.6s ease both;
+    animation-delay: 0.22s;
   }
-  .hero-flourish-line:last-child {
-    background: linear-gradient(90deg, rgba(200,169,110,0.5), transparent);
-  }
-  .hero-flourish-diamond {
-    width: 7px;
-    height: 7px;
-    background: var(--gold);
-    transform: rotate(45deg);
-    opacity: 0.8;
-  }
+
   .hero-date {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
+    font-size: clamp(15px, 2.5vw, 19px);
     font-weight: 300;
     font-style: italic;
     color: var(--blush);
-    margin-top: 2px;
     position: relative;
-    animation: fadeUp 0.7s ease both;
-    animation-delay: 0.45s;
+    animation: fadeUp 0.6s ease both;
+    animation-delay: 0.32s;
+    letter-spacing: 1px;
   }
+
   .countdown-strip {
-    display: flex;
-    align-items: center;
+    display: inline-flex;
+    align-items: baseline;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     margin-top: 28px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(200,169,110,0.22);
+    border-radius: 14px;
+    padding: 16px 40px;
     position: relative;
-    animation: fadeUp 0.7s ease both;
-    animation-delay: 0.55s;
+    animation: fadeUp 0.6s ease both;
+    animation-delay: 0.42s;
   }
   .countdown-num {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(200,169,110,0.3);
-    border-radius: 12px;
-    padding: 14px 36px;
-    text-align: center;
-  }
-  .countdown-num .n {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 52px;
+    font-size: clamp(48px, 9vw, 76px);
     font-weight: 300;
     color: var(--gold);
     line-height: 1;
-    display: block;
   }
-  .countdown-num .l {
-    font-size: 10px;
-    letter-spacing: 3px;
+  .countdown-label {
+    font-size: 11px;
+    letter-spacing: 3.5px;
     text-transform: uppercase;
     color: var(--muted);
-    margin-top: 4px;
-    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
   }
+
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
+    from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
@@ -529,36 +506,12 @@
     border-radius: 0 0 16px 16px;
   }
 
-  /* OVERVIEW PILLS ROW */
-  .overview-meta {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 32px;
-    align-items: center;
-  }
-  .overview-pill {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 8px 20px;
-    font-size: 13px;
-    color: var(--muted);
-    font-family: 'DM Sans', sans-serif;
-  }
-  .overview-pill strong { color: var(--deep); font-weight: 500; }
-
-  /* ── MOBILE RESPONSIVE ── */
+  /* MOBILE RESPONSIVE */
   @media (max-width: 640px) {
-    /* Content padding */
     .content { padding: 20px 12px; }
-
-    /* Hero */
-    .hero { padding: 32px 16px 28px; }
-    .countdown-num { padding: 12px 24px; }
-    .countdown-num .n { font-size: 40px; }
-
-    /* Nav tabs: horizontally scrollable, no wrap */
+    .hero { padding: 36px 16px 32px; }
+    .countdown-strip { padding: 14px 28px; }
+    .countdown-num { font-size: 52px; }
     .nav-wrap {
       padding: 0;
       overflow-x: auto;
@@ -572,16 +525,12 @@
       white-space: nowrap;
       flex-shrink: 0;
     }
-
-    /* Stats: 2-column grid on mobile */
     .stats-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
     }
     .stat-value { font-size: 32px; }
     .stat-card { padding: 16px; }
-
-    /* Section headers wrap gracefully */
     .section-header {
       flex-wrap: wrap;
       gap: 8px;
@@ -591,33 +540,15 @@
       min-width: 120px;
       font-size: 18px;
     }
-
-    /* RSVP summary: 2-column on mobile */
     .rsvp-summary {
       padding: 20px 16px;
       gap: 16px;
       grid-template-columns: repeat(2, 1fr);
     }
     .rsvp-num { font-size: 36px; }
-
-    /* Add category row stacks vertically */
-    .add-category-row {
-      flex-direction: column;
-    }
-
-    /* Checklist add row stacks vertically */
-    .checklist-add {
-      flex-direction: column;
-    }
-    .checklist-add .btn {
-      width: 100%;
-    }
-
-    /* Overview pills tighten up */
-    .overview-pill {
-      font-size: 12px;
-      padding: 6px 14px;
-    }
+    .add-category-row { flex-direction: column; }
+    .checklist-add { flex-direction: column; }
+    .checklist-add .btn { width: 100%; }
   }
 </style>
 </head>
@@ -629,22 +560,15 @@
   <div class="hero-dot"></div>
   <div class="hero-dot"></div>
 
-  <div class="hero-eyebrow">Z &amp; M's Wedding Dashboard</div>
-  <div class="hero-title">Locked In!</div>
+  <div class="hero-title">Z &amp; M's <span>Wedding Dashboard</span></div>
 
-  <div class="hero-flourish">
-    <div class="hero-flourish-line"></div>
-    <div class="hero-flourish-diamond"></div>
-    <div class="hero-flourish-line"></div>
-  </div>
+  <div class="hero-divider"></div>
 
   <div class="hero-date">Friday, July 31st, 2026</div>
 
   <div class="countdown-strip">
-    <div class="countdown-num">
-      <span class="n" id="cd-days">--</span>
-      <span class="l">Days</span>
-    </div>
+    <span class="countdown-num" id="cd-days">--</span>
+    <span class="countdown-label">days away</span>
   </div>
 </div>
 
@@ -662,7 +586,6 @@
   <!-- OVERVIEW TAB -->
   <div class="tab-panel active" id="tab-overview">
     <div class="stats-grid" id="overview-stats"></div>
-    <div class="overview-meta" id="overview-meta"></div>
   </div>
 
   <!-- VENDORS TAB -->
@@ -688,9 +611,7 @@
 </div>
 
 <script>
-// ─────────────────────────────────────────────
 // COUNTDOWN
-// ─────────────────────────────────────────────
 function updateCountdown() {
   const wedding = new Date('2026-07-31T00:00:00');
   const now = new Date();
@@ -701,49 +622,50 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 60000);
 
-// ─────────────────────────────────────────────
 // STATE
-// ─────────────────────────────────────────────
 let vendorData = [
   {
     id: 1, title: 'Venue',
     items: [
-      { id: 1, name: 'Nikkah Venue', booked: 'booked', deposit: 'paid', link: '' },
-      { id: 2, name: 'Reception Venue', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 1, name: 'Royal King Event Centre', booked: 'booked', deposit: 'paid', link: '' },
+    ]
+  },
+  {
+    id: 3, title: 'Catering',
+    items: [
+      { id: 1, name: 'Maryan Afgooye Catering', booked: 'booked', deposit: 'none', link: '' },
+      { id: 2, name: 'Cake', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 3, name: 'Dessert Table', booked: 'not booked', deposit: 'none', link: '' },
     ]
   },
   {
     id: 2, title: 'Photography & Film',
     items: [
       { id: 1, name: 'Photographer', booked: 'not booked', deposit: 'none', link: '' },
-      { id: 2, name: 'Videographer', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 2, name: 'Photo Booth', booked: 'not booked', deposit: 'none', link: '' },
     ]
   },
   {
-    id: 3, title: 'Catering',
+    id: 4, title: 'Bride & Groom',
     items: [
-      { id: 1, name: 'Caterer', booked: 'not booked', deposit: 'none', link: '' },
-      { id: 2, name: 'Cake / Desserts', booked: 'not booked', deposit: 'none', link: '' },
-    ]
-  },
-  {
-    id: 4, title: 'Beauty',
-    items: [
-      { id: 1, name: 'Hair Stylist', booked: 'not booked', deposit: 'none', link: '' },
-      { id: 2, name: 'Makeup Artist', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 1, name: 'Bridal Dress', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 2, name: 'Bridal Hair Stylist', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 3, name: 'Bridal Makeup Artist', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 4, name: "Groom's Suit", booked: 'not booked', deposit: 'none', link: '' },
+      { id: 5, name: "Groom's Hair Cut", booked: 'not booked', deposit: 'none', link: '' },
     ]
   },
   {
     id: 5, title: 'Music & Entertainment',
     items: [
-      { id: 1, name: 'DJ', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 1, name: "Venue's Plug and Play", booked: 'not booked', deposit: 'none', link: '' },
+      { id: 2, name: 'Playlists', booked: 'not booked', deposit: 'none', link: '' },
     ]
   },
   {
-    id: 6, title: 'Floral & Decor',
+    id: 6, title: 'Decor',
     items: [
-      { id: 1, name: 'Florist', booked: 'not booked', deposit: 'none', link: '' },
-      { id: 2, name: 'Decor Rental', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 1, name: 'JN Events and Decor', booked: 'not booked', deposit: 'none', link: '' },
     ]
   },
 ];
@@ -790,9 +712,7 @@ let checklistData = [
 
 let _vcatId = 10, _vitId = 100, _gcatId = 10, _gitId = 100, _clitId = 100;
 
-// ─────────────────────────────────────────────
 // HELPERS
-// ─────────────────────────────────────────────
 function guestStats() {
   let invited = 0, confirmed = 0, declined = 0, awaiting = 0;
   guestData.forEach(cat => cat.items.forEach(g => {
@@ -822,24 +742,13 @@ function checklistStats() {
   return { total, done };
 }
 
-// ─────────────────────────────────────────────
 // OVERVIEW
-// ─────────────────────────────────────────────
 function renderOverview() {
   const gs = guestStats();
   const vs = vendorStats();
   const cs = checklistStats();
-  const wedding = new Date('2026-07-31T00:00:00');
-  const now = new Date(); now.setHours(0,0,0,0);
-  const days = Math.ceil((wedding - now) / (1000*60*60*24));
-  const weeks = Math.floor(days / 7);
 
   document.getElementById('overview-stats').innerHTML = `
-    <div class="stat-card">
-      <div class="stat-label">Days Away</div>
-      <div class="stat-value">${days}</div>
-      <div class="stat-sub">${weeks} weeks to go</div>
-    </div>
     <div class="stat-card">
       <div class="stat-label">Guests Invited</div>
       <div class="stat-value">${gs.invited}<span style="font-size:20px;color:var(--muted)">/300</span></div>
@@ -856,18 +765,9 @@ function renderOverview() {
       <div class="stat-sub">${Math.round(cs.done/cs.total*100)||0}% done</div>
     </div>
   `;
-
-  document.getElementById('overview-meta').innerHTML = `
-    <div class="overview-pill"><strong>Confirmed RSVPs:</strong> ${gs.confirmed}</div>
-    <div class="overview-pill"><strong>Declined:</strong> ${gs.declined}</div>
-    <div class="overview-pill"><strong>Awaiting:</strong> ${gs.awaiting}</div>
-    <div class="overview-pill"><strong>Spots Left:</strong> ${gs.remaining}</div>
-  `;
 }
 
-// ─────────────────────────────────────────────
 // VENDORS
-// ─────────────────────────────────────────────
 function bookedPill(status) {
   if (status === 'booked') return `<span class="pill pill-green">Booked</span>`;
   return `<span class="pill pill-red">Not Booked</span>`;
@@ -985,9 +885,7 @@ function renderVendors() {
   document.getElementById('vendor-sections').innerHTML = html;
 }
 
-// ─────────────────────────────────────────────
 // GUESTS
-// ─────────────────────────────────────────────
 function rsvpPill(status) {
   if (status === 'confirmed') return `<span class="pill pill-green">Confirmed</span>`;
   if (status === 'declined') return `<span class="pill pill-rose">Declined</span>`;
@@ -1105,9 +1003,7 @@ function renderGuests() {
   document.getElementById('guest-sections').innerHTML = html;
 }
 
-// ─────────────────────────────────────────────
 // CHECKLIST
-// ─────────────────────────────────────────────
 function toggleCheck(catId, itemId) {
   const cat = checklistData.find(c=>c.id===catId);
   const item = cat.items.find(i=>i.id===itemId);
@@ -1172,9 +1068,7 @@ function renderChecklist() {
   document.getElementById('checklist-sections').innerHTML = html;
 }
 
-// ─────────────────────────────────────────────
 // TABS & RENDER
-// ─────────────────────────────────────────────
 function esc(str) {
   if (!str) return '';
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
