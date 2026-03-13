@@ -343,6 +343,10 @@
     border-bottom: 1px dashed transparent;
     transition: border-color 0.2s;
     padding: 2px 0;
+    /* FIX: allow name to wrap and never clip */
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
   .editable-cell:hover, .editable-cell:focus { border-bottom-color: var(--gold); }
   .pill {
@@ -556,7 +560,9 @@
     }
     .rsvp-num { font-size: 34px; }
     .rsvp-label { font-size: 9px; letter-spacing: 1.5px; }
-    .vendor-table, .guest-table { min-width: 340px; }
+    /* FIX: vendor name column gets full available width on mobile */
+    .vendor-table { min-width: 0; width: 100%; }
+    .vendor-table td:first-child { min-width: 120px; width: auto; max-width: none; }
     .vendor-table th, .vendor-table td,
     .guest-table th, .guest-table td { padding: 10px 10px; font-size: 13px; }
     .pill { font-size: 11px; padding: 4px 10px; }
@@ -567,6 +573,8 @@
     .checklist-add { padding: 12px 14px; }
     .add-category-row { padding: 12px; }
     .add-input { font-size: 13px; padding: 7px 10px; }
+    /* FIX: guest table also gets same treatment */
+    .guest-table { min-width: 0; width: 100%; }
   }
 
   @media (max-width: 380px) {
@@ -723,7 +731,6 @@ let guestData = [
   { id: 4, title: "Groom's Guest",  items: [] },
 ];
 
-// ── ONLY THIS BLOCK CHANGED ──────────────────────────────────────────────────
 let checklistData = [
   {
     id: 1, title: 'Overall Checklist',
@@ -759,20 +766,19 @@ let checklistData = [
   {
     id: 2, title: 'Day-of Checklist',
     items: [
-      { id: 1,  text: 'Confirm all vendors',        done: false },
-      { id: 2,  text: 'Bridal party hair & makeup', done: false },
-      { id: 3,  text: 'Bride gets ready',           done: false },
-      { id: 4,  text: 'First look / photos',        done: false },
-      { id: 5,  text: 'Nikkah ceremony',            done: false },
-      { id: 6,  text: 'Cocktail hour',              done: false },
-      { id: 7,  text: 'Reception entrance',         done: false },
-      { id: 8,  text: 'First dance',                done: false },
-      { id: 9,  text: 'Dinner & speeches',          done: false },
-      { id: 10, text: 'Cake cutting',               done: false },
+      { id: 1,  text: 'Confirm all vendors arriving on time', done: false },
+      { id: 2,  text: 'Sound check / microphone test',        done: false },
+      { id: 3,  text: 'Guest book / sign-in table ready',     done: false },
+      { id: 4,  text: 'Decorations in place',                 done: false },
+      { id: 5,  text: 'Family photos after Nikkah ceremony',  done: false },
+      { id: 6,  text: 'Place cards done',                     done: false },
+      { id: 7,  text: 'Bar fully stocked',                    done: false },
+      { id: 8,  text: 'Final headcount for catering',         done: false },
+      { id: 9,  text: 'Confirm convertible driver',           done: false },
+      { id: 10, text: 'Front Signage in place',               done: false },
     ]
   }
 ];
-// ── END OF CHANGE ────────────────────────────────────────────────────────────
 
 let _vcatId = 10, _vitId = 100, _gcatId = 10, _gitId = 100, _clitId = 100;
 
