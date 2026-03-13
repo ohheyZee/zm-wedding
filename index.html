@@ -1,1183 +1,1089 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Z & M — Wedding Dashboard </title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<title>Lock In! Wedding Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --cream: #f5f0e8;
-    --cream-dark: #ede7d9;
-    --cream-border: #d9d0bc;
-    --ink: #1a1612;
-    --ink-light: #5a5045;
-    --ink-muted: #8c8070;
-    --gold: #b8974a;
-    --gold-light: #e8d9a8;
-    --green: #3a7d44;
-    --green-bg: #e8f3ea;
-    --green-light: #c8e6cc;
-    --amber: #c47b1a;
-    --amber-bg: #fdf3e0;
-    --amber-light: #f5d89a;
-    --red: #c0392b;
-    --red-bg: #fdecea;
-    --red-light: #f5b8b2;
-    --blue: #2563a8;
-    --blue-bg: #e8f0fc;
-    --blue-light: #b8d0f0;
+    --cream: #faf7f2;
+    --blush: #e8d5c4;
+    --rose: #c9a89a;
+    --deep: #2c1810;
+    --sage: #8a9e8c;
+    --gold: #c8a96e;
+    --muted: #9b8b80;
     --card: #ffffff;
-    --shadow: 0 2px 12px rgba(26,22,18,0.07);
-    --shadow-md: 0 4px 24px rgba(26,22,18,0.10);
+    --border: #ede5dc;
+    --red-soft: #e8a097;
+    --green-soft: #8fba8f;
+    --amber-soft: #d4a862;
+    --blue-soft: #7fa8c9;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Jost', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     background: var(--cream);
-    color: var(--ink);
+    color: var(--deep);
     min-height: 100vh;
-    font-size: 14px;
   }
 
-  /* ── NAV ── */
-  header {
-    background: var(--cream);
-    border-bottom: 1px solid var(--cream-border);
-    position: sticky; top: 0; z-index: 100;
+  /* HERO HEADER */
+  .hero {
+    background: var(--deep);
+    padding: 48px 32px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
   }
-  .nav-inner {
-    max-width: 1100px; margin: 0 auto;
-    display: flex; align-items: center; gap: 0;
-    padding: 0 24px;
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(200,169,110,0.18) 0%, transparent 70%);
   }
-  .nav-logo {
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-weight: 500; letter-spacing: 0.02em;
-    color: var(--ink); padding: 18px 20px 18px 0;
-    border-right: 1px solid var(--cream-border);
-    margin-right: 8px; white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .nav-logo em { font-style: italic; color: var(--gold); }
-  nav { display: flex; gap: 0; }
-  nav button {
-    background: none; border: none; cursor: pointer;
-    font-family: 'Jost', sans-serif;
-    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--ink-muted);
-    padding: 20px 18px; border-bottom: 2px solid transparent;
-    transition: all 0.2s; white-space: nowrap;
-  }
-  nav button:hover { color: var(--ink); }
-  nav button.active {
-    color: var(--ink); border-bottom-color: var(--gold);
-  }
-
-  /* ── PAGE WRAPPER ── */
-  .page { display: none; }
-  .page.active { display: block; }
-  .content { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
-
-  /* ── PAGE HEADERS ── */
-  .page-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 38px; font-weight: 400; line-height: 1;
-    margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between;
-  }
-  .page-title em { font-style: italic; color: var(--gold); margin-left: 10px; }
-  .page-title-badge {
-    font-family: 'Jost', sans-serif;
-    font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
-    text-transform: uppercase; background: var(--gold-light);
-    color: var(--gold); padding: 6px 14px; border-radius: 20px;
-  }
-
-  /* ── OVERVIEW ── */
-  .overview-greeting {
-    background: var(--ink);
+    font-size: clamp(52px, 8vw, 88px);
+    font-weight: 300;
     color: var(--cream);
-    border-radius: 16px;
-    padding: 36px 40px;
-    margin-bottom: 32px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 24px;
+    line-height: 1;
+    letter-spacing: -1px;
+    position: relative;
   }
-  .overview-greeting h2 {
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-date {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 400; line-height: 1.3;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--blush);
+    margin-top: 10px;
+    position: relative;
   }
-  .overview-greeting h2 em { font-style: italic; color: var(--gold-light); }
-  .overview-greeting p { color: #b8a88a; font-size: 13px; margin-top: 6px; }
-  .countdown-box {
-    text-align: center; flex-shrink: 0;
+  .countdown-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+    position: relative;
+  }
+  .countdown-num {
     background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 12px; padding: 20px 28px;
+    border: 1px solid rgba(200,169,110,0.3);
+    border-radius: 12px;
+    padding: 14px 28px;
+    text-align: center;
   }
-  .countdown-number {
+  .countdown-num .n {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 52px; font-weight: 300; line-height: 1;
-    color: var(--gold-light);
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
   }
-  .countdown-label {
-    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: #8c7a60; margin-top: 4px;
+  .countdown-num .l {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+    display: block;
+  }
+  .countdown-sep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    color: rgba(200,169,110,0.4);
+    line-height: 1;
+    margin-bottom: 18px;
   }
 
+  /* NAV TABS */
+  .nav-wrap {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 18px 24px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: var(--deep); }
+  .tab-btn.active {
+    color: var(--deep);
+    border-bottom-color: var(--gold);
+  }
+
+  /* CONTENT */
+  .content { padding: 36px 32px; max-width: 1200px; margin: 0 auto; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* OVERVIEW STATS */
   .stats-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
     margin-bottom: 32px;
   }
   .stat-card {
-    background: var(--card); border-radius: 12px;
-    padding: 22px 24px; box-shadow: var(--shadow);
-    border: 1px solid var(--cream-border);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
   }
-  .stat-card .stat-label {
-    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--ink-muted); margin-bottom: 8px;
+  .stat-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
   }
-  .stat-card .stat-value {
+  .stat-value {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 36px; font-weight: 400; line-height: 1;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--deep);
+    line-height: 1;
   }
-  .stat-card .stat-sub { font-size: 11px; color: var(--ink-muted); margin-top: 4px; }
-  .stat-green .stat-value { color: var(--green); }
-  .stat-amber .stat-value { color: var(--amber); }
-  .stat-red .stat-value { color: var(--red); }
-  .stat-gold .stat-value { color: var(--gold); }
-
-  .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .overview-card {
-    background: var(--card); border-radius: 12px;
-    padding: 24px; box-shadow: var(--shadow);
-    border: 1px solid var(--cream-border);
-  }
-  .overview-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; font-weight: 500; margin-bottom: 16px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .overview-card h3 em { font-style: italic; color: var(--gold); }
-  .overview-card h3 .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--gold); flex-shrink: 0;
+  .stat-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
   }
 
-  /* Category progress rows */
-  .category-row { margin-bottom: 14px; }
-  .category-row-head {
-    display: flex; justify-content: space-between;
-    align-items: center; margin-bottom: 6px;
-  }
-  .category-name { font-size: 12px; font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
-  .category-pct {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px; font-weight: 400; color: var(--ink-muted);
-  }
-  .bar-track {
-    height: 6px; background: var(--cream-dark);
-    border-radius: 99px; overflow: hidden;
-  }
-  .bar-fill {
-    height: 100%; border-radius: 99px;
-    transition: width 0.6s ease;
-  }
-  .bar-green { background: var(--green); }
-  .bar-amber { background: var(--amber); }
-  .bar-red { background: var(--red); }
-
-  /* ── TABLE (Vendors) ── */
-  .table-wrap {
-    background: var(--card); border-radius: 14px;
-    box-shadow: var(--shadow); border: 1px solid var(--cream-border);
+  /* SECTION CARD */
+  .section-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
     overflow: hidden;
+    margin-bottom: 24px;
   }
-  table { width: 100%; border-collapse: collapse; }
-  thead tr { background: var(--ink); }
-  thead th {
-    font-family: 'Jost', sans-serif;
-    font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
-    text-transform: uppercase; color: #a89878;
-    padding: 14px 16px; text-align: left; white-space: nowrap;
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    background: #fdfaf7;
   }
-  .section-row td {
-    background: var(--cream-dark);
+  .section-title-wrap { display: flex; align-items: center; gap: 10px; }
+  .section-title-input {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 14px; font-style: italic; color: var(--ink-muted);
-    padding: 8px 16px; border-top: 1px solid var(--cream-border);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--deep);
+    border: none;
+    background: transparent;
+    outline: none;
+    border-bottom: 1px dashed transparent;
+    transition: border-color 0.2s;
+    min-width: 160px;
   }
-  .section-row td span { margin-right: 8px; color: var(--gold); }
-  tbody tr:not(.section-row) {
-    border-top: 1px solid var(--cream-border);
-    transition: background 0.15s;
+  .section-title-input:hover, .section-title-input:focus {
+    border-bottom-color: var(--gold);
   }
-  tbody tr:not(.section-row):hover { background: #faf7f2; }
-  td { padding: 13px 16px; vertical-align: middle; }
-  .vendor-name { font-weight: 500; font-size: 13px; }
-  .vendor-type { font-size: 11px; color: var(--ink-muted); margin-top: 2px; }
-  .notes-cell { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; color: var(--ink-muted); }
+  .section-count {
+    font-size: 11px;
+    background: var(--blush);
+    color: var(--deep);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .section-actions { display: flex; gap: 8px; align-items: center; }
 
-  /* ── PILL BADGES (clickable) ── */
-  .pill {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 4px 10px; border-radius: 20px;
-    font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
-    cursor: pointer; border: none; font-family: 'Jost', sans-serif;
-    text-transform: uppercase; transition: all 0.15s; white-space: nowrap;
-    user-select: none;
-  }
-  .pill .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
-  .pill-green { background: var(--green-bg); color: var(--green); }
-  .pill-green .dot { background: var(--green); }
-  .pill-amber { background: var(--amber-bg); color: var(--amber); }
-  .pill-amber .dot { background: var(--amber); }
-  .pill-red { background: var(--red-bg); color: var(--red); }
-  .pill-red .dot { background: var(--red); }
-  .pill-blue { background: var(--blue-bg); color: var(--blue); }
-  .pill-blue .dot { background: var(--blue); }
-  .pill-grey { background: var(--cream-dark); color: var(--ink-muted); }
-  .pill-grey .dot { background: var(--ink-muted); }
-  .pill:hover { filter: brightness(0.93); transform: scale(1.03); }
-
-  /* Progress bar in table */
-  .progress-cell { min-width: 110px; }
-  .progress-label { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 10px; color: var(--ink-muted); }
-  .prog-bar { height: 5px; background: var(--cream-dark); border-radius: 99px; overflow: hidden; }
-  .prog-fill { height: 100%; border-radius: 99px; transition: width 0.4s; }
-
-  /* ── ADD ROW BUTTON ── */
-  .add-row-btn {
-    background: none; border: 1.5px dashed var(--cream-border);
-    color: var(--ink-muted); font-family: 'Jost', sans-serif;
-    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    cursor: pointer; padding: 12px 20px; width: 100%;
-    transition: all 0.2s; border-radius: 0 0 14px 14px;
-  }
-  .add-row-btn:hover { background: var(--cream-dark); color: var(--ink); }
-
-  /* ── CHECKLIST ── */
-  .checklist-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-  }
-  .checklist-card {
-    background: var(--card); border-radius: 12px;
-    padding: 22px; box-shadow: var(--shadow);
-    border: 1px solid var(--cream-border);
-  }
-  .checklist-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px; font-weight: 500; margin-bottom: 14px;
-    display: flex; align-items: center; gap: 8px;
-    padding-bottom: 12px; border-bottom: 1px solid var(--cream-border);
-  }
-  .checklist-card h3 .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--gold); flex-shrink: 0;
-  }
-  .check-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 7px 0; border-bottom: 1px solid #f0ebe0;
+  /* BUTTONS */
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
     cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.5px;
   }
-  .check-item:last-child { border-bottom: none; }
-  .check-box {
-    width: 16px; height: 16px; border-radius: 4px;
-    border: 1.5px solid var(--cream-border); flex-shrink: 0;
+  .btn-gold {
+    background: var(--gold);
+    color: #fff;
+  }
+  .btn-gold:hover { background: #b8943d; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { background: var(--cream); color: var(--deep); }
+  .btn-danger {
+    background: transparent;
+    color: #c07070;
+    border: 1px solid #e5c5c5;
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+  .btn-danger:hover { background: #fdf0f0; }
+  .btn-icon {
+    width: 28px; height: 28px;
     display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
+    border-radius: 6px;
+    font-size: 16px;
+    line-height: 1;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: var(--muted);
+    transition: all 0.15s;
   }
-  .check-box.checked { background: var(--green); border-color: var(--green); }
-  .check-box.checked::after {
-    content: ''; display: block; width: 4px; height: 7px;
-    border: 2px solid #fff; border-top: none; border-left: none;
-    transform: rotate(45deg) translateY(-1px);
-  }
-  .check-label { font-size: 12.5px; transition: all 0.2s; }
-  .check-label.done { text-decoration: line-through; color: var(--ink-muted); }
+  .btn-icon:hover { background: #fde8e8; color: #c07070; }
 
-  /* ── GUEST LIST ── */
-  .guest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .guest-card {
-    background: var(--card); border-radius: 12px;
-    box-shadow: var(--shadow); border: 1px solid var(--cream-border);
-    overflow: hidden;
+  /* VENDOR TABLE */
+  .vendor-table { width: 100%; border-collapse: collapse; }
+  .vendor-table th {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 12px 16px;
+    text-align: left;
+    background: #fdfaf7;
+    border-bottom: 1px solid var(--border);
   }
-  .guest-card-head {
-    padding: 16px 20px;
-    display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1px solid var(--cream-border);
+  .vendor-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+    font-size: 14px;
   }
-  .guest-card-head h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px; font-weight: 500;
+  .vendor-table tr:last-child td { border-bottom: none; }
+  .vendor-table tr:hover td { background: #fdfaf7; }
+  .editable-cell {
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--deep);
+    width: 100%;
+    outline: none;
+    border-bottom: 1px dashed transparent;
+    transition: border-color 0.2s;
+    padding: 2px 0;
   }
-  .guest-card-head h3 em { font-style: italic; color: var(--gold); }
-  .guest-count {
-    background: var(--ink); color: var(--cream);
-    font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
-    padding: 4px 10px; border-radius: 20px;
+  .editable-cell:hover, .editable-cell:focus {
+    border-bottom-color: var(--gold);
   }
+  .pill {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+  }
+  .pill:hover { opacity: 0.8; transform: scale(0.97); }
+  .pill-red { background: #fde8e8; color: #c07070; }
+  .pill-green { background: #e6f4e6; color: #4a8f4a; }
+  .pill-amber { background: #fef3e2; color: #b07d2a; }
+  .pill-grey { background: #f0ece8; color: var(--muted); }
+  .pill-blue { background: #e6f0f8; color: #3a7aaa; }
+  .pill-rose { background: #fdeaea; color: #b05a5a; }
+
+  /* ADD ROW */
+  .add-row td { background: #fdfaf7; }
+  .add-input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--deep);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .add-input:focus { border-color: var(--gold); }
+
+  /* GUEST TABLE */
   .guest-table { width: 100%; border-collapse: collapse; }
   .guest-table th {
-    background: var(--ink); color: #a89878;
-    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
-    padding: 8px 14px; text-align: left; font-weight: 500;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 12px 16px;
+    text-align: left;
+    background: #fdfaf7;
+    border-bottom: 1px solid var(--border);
   }
   .guest-table td {
-    padding: 9px 14px; border-bottom: 1px solid var(--cream-border);
-    font-size: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+    font-size: 14px;
   }
   .guest-table tr:last-child td { border-bottom: none; }
-  .guest-table tr:hover td { background: #faf7f2; }
-  .empty-row td {
-    text-align: center; color: var(--ink-muted);
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; padding: 20px; font-size: 13px;
-  }
+  .guest-table tr:hover td { background: #fdfaf7; }
 
+  /* RSVP SUMMARY */
   .rsvp-summary {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-    padding: 20px;
+    background: var(--deep);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 24px;
   }
-  .rsvp-stat {
-    text-align: center; padding: 16px;
-    background: var(--cream); border-radius: 10px;
-    border: 1px solid var(--cream-border);
-  }
-  .rsvp-stat .n {
+  .rsvp-stat { text-align: center; }
+  .rsvp-num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 30px; font-weight: 400; line-height: 1;
+    font-size: 46px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
   }
-  .rsvp-stat .l { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-top: 4px; }
+  .rsvp-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--blush);
+    margin-top: 4px;
+    display: block;
+  }
+  .rsvp-bar-wrap {
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    height: 4px;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+  .rsvp-bar-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
 
-  .add-guest-form {
-    padding: 12px 14px; background: var(--cream);
-    border-top: 1px solid var(--cream-border);
-    display: flex; gap: 8px; flex-wrap: wrap;
+  /* CHECKLIST */
+  .checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
   }
-  .add-guest-form input, .add-guest-form select {
-    font-family: 'Jost', sans-serif; font-size: 11px;
-    border: 1px solid var(--cream-border); background: var(--card);
-    padding: 6px 10px; border-radius: 6px; outline: none;
-    color: var(--ink); flex: 1; min-width: 80px;
+  .checklist-item:last-of-type { border-bottom: none; }
+  .checklist-item:hover { background: #fdfaf7; }
+  .check-box {
+    width: 20px; height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s;
+    background: transparent;
   }
-  .add-guest-form input:focus, .add-guest-form select:focus {
-    border-color: var(--gold);
+  .check-box.checked {
+    background: var(--sage);
+    border-color: var(--sage);
   }
-  .add-guest-form button {
-    background: var(--ink); color: var(--cream);
-    border: none; cursor: pointer; font-family: 'Jost', sans-serif;
-    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 6px 14px; border-radius: 6px; transition: background 0.2s;
+  .check-box.checked::after {
+    content: '';
+    width: 5px; height: 9px;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg) translateY(-1px);
+    display: block;
   }
-  .add-guest-form button:hover { background: var(--gold); color: var(--ink); }
-
-  /* ── TIMELINE ── */
-  .timeline-list { display: flex; flex-direction: column; gap: 0; }
-  .timeline-item {
-    display: flex; align-items: flex-start; gap: 0;
-    background: var(--card); border: 1px solid var(--cream-border);
-    border-bottom: none; padding: 0;
-    position: relative;
-  }
-  .timeline-item:first-child { border-radius: 12px 12px 0 0; }
-  .timeline-item:last-child { border-bottom: 1px solid var(--cream-border); border-radius: 0 0 12px 12px; }
-  .tl-dot-col {
-    width: 52px; display: flex; justify-content: center;
-    padding: 22px 0 22px;
-    position: relative; flex-shrink: 0;
-  }
-  .tl-dot-col::after {
-    content: ''; position: absolute; left: 50%; top: 0; bottom: -1px;
-    width: 1px; background: var(--cream-border); transform: translateX(-50%);
-    z-index: 0;
-  }
-  .tl-dot {
-    width: 12px; height: 12px; border-radius: 50%;
-    border: 2px solid var(--cream-border); background: var(--card);
-    position: relative; z-index: 1; margin-top: 4px; flex-shrink: 0;
+  .check-label {
+    flex: 1;
+    font-size: 14px;
+    cursor: text;
+    outline: none;
+    border-bottom: 1px dashed transparent;
     transition: all 0.2s;
+    min-width: 80px;
   }
-  .tl-dot.done { background: var(--green); border-color: var(--green); }
-  .tl-dot.upcoming { background: var(--cream); border-color: var(--ink-muted); }
-  .tl-dot.tbd { background: var(--cream); border-color: var(--cream-border); }
-  .tl-body { flex: 1; padding: 18px 20px 18px 0; }
-  .tl-title { font-size: 13.5px; font-weight: 500; }
-  .tl-note { font-size: 11.5px; color: var(--ink-muted); margin-top: 3px; font-family: 'Cormorant Garamond', serif; font-style: italic; }
-  .tl-right {
-    padding: 18px 24px 18px 8px; text-align: right; flex-shrink: 0;
-    min-width: 110px;
+  .check-label:hover, .check-label:focus {
+    border-bottom-color: var(--gold);
   }
-  .tl-status { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; }
-  .tl-status.done { color: var(--green); }
-  .tl-status.upcoming { color: var(--ink-muted); }
-  .tl-tag { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px; }
+  .check-label.done {
+    text-decoration: line-through;
+    color: var(--muted);
+  }
+  .progress-bar-wrap {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0 20px 16px;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--sage), var(--gold));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    font-size: 11px;
+    color: var(--muted);
+    padding: 8px 20px 4px;
+    display: flex;
+    justify-content: space-between;
+  }
 
-  /* ── NOTES ── */
-  .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .notes-card {
-    background: var(--card); border-radius: 12px;
-    padding: 22px; box-shadow: var(--shadow);
-    border: 1px solid var(--cream-border);
+  /* ADD CHECKLIST */
+  .checklist-add {
+    display: flex;
+    gap: 10px;
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    background: #fdfaf7;
   }
-  .notes-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px; font-weight: 500; margin-bottom: 12px;
-    color: var(--ink);
-  }
-  .notes-card textarea {
-    width: 100%; min-height: 180px; resize: vertical;
-    font-family: 'Cormorant Garamond', serif; font-size: 14px;
-    line-height: 1.7; color: var(--ink); background: var(--cream);
-    border: 1px solid var(--cream-border); border-radius: 8px;
-    padding: 12px 14px; outline: none; transition: border-color 0.2s;
-  }
-  .notes-card textarea:focus { border-color: var(--gold); }
 
-  /* ── MODAL ── */
-  .modal-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(26,22,18,0.5); z-index: 200;
-    align-items: center; justify-content: center;
+  /* ADD VENDOR CATEGORY */
+  .add-category-row {
+    display: flex;
+    gap: 10px;
+    padding: 16px;
+    background: #fdfaf7;
+    border-top: 1px solid var(--border);
+    border-radius: 0 0 16px 16px;
   }
-  .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--card); border-radius: 16px;
-    padding: 32px; width: 420px; max-width: 90vw;
-    box-shadow: var(--shadow-md);
-  }
-  .modal h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; margin-bottom: 20px;
-  }
-  .modal-field { margin-bottom: 14px; }
-  .modal-field label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); display: block; margin-bottom: 5px; }
-  .modal-field input, .modal-field select, .modal-field textarea {
-    width: 100%; font-family: 'Jost', sans-serif; font-size: 13px;
-    border: 1px solid var(--cream-border); background: var(--cream);
-    padding: 9px 12px; border-radius: 8px; outline: none; color: var(--ink);
-  }
-  .modal-field input:focus, .modal-field select:focus { border-color: var(--gold); }
-  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
-  .btn-cancel {
-    background: none; border: 1px solid var(--cream-border);
-    color: var(--ink-muted); font-family: 'Jost', sans-serif;
-    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 9px 18px; border-radius: 8px; cursor: pointer;
-  }
-  .btn-save {
-    background: var(--ink); color: var(--cream);
-    border: none; font-family: 'Jost', sans-serif;
-    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 9px 18px; border-radius: 8px; cursor: pointer;
-    transition: background 0.2s;
-  }
-  .btn-save:hover { background: var(--gold); color: var(--ink); }
 
-  .add-section-btn {
-    background: none; border: 1.5px dashed var(--cream-border);
-    color: var(--ink-muted); font-family: 'Jost', sans-serif;
-    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    cursor: pointer; padding: 14px 20px; width: 100%; margin-top: 16px;
-    border-radius: 10px; transition: all 0.2s;
+  /* OVERVIEW PILLS ROW */
+  .overview-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    align-items: center;
   }
-  .add-section-btn:hover { background: var(--cream-dark); color: var(--ink); }
+  .overview-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .overview-pill strong { color: var(--deep); font-weight: 500; }
 
-  @media (max-width: 768px) {
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .overview-grid, .checklist-grid, .guest-grid, .notes-grid { grid-template-columns: 1fr; }
-    .checklist-grid { grid-template-columns: 1fr 1fr; }
-    .overview-greeting { flex-direction: column; }
-    .nav-inner { overflow-x: auto; }
-    nav button { padding: 16px 12px; font-size: 10px; }
-    table { font-size: 12px; }
-    thead th { padding: 10px 10px; font-size: 9px; }
-    td { padding: 10px 10px; }
+  /* MOBILE */
+  @media(max-width: 640px) {
+    .content { padding: 20px 16px; }
+    .nav-wrap { padding: 0 16px; }
+    .tab-btn { padding: 14px 14px; font-size: 11px; }
+    .hero { padding: 36px 20px 30px; }
+    .rsvp-summary { padding: 20px; gap: 16px; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="nav-inner">
-    <div class="nav-logo">Z <em>&</em> M</div>
-    <nav>
-      <button class="active" onclick="showTab('overview', this)">Overview</button>
-      <button onclick="showTab('vendors', this)">Vendors</button>
-      <button onclick="showTab('guestlist', this)">Guest List</button>
-      <button onclick="showTab('checklist', this)">Checklist</button>
-      <button onclick="showTab('timeline', this)">Timeline</button>
-      <button onclick="showTab('notes', this)">Notes</button>
-    </nav>
-  </div>
-</header>
-
-<!-- ══════════════ OVERVIEW ══════════════ -->
-<div id="tab-overview" class="page active">
-  <div class="content">
-    <div class="overview-greeting">
-      <div>
-        <h2>You're doing <em>beautifully,</em> Z & M.</h2>
-        <p>Keep going — every small step is one closer to your perfect day.</p>
-      </div>
-      <div class="countdown-box">
-        <div class="countdown-number" id="countdown-num">—</div>
-        <div class="countdown-label">days to go</div>
-        <div style="font-size:10px;color:#6a5a40;margin-top:6px;letter-spacing:0.08em;">Sept 19, 2026</div>
-      </div>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stat-card stat-green">
-        <div class="stat-label">Vendors Booked</div>
-        <div class="stat-value" id="stat-booked">0</div>
-        <div class="stat-sub">confirmed & secured</div>
-      </div>
-      <div class="stat-card stat-amber">
-        <div class="stat-label">In Progress</div>
-        <div class="stat-value" id="stat-progress">0</div>
-        <div class="stat-sub">deposits / shortlisted</div>
-      </div>
-      <div class="stat-card stat-red">
-        <div class="stat-label">Not Started</div>
-        <div class="stat-value" id="stat-notstarted">0</div>
-        <div class="stat-sub">still to action</div>
-      </div>
-      <div class="stat-card stat-gold">
-        <div class="stat-label">Total Guests</div>
-        <div class="stat-value" id="stat-guests">0</div>
-        <div class="stat-sub">on the list</div>
-      </div>
-    </div>
-
-    <div class="overview-grid">
-      <div class="overview-card">
-        <h3><span class="dot"></span> Vendor Progress <em>by Category</em></h3>
-        <div id="overview-categories"></div>
-      </div>
-      <div class="overview-card">
-        <h3><span class="dot"></span> Checklist <em>Completion</em></h3>
-        <div id="overview-checklist"></div>
-      </div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Wedding Planner</div>
+  <div class="hero-title">Lock In! <em>&#9417;</em></div>
+  <div class="hero-date">Friday, July 31st, 2026</div>
+  <div class="countdown-strip">
+    <div class="countdown-num">
+      <span class="n" id="cd-days">--</span>
+      <span class="l">Days</span>
     </div>
   </div>
 </div>
 
-<!-- ══════════════ VENDORS ══════════════ -->
-<div id="tab-vendors" class="page">
-  <div class="content">
-    <div class="page-title">
-      Vendor <em>Tracker</em>
-      <span class="page-title-badge" id="vendor-count-badge">0 Vendors</span>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Vendor / Task</th>
-            <th>Booked</th>
-            <th>Deposit Paid</th>
-            <th>Reserved / Secured</th>
-            <th>Balance Due</th>
-            <th>Due Date</th>
-            <th>Progress</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody id="vendor-tbody"></tbody>
-      </table>
-      <button class="add-row-btn" onclick="openAddVendorModal()">+ Add Vendor or Task</button>
-    </div>
-  </div>
+<!-- NAV -->
+<div class="nav-wrap">
+  <button class="tab-btn active" onclick="switchTab('overview', this)">Overview</button>
+  <button class="tab-btn" onclick="switchTab('vendors', this)">Vendors</button>
+  <button class="tab-btn" onclick="switchTab('guests', this)">Guest List</button>
+  <button class="tab-btn" onclick="switchTab('checklist', this)">Checklist</button>
 </div>
 
-<!-- ══════════════ GUEST LIST ══════════════ -->
-<div id="tab-guestlist" class="page">
-  <div class="content">
-    <div class="page-title">
-      Guest <em>List</em>
-      <span class="page-title-badge">RSVP Tracker</span>
-    </div>
-    <div class="guest-grid" id="guest-grid"></div>
-    <div class="overview-card" style="margin-top:20px;">
-      <h3><span class="dot"></span> RSVP <em>Summary</em></h3>
-      <div class="rsvp-summary">
-        <div class="rsvp-stat"><div class="n" id="rsvp-confirmed" style="color:var(--green)">0</div><div class="l">Confirmed</div></div>
-        <div class="rsvp-stat"><div class="n" id="rsvp-awaiting" style="color:var(--amber)">0</div><div class="l">Awaiting</div></div>
-        <div class="rsvp-stat"><div class="n" id="rsvp-declined" style="color:var(--red)">0</div><div class="l">Declined</div></div>
-        <div class="rsvp-stat"><div class="n" id="rsvp-total" style="color:var(--gold)">0</div><div class="l">Total</div></div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- CONTENT -->
+<div class="content">
 
-<!-- ══════════════ CHECKLIST ══════════════ -->
-<div id="tab-checklist" class="page">
-  <div class="content">
-    <div class="page-title">
-      Wedding <em>Checklist</em>
-      <span class="page-title-badge">By Category</span>
-    </div>
-    <div class="checklist-grid" id="checklist-grid"></div>
-    <button class="add-section-btn" onclick="openAddChecklistModal()">+ Add New Checklist Category</button>
+  <!-- OVERVIEW TAB -->
+  <div class="tab-panel active" id="tab-overview">
+    <div class="stats-grid" id="overview-stats"></div>
+    <div class="overview-meta" id="overview-meta"></div>
   </div>
-</div>
 
-<!-- ══════════════ TIMELINE ══════════════ -->
-<div id="tab-timeline" class="page">
-  <div class="content">
-    <div class="page-title">
-      Planning <em>Timeline</em>
-      <span class="page-title-badge">Key Milestones</span>
+  <!-- VENDORS TAB -->
+  <div class="tab-panel" id="tab-vendors">
+    <div id="vendor-sections"></div>
+    <div class="add-category-row" style="border-radius:16px;border:1px solid var(--border);">
+      <input class="add-input" id="new-cat-name" placeholder="New vendor category name..." style="flex:1"/>
+      <button class="btn btn-gold" onclick="addVendorCategory()">+ Add Category</button>
     </div>
-    <div class="table-wrap" style="padding:8px 0;">
-      <div class="timeline-list" id="timeline-list"></div>
-    </div>
-    <button class="add-section-btn" onclick="openAddTimelineModal()">+ Add Milestone</button>
   </div>
-</div>
 
-<!-- ══════════════ NOTES ══════════════ -->
-<div id="tab-notes" class="page">
-  <div class="content">
-    <div class="page-title">Notes <em>& Ideas</em></div>
-    <div class="notes-grid">
-      <div class="notes-card">
-        <h3>Ceremony Ideas</h3>
-        <textarea placeholder="Jot down anything here — vow ideas, music, order of events..."></textarea>
-      </div>
-      <div class="notes-card">
-        <h3>Decor & Aesthetic</h3>
-        <textarea placeholder="Colour palette, florals, table settings, mood board links..."></textarea>
-      </div>
-      <div class="notes-card">
-        <h3>Reception Details</h3>
-        <textarea placeholder="Seating plan notes, speeches, first dance song..."></textarea>
-      </div>
-      <div class="notes-card">
-        <h3>To-Do This Week</h3>
-        <textarea placeholder="Quick action items to tackle soon..."></textarea>
-      </div>
-    </div>
+  <!-- GUESTS TAB -->
+  <div class="tab-panel" id="tab-guests">
+    <div class="rsvp-summary" id="rsvp-summary"></div>
+    <div id="guest-sections"></div>
   </div>
-</div>
 
-<!-- ══════════════ MODALS ══════════════ -->
-<div class="modal-overlay" id="vendor-modal">
-  <div class="modal">
-    <h2>Add Vendor / Task</h2>
-    <div class="modal-field"><label>Vendor Name</label><input id="m-name" placeholder="e.g. Royal King Centre"/></div>
-    <div class="modal-field"><label>Category</label>
-      <select id="m-cat">
-        <option>Ceremony</option><option>Venue & Reception</option>
-        <option>Photography</option><option>Bridal Appearance</option>
-        <option>Groom Appearance</option><option>Logistics</option>
-        <option>Other</option>
-      </select>
-    </div>
-    <div class="modal-field"><label>Notes</label><input id="m-notes" placeholder="e.g. Deposit confirmed"/></div>
-    <div class="modal-field"><label>Balance Due</label><input id="m-balance" placeholder="e.g. TBD or £2,000"/></div>
-    <div class="modal-field"><label>Due Date</label><input id="m-due" placeholder="e.g. Aug 2026"/></div>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal('vendor-modal')">Cancel</button>
-      <button class="btn-save" onclick="saveVendor()">Add Vendor</button>
-    </div>
+  <!-- CHECKLIST TAB -->
+  <div class="tab-panel" id="tab-checklist">
+    <div id="checklist-sections"></div>
   </div>
-</div>
 
-<div class="modal-overlay" id="checklist-modal">
-  <div class="modal">
-    <h2>Add Checklist Category</h2>
-    <div class="modal-field"><label>Category Name</label><input id="cl-cat" placeholder="e.g. Music & Entertainment"/></div>
-    <div class="modal-field"><label>First Item (optional)</label><input id="cl-item" placeholder="e.g. Book DJ"/></div>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal('checklist-modal')">Cancel</button>
-      <button class="btn-save" onclick="saveChecklist()">Add Category</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="timeline-modal">
-  <div class="modal">
-    <h2>Add Timeline Milestone</h2>
-    <div class="modal-field"><label>Milestone Title</label><input id="tl-title" placeholder="e.g. Book Florist"/></div>
-    <div class="modal-field"><label>Note</label><input id="tl-note" placeholder="e.g. Review quotes and confirm"/></div>
-    <div class="modal-field"><label>Status</label>
-      <select id="tl-status">
-        <option value="done">Completed</option>
-        <option value="upcoming">Upcoming</option>
-        <option value="tbd">TBD</option>
-      </select>
-    </div>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal('timeline-modal')">Cancel</button>
-      <button class="btn-save" onclick="saveTimeline()">Add Milestone</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="item-modal">
-  <div class="modal">
-    <h2>Add Checklist Item</h2>
-    <div class="modal-field"><label>Item</label><input id="item-input" placeholder="e.g. Arrange guest transport"/></div>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal('item-modal')">Cancel</button>
-      <button class="btn-save" id="item-save-btn">Add Item</button>
-    </div>
-  </div>
 </div>
 
 <script>
-/* ═══════════════════════════════════════════
-   DATA — Edit everything here to update the dashboard
-═══════════════════════════════════════════ */
+// ─────────────────────────────────────────────
+// COUNTDOWN
+// ─────────────────────────────────────────────
+function updateCountdown() {
+  const wedding = new Date('2026-07-31T00:00:00');
+  const now = new Date();
+  now.setHours(0,0,0,0);
+  const diff = Math.ceil((wedding - now) / (1000*60*60*24));
+  document.getElementById('cd-days').textContent = diff > 0 ? diff : 0;
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
 
-const WEDDING_DATE = "2026-09-19";
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let vendorData = [
+  {
+    id: 1, title: 'Venue',
+    items: [
+      { id: 1, name: 'Nikkah Venue', booked: 'booked', deposit: 'paid', link: '' },
+      { id: 2, name: 'Reception Venue', booked: 'not booked', deposit: 'none', link: '' },
+    ]
+  },
+  {
+    id: 2, title: 'Photography & Film',
+    items: [
+      { id: 1, name: 'Photographer', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 2, name: 'Videographer', booked: 'not booked', deposit: 'none', link: '' },
+    ]
+  },
+  {
+    id: 3, title: 'Catering',
+    items: [
+      { id: 1, name: 'Caterer', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 2, name: 'Cake / Desserts', booked: 'not booked', deposit: 'none', link: '' },
+    ]
+  },
+  {
+    id: 4, title: 'Beauty',
+    items: [
+      { id: 1, name: 'Hair Stylist', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 2, name: 'Makeup Artist', booked: 'not booked', deposit: 'none', link: '' },
+    ]
+  },
+  {
+    id: 5, title: 'Music & Entertainment',
+    items: [
+      { id: 1, name: 'DJ', booked: 'not booked', deposit: 'none', link: '' },
+    ]
+  },
+  {
+    id: 6, title: 'Floral & Decor',
+    items: [
+      { id: 1, name: 'Florist', booked: 'not booked', deposit: 'none', link: '' },
+      { id: 2, name: 'Decor Rental', booked: 'not booked', deposit: 'none', link: '' },
+    ]
+  },
+];
 
-// STATUS OPTIONS (vendor columns):
-// booked: "yes" | "no" | "pending"
-// deposit: "paid" | "no" | "pending"
-// reserved: "yes" | "no" | "pending"
-// progress: "complete" | "booked" | "confirmed" | "in-progress" | "shortlisted" | "not-started"
-
-let vendors = [
-  // ── Ceremony
-  { id:1, section:"Ceremony", name:"Nikkah Certificate", type:"Documentation", booked:"yes", deposit:"paid", reserved:"yes", balance:"—", due:"—", progress:"complete", pct:100, notes:"Required document" },
-  { id:2, section:"Ceremony", name:"Wedding Officiant (Imam)", type:"Ceremony", booked:"pending", deposit:"no", reserved:"no", balance:"—", due:"—", progress:"in-progress", pct:30, notes:"Contact local mosque" },
-  { id:3, section:"Ceremony", name:"UK Marriage License", type:"Legal", booked:"pending", deposit:"no", reserved:"no", balance:"—", due:"—", progress:"not-started", pct:0, notes:"Register office appt" },
-
-  // ── Venue & Reception
-  { id:4, section:"Venue & Reception", name:"Royal King Centre", type:"Venue", booked:"yes", deposit:"paid", reserved:"yes", balance:"TBD", due:"TBD", progress:"booked", pct:80, notes:"Deposit confirmed" },
-  { id:5, section:"Venue & Reception", name:"Maryan Afgooye Catering", type:"Catering", booked:"yes", deposit:"paid", reserved:"yes", balance:"TBD", due:"TBD", progress:"confirmed", pct:75, notes:"Menu to finalise" },
-  { id:6, section:"Venue & Reception", name:"JN Events and Decor", type:"Decor", booked:"yes", deposit:"pending", reserved:"pending", balance:"TBD", due:"TBD", progress:"in-progress", pct:50, notes:"Theme discussion due" },
-  { id:7, section:"Venue & Reception", name:"Wedding Cake Vendor", type:"Catering", booked:"yes", deposit:"paid", reserved:"yes", balance:"TBD", due:"TBD", progress:"booked", pct:80, notes:"Design to confirm" },
-
-  // ── Photography
-  { id:8, section:"Photography", name:"Photographer", type:"Photo", booked:"no", deposit:"no", reserved:"no", balance:"—", due:"—", progress:"not-started", pct:0, notes:"Shortlist portfolios" },
-  { id:9, section:"Photography", name:"Videographer", type:"Video", booked:"no", deposit:"no", reserved:"no", balance:"—", due:"—", progress:"not-started", pct:0, notes:"Shortlist portfolios" },
-
-  // ── Bridal Appearance
-  { id:10, section:"Bridal Appearance", name:"Wedding Dress — Ilwaad Shop UK", type:"Attire", booked:"yes", deposit:"paid", reserved:"yes", balance:"—", due:"—", progress:"complete", pct:100, notes:"Alterations to schedule" },
-  { id:11, section:"Bridal Appearance", name:"Makeup Artist", type:"Beauty", booked:"yes", deposit:"paid", reserved:"yes", balance:"TBD", due:"TBD", progress:"booked", pct:80, notes:"Trial booked" },
-  { id:12, section:"Bridal Appearance", name:"Hair Stylist", type:"Beauty", booked:"no", deposit:"no", reserved:"no", balance:"—", due:"—", progress:"not-started", pct:0, notes:"Book hair appointment" },
-
-  // ── Logistics
-  { id:13, section:"Logistics", name:"Hire Car — Enterprise Markham Car", type:"Transport", booked:"yes", deposit:"paid", reserved:"yes", balance:"—", due:"—", progress:"confirmed", pct:75, notes:"Confirmed booking" },
-  { id:14, section:"Logistics", name:"Ramerson Hotel Rooms", type:"Accommodation", booked:"yes", deposit:"paid", reserved:"yes", balance:"—", due:"—", progress:"booked", pct:80, notes:"Rooms reserved" },
+let guestData = [
+  { id: 1, title: "Bride's Family", items: [] },
+  { id: 2, title: "Groom's Family", items: [] },
+  { id: 3, title: "Bride's Guest", items: [] },
+  { id: 4, title: "Groom's Guest", items: [] },
 ];
 
 let checklistData = [
-  { id:1, title:"Ceremony", items:[
-    { text:"Obtain Nikkah Certificate", done:true },
-    { text:"Book Wedding Officiant (Imam)", done:false },
-    { text:"Apply for UK Marriage License", done:true },
-    { text:"Write Ceremony Vows", done:false },
-    { text:"Plan Ceremony Order of Events", done:false },
-  ]},
-  { id:2, title:"Venue & Reception", items:[
-    { text:"Book Royal King Centre", done:true },
-    { text:"Book Maryan Afgooye Catering", done:true },
-    { text:"Finalise Decor with JN Events", done:true },
-    { text:"Book Wedding Cake Vendor", done:true },
-    { text:"Arrange Dessert Table", done:false },
-    { text:"Finalise Seating Plan", done:false },
-  ]},
-  { id:3, title:"Photography", items:[
-    { text:"Shortlist Photographers", done:false },
-    { text:"Book Photographer", done:false },
-    { text:"Book Photo Booth", done:false },
-    { text:"Plan Shot List", done:false },
-    { text:"Book Videographer", done:false },
-  ]},
-  { id:4, title:"Bridal Appearance", items:[
-    { text:"Purchase Wedding Dress — Ilwaad", done:true },
-    { text:"Book Makeup Artist", done:true },
-    { text:"Book Hair Stylist", done:false },
-    { text:"Schedule Dress Alterations", done:false },
-    { text:"Bridal Accessories", done:false },
-  ]},
-  { id:5, title:"Groom Appearance", items:[
-    { text:"Purchase / Tailor Wedding Suit", done:false },
-    { text:"Choose Accessories", done:false },
-    { text:"Grooming Appointment", done:false },
-  ]},
-  { id:6, title:"Logistics", items:[
-    { text:"Confirm Enterprise Markham Car", done:true },
-    { text:"Confirm Ramerson Hotel Rooms", done:true },
-    { text:"Arrange Guest Transportation", done:true },
-    { text:"Finalise Day-of Schedule", done:false },
-  ]},
+  {
+    id: 1, title: 'Overall Checklist',
+    items: [
+      { id: 1, text: 'Set a budget', done: false },
+      { id: 2, text: 'Book ceremony venue', done: false },
+      { id: 3, text: 'Book reception venue', done: false },
+      { id: 4, text: 'Send save the dates', done: false },
+      { id: 5, text: 'Book photographer', done: false },
+      { id: 6, text: 'Book videographer', done: false },
+      { id: 7, text: 'Choose wedding dress', done: false },
+      { id: 8, text: 'Book caterer', done: false },
+      { id: 9, text: 'Finalize guest list', done: false },
+      { id: 10, text: 'Send invitations', done: false },
+    ]
+  },
+  {
+    id: 2, title: 'Day-of Checklist',
+    items: [
+      { id: 1, text: 'Confirm all vendors', done: false },
+      { id: 2, text: 'Bridal party hair & makeup', done: false },
+      { id: 3, text: 'Bride gets ready', done: false },
+      { id: 4, text: 'First look / photos', done: false },
+      { id: 5, text: 'Nikkah ceremony', done: false },
+      { id: 6, text: 'Cocktail hour', done: false },
+      { id: 7, text: 'Reception entrance', done: false },
+      { id: 8, text: 'First dance', done: false },
+      { id: 9, text: 'Dinner & speeches', done: false },
+      { id: 10, text: 'Cake cutting', done: false },
+    ]
+  }
 ];
 
-let guestData = {
-  "Bride's Family": [],
-  "Groom's Family": [],
-  "Friends & Others": [],
-};
+let _vcatId = 10, _vitId = 100, _gcatId = 10, _gitId = 100, _clitId = 100;
 
-let timelineData = [
-  { id:1, title:"Nikkah Certificate Obtained", note:"Ceremony documentation secured", status:"done" },
-  { id:2, title:"Venue Booked — Royal King Centre", note:"Deposit paid and date reserved", status:"done" },
-  { id:3, title:"Catering Confirmed — Maryan Afgooye", note:"Menu finalisation pending", status:"done" },
-  { id:4, title:"Wedding Dress Purchased — Ilwaad Shop UK", note:"Alterations to be scheduled", status:"done" },
-  { id:5, title:"Book Photographer", note:"Review portfolios and confirm", status:"tbd" },
-  { id:6, title:"Finalise Decor with JN Events", note:"Theme and colour palette to confirm", status:"upcoming" },
-  { id:7, title:"Send Invitations", note:"Guest list to be finalised first", status:"tbd" },
-  { id:8, title:"Wedding Day", note:"Royal King Centre — September 19, 2026", status:"upcoming" },
-];
-
-/* ════════════ PILL HELPERS ════════════ */
-const pillMap = {
-  "yes":         { cls:"pill-green",  label:"Yes" },
-  "paid":        { cls:"pill-green",  label:"Paid" },
-  "confirmed":   { cls:"pill-green",  label:"Confirmed" },
-  "complete":    { cls:"pill-green",  label:"Complete" },
-  "no":          { cls:"pill-red",    label:"No" },
-  "pending":     { cls:"pill-amber",  label:"Pending" },
-  "in-progress": { cls:"pill-amber",  label:"In Progress" },
-  "shortlisted": { cls:"pill-blue",   label:"Shortlisted" },
-  "booked":      { cls:"pill-green",  label:"Booked" },
-  "not-started": { cls:"pill-red",    label:"Not Started" },
-  "reserved":    { cls:"pill-green",  label:"Reserved" },
-};
-
-const bookedCycle   = ["no","pending","yes"];
-const depositCycle  = ["no","pending","paid"];
-const reservedCycle = ["no","pending","yes"];
-const progressCycle = ["not-started","shortlisted","in-progress","confirmed","booked","complete"];
-
-function pillHTML(val) {
-  const p = pillMap[val] || { cls:"pill-grey", label: val };
-  return `<span class="pill ${p.cls}"><span class="dot"></span>${p.label}</span>`;
+// ─────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────
+function guestStats() {
+  let invited = 0, confirmed = 0, declined = 0, awaiting = 0;
+  guestData.forEach(cat => cat.items.forEach(g => {
+    invited++;
+    if (g.rsvp === 'confirmed') confirmed++;
+    else if (g.rsvp === 'declined') declined++;
+    else awaiting++;
+  }));
+  return { invited, confirmed, declined, awaiting, remaining: Math.max(0, 300 - invited) };
 }
 
-function progressColor(pct) {
-  if (pct >= 80) return "#3a7d44";
-  if (pct >= 40) return "#c47b1a";
-  return "#c0392b";
+function vendorStats() {
+  let total = 0, booked = 0;
+  vendorData.forEach(c => c.items.forEach(v => {
+    total++;
+    if (v.booked === 'booked') booked++;
+  }));
+  return { total, booked };
 }
 
-/* ════════════ RENDER VENDORS ════════════ */
+function checklistStats() {
+  let total = 0, done = 0;
+  checklistData.forEach(c => c.items.forEach(i => {
+    total++;
+    if (i.done) done++;
+  }));
+  return { total, done };
+}
+
+// ─────────────────────────────────────────────
+// OVERVIEW
+// ─────────────────────────────────────────────
+function renderOverview() {
+  const gs = guestStats();
+  const vs = vendorStats();
+  const cs = checklistStats();
+  const wedding = new Date('2026-07-31T00:00:00');
+  const now = new Date(); now.setHours(0,0,0,0);
+  const days = Math.ceil((wedding - now) / (1000*60*60*24));
+  const weeks = Math.floor(days / 7);
+
+  document.getElementById('overview-stats').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">Days Away</div>
+      <div class="stat-value">${days}</div>
+      <div class="stat-sub">${weeks} weeks to go</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Guests Invited</div>
+      <div class="stat-value">${gs.invited}<span style="font-size:20px;color:var(--muted)">/300</span></div>
+      <div class="stat-sub">${gs.remaining} spots remaining</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Vendors Booked</div>
+      <div class="stat-value">${vs.booked}<span style="font-size:20px;color:var(--muted)">/${vs.total}</span></div>
+      <div class="stat-sub">${vs.total - vs.booked} still needed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Tasks Complete</div>
+      <div class="stat-value">${cs.done}<span style="font-size:20px;color:var(--muted)">/${cs.total}</span></div>
+      <div class="stat-sub">${Math.round(cs.done/cs.total*100)||0}% done</div>
+    </div>
+  `;
+
+  document.getElementById('overview-meta').innerHTML = `
+    <div class="overview-pill"><strong>Confirmed RSVPs:</strong> ${gs.confirmed}</div>
+    <div class="overview-pill"><strong>Declined:</strong> ${gs.declined}</div>
+    <div class="overview-pill"><strong>Awaiting:</strong> ${gs.awaiting}</div>
+    <div class="overview-pill"><strong>Spots Left:</strong> ${gs.remaining}</div>
+  `;
+}
+
+// ─────────────────────────────────────────────
+// VENDORS
+// ─────────────────────────────────────────────
+function bookedPill(status) {
+  if (status === 'booked') return `<span class="pill pill-green">Booked</span>`;
+  return `<span class="pill pill-red">Not Booked</span>`;
+}
+function depositPill(status) {
+  if (status === 'paid') return `<span class="pill pill-green">Paid</span>`;
+  if (status === 'pending') return `<span class="pill pill-amber">Pending</span>`;
+  return `<span class="pill pill-grey">No Deposit</span>`;
+}
+function cycleBooked(catId, itemId) {
+  const cat = vendorData.find(c=>c.id===catId);
+  const item = cat.items.find(i=>i.id===itemId);
+  item.booked = item.booked === 'booked' ? 'not booked' : 'booked';
+  renderAll();
+}
+function cycleDeposit(catId, itemId) {
+  const cat = vendorData.find(c=>c.id===catId);
+  const item = cat.items.find(i=>i.id===itemId);
+  const seq = ['none','pending','paid'];
+  item.deposit = seq[(seq.indexOf(item.deposit)+1)%3];
+  renderAll();
+}
+function updateVendorField(catId, itemId, field, val) {
+  const cat = vendorData.find(c=>c.id===catId);
+  const item = cat.items.find(i=>i.id===itemId);
+  item[field] = val;
+  renderOverview();
+}
+function deleteVendorItem(catId, itemId) {
+  const cat = vendorData.find(c=>c.id===catId);
+  cat.items = cat.items.filter(i=>i.id!==itemId);
+  renderAll();
+}
+function addVendorItem(catId) {
+  const cat = vendorData.find(c=>c.id===catId);
+  const nameEl = document.getElementById(`add-vendor-name-${catId}`);
+  const name = nameEl.value.trim();
+  if (!name) return;
+  cat.items.push({ id: ++_vitId, name, booked: 'not booked', deposit: 'none', link: '' });
+  renderAll();
+}
+function deleteVendorCategory(catId) {
+  if (!confirm('Delete this category and all its vendors?')) return;
+  vendorData = vendorData.filter(c=>c.id!==catId);
+  renderAll();
+}
+function updateCategoryTitle(catId, val, type) {
+  if (type === 'vendor') vendorData.find(c=>c.id===catId).title = val;
+  else if (type === 'guest') guestData.find(c=>c.id===catId).title = val;
+  else if (type === 'checklist') checklistData.find(c=>c.id===catId).title = val;
+  renderOverview();
+}
+function addVendorCategory() {
+  const nameEl = document.getElementById('new-cat-name');
+  const name = nameEl.value.trim();
+  if (!name) return;
+  vendorData.push({ id: ++_vcatId, title: name, items: [] });
+  nameEl.value = '';
+  renderAll();
+}
+function openVendorLink(url) {
+  if (url && (url.startsWith('http'))) window.open(url, '_blank');
+}
+
 function renderVendors() {
-  const tbody = document.getElementById("vendor-tbody");
-  const sections = [...new Set(vendors.map(v => v.section))];
-  let html = "";
-  sections.forEach(sec => {
-    html += `<tr class="section-row"><td colspan="8"><span>—</span>${sec}</td></tr>`;
-    vendors.filter(v => v.section === sec).forEach(v => {
-      const pc = progressColor(v.pct);
+  let html = '';
+  vendorData.forEach(cat => {
+    html += `
+    <div class="section-card" style="margin-bottom:24px;">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <input class="section-title-input" value="${esc(cat.title)}" onchange="updateCategoryTitle(${cat.id},this.value,'vendor')" title="Click to rename"/>
+          <span class="section-count">${cat.items.length}</span>
+        </div>
+        <div class="section-actions">
+          <button class="btn btn-danger" onclick="deleteVendorCategory(${cat.id})">Delete Category</button>
+        </div>
+      </div>
+      <table class="vendor-table">
+        <thead><tr>
+          <th style="width:32%">Vendor</th>
+          <th style="width:15%">Booked</th>
+          <th style="width:15%">Deposit</th>
+          <th>Link</th>
+          <th style="width:40px"></th>
+        </tr></thead>
+        <tbody>
+    `;
+    cat.items.forEach(item => {
       html += `<tr>
-        <td><div class="vendor-name">${v.name}</div><div class="vendor-type">${v.type}</div></td>
-        <td><button class="pill ${pillMap[v.booked]?.cls||'pill-grey'}" onclick="cycleVendor(${v.id},'booked')"><span class="dot"></span>${pillMap[v.booked]?.label||v.booked}</button></td>
-        <td><button class="pill ${pillMap[v.deposit]?.cls||'pill-grey'}" onclick="cycleVendor(${v.id},'deposit')"><span class="dot"></span>${pillMap[v.deposit]?.label||v.deposit}</button></td>
-        <td><button class="pill ${pillMap[v.reserved]?.cls||'pill-grey'}" onclick="cycleVendor(${v.id},'reserved')"><span class="dot"></span>${pillMap[v.reserved]?.label||v.reserved}</button></td>
-        <td style="color:var(--ink-muted);font-size:12px;">${v.balance}</td>
-        <td style="color:var(--ink-muted);font-size:12px;">${v.due}</td>
-        <td class="progress-cell">
-          <div class="progress-label">
-            <button class="pill ${pillMap[v.progress]?.cls||'pill-grey'}" style="padding:2px 8px;font-size:9px;" onclick="cycleVendorProgress(${v.id})"><span class="dot"></span>${pillMap[v.progress]?.label||v.progress}</button>
-            <span>${v.pct}%</span>
-          </div>
-          <div class="prog-bar"><div class="prog-fill" style="width:${v.pct}%;background:${pc}"></div></div>
+        <td><input class="editable-cell" value="${esc(item.name)}" onchange="updateVendorField(${cat.id},${item.id},'name',this.value)" placeholder="Vendor name"/></td>
+        <td><span onclick="cycleBooked(${cat.id},${item.id})">${bookedPill(item.booked)}</span></td>
+        <td><span onclick="cycleDeposit(${cat.id},${item.id})">${depositPill(item.deposit)}</span></td>
+        <td>
+          <input class="editable-cell" value="${esc(item.link)}" placeholder="https://..."
+            onchange="updateVendorField(${cat.id},${item.id},'link',this.value)"
+            ondblclick="openVendorLink(this.value)"
+            title="Double-click to open link"/>
         </td>
-        <td class="notes-cell">${v.notes}</td>
+        <td><button class="btn-icon" onclick="deleteVendorItem(${cat.id},${item.id})" title="Delete">&#215;</button></td>
       </tr>`;
     });
-  });
-  tbody.innerHTML = html;
-  const total = vendors.length;
-  document.getElementById("vendor-count-badge").textContent = `${total} Vendors`;
-  updateStats();
-}
-
-function cycleVendor(id, field) {
-  const v = vendors.find(x => x.id === id);
-  if (!v) return;
-  const cycles = { booked: bookedCycle, deposit: depositCycle, reserved: reservedCycle };
-  const cycle = cycles[field];
-  const cur = cycle.indexOf(v[field]);
-  v[field] = cycle[(cur + 1) % cycle.length];
-  renderVendors();
-}
-
-function cycleVendorProgress(id) {
-  const v = vendors.find(x => x.id === id);
-  if (!v) return;
-  const cur = progressCycle.indexOf(v.progress);
-  v.progress = progressCycle[(cur + 1) % progressCycle.length];
-  const pctMap = {"not-started":0,"shortlisted":20,"in-progress":50,"confirmed":75,"booked":80,"complete":100};
-  v.pct = pctMap[v.progress] || 0;
-  renderVendors();
-  renderOverview();
-}
-
-/* ════════════ RENDER CHECKLIST ════════════ */
-function renderChecklist() {
-  const grid = document.getElementById("checklist-grid");
-  grid.innerHTML = checklistData.map((cat, ci) => {
-    const items = cat.items.map((item, ii) =>
-      `<div class="check-item" onclick="toggleCheck(${ci},${ii})">
-        <div class="check-box ${item.done ? 'checked' : ''}"></div>
-        <span class="check-label ${item.done ? 'done' : ''}">${item.text}</span>
-      </div>`
-    ).join('');
-    return `<div class="checklist-card">
-      <h3><span class="dot"></span>${cat.title}
-        <button class="pill pill-grey" style="margin-left:auto;font-size:9px;padding:3px 8px;" onclick="openAddItemModal(${ci})">+ Add</button>
-      </h3>
-      ${items}
+    html += `
+        <tr class="add-row">
+          <td><input class="add-input" id="add-vendor-name-${cat.id}" placeholder="New vendor name..." onkeydown="if(event.key==='Enter')addVendorItem(${cat.id})"/></td>
+          <td colspan="3" style="color:var(--muted);font-size:12px;">Press Enter or click Add</td>
+          <td><button class="btn btn-gold" onclick="addVendorItem(${cat.id})" style="padding:7px 12px;">+</button></td>
+        </tr>
+        </tbody>
+      </table>
     </div>`;
-  }).join('');
+  });
+  document.getElementById('vendor-sections').innerHTML = html;
+}
+
+// ─────────────────────────────────────────────
+// GUESTS
+// ─────────────────────────────────────────────
+function rsvpPill(status) {
+  if (status === 'confirmed') return `<span class="pill pill-green">Confirmed</span>`;
+  if (status === 'declined') return `<span class="pill pill-rose">Declined</span>`;
+  return `<span class="pill pill-grey">Awaiting</span>`;
+}
+function eventPill(status) {
+  if (status === 'nikkah') return `<span class="pill pill-amber">Nikkah</span>`;
+  if (status === 'reception') return `<span class="pill pill-blue">Reception</span>`;
+  return `<span class="pill pill-green">Both</span>`;
+}
+function cycleRsvp(catId, itemId) {
+  const cat = guestData.find(c=>c.id===catId);
+  const item = cat.items.find(i=>i.id===itemId);
+  const seq = ['awaiting','confirmed','declined'];
+  item.rsvp = seq[(seq.indexOf(item.rsvp||'awaiting')+1)%3];
+  renderAll();
+}
+function cycleEvent(catId, itemId) {
+  const cat = guestData.find(c=>c.id===catId);
+  const item = cat.items.find(i=>i.id===itemId);
+  const seq = ['both','nikkah','reception'];
+  item.event = seq[(seq.indexOf(item.event||'both')+1)%3];
+  renderAll();
+}
+function updateGuestField(catId, itemId, field, val) {
+  const cat = guestData.find(c=>c.id===catId);
+  const item = cat.items.find(i=>i.id===itemId);
+  item[field] = val;
   renderOverview();
 }
-
-function toggleCheck(ci, ii) {
-  checklistData[ci].items[ii].done = !checklistData[ci].items[ii].done;
-  renderChecklist();
+function deleteGuest(catId, itemId) {
+  const cat = guestData.find(c=>c.id===catId);
+  cat.items = cat.items.filter(i=>i.id!==itemId);
+  renderAll();
+}
+function addGuest(catId) {
+  const cat = guestData.find(c=>c.id===catId);
+  const fnEl = document.getElementById(`add-guest-fn-${catId}`);
+  const lnEl = document.getElementById(`add-guest-ln-${catId}`);
+  const fn = fnEl.value.trim(), ln = lnEl.value.trim();
+  if (!fn && !ln) return;
+  cat.items.push({ id: ++_gitId, firstName: fn, lastName: ln, rsvp: 'awaiting', event: 'both' });
+  fnEl.value = ''; lnEl.value = '';
+  renderAll();
 }
 
-/* ════════════ RENDER GUEST LIST ════════════ */
+function renderRsvpSummary() {
+  const gs = guestStats();
+  const pct = Math.min(100, Math.round(gs.invited/300*100));
+  document.getElementById('rsvp-summary').innerHTML = `
+    <div class="rsvp-stat">
+      <span class="rsvp-num">${gs.invited}</span>
+      <span class="rsvp-label">Guests Invited</span>
+      <div class="rsvp-bar-wrap"><div class="rsvp-bar-fill" style="width:${pct}%"></div></div>
+    </div>
+    <div class="rsvp-stat">
+      <span class="rsvp-num">${gs.confirmed}</span>
+      <span class="rsvp-label">Confirmed</span>
+    </div>
+    <div class="rsvp-stat">
+      <span class="rsvp-num">${gs.declined}</span>
+      <span class="rsvp-label">Declined</span>
+    </div>
+    <div class="rsvp-stat">
+      <span class="rsvp-num">${gs.remaining}</span>
+      <span class="rsvp-label">Spots Remaining</span>
+    </div>
+  `;
+}
+
 function renderGuests() {
-  const grid = document.getElementById("guest-grid");
-  const sections = Object.keys(guestData);
-  grid.innerHTML = sections.map(sec => {
-    const guests = guestData[sec];
-    const rows = guests.length > 0
-      ? guests.map((g, gi) =>
-          `<tr>
-            <td>${g.name}</td>
-            <td><button class="pill ${g.rsvp==='confirmed'?'pill-green':g.rsvp==='declined'?'pill-red':'pill-amber'}" onclick="cycleRsvp('${sec}',${gi})" style="font-size:9px;padding:3px 8px;">
-              <span class="dot"></span>${g.rsvp==='confirmed'?'Confirmed':g.rsvp==='declined'?'Declined':'Awaiting'}
-            </button></td>
-            <td>${g.plus1||'—'}</td>
-            <td>${g.table||'—'}</td>
-            <td class="notes-cell">${g.notes||''}</td>
-          </tr>`
-        ).join('')
-      : `<tr class="empty-row"><td colspan="5">No guests added yet — fill in your list here.</td></tr>`;
-    return `<div class="guest-card">
-      <div class="guest-card-head">
-        <h3>${sec.split(' ')[0]} <em>${sec.split(' ').slice(1).join(' ')}</em></h3>
-        <span class="guest-count">${guests.length} guests</span>
+  renderRsvpSummary();
+  let html = '';
+  guestData.forEach(cat => {
+    html += `
+    <div class="section-card" style="margin-bottom:24px;">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <input class="section-title-input" value="${esc(cat.title)}" onchange="updateCategoryTitle(${cat.id},this.value,'guest')" title="Click to rename"/>
+          <span class="section-count">${cat.items.length}</span>
+        </div>
       </div>
       <table class="guest-table">
-        <thead><tr><th>Name</th><th>RSVP</th><th>+1</th><th>Table</th><th>Notes</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-      <div class="add-guest-form">
-        <input id="g-name-${sec.replace(/\s/g,'_')}" placeholder="Full name"/>
-        <select id="g-rsvp-${sec.replace(/\s/g,'_')}">
-          <option value="awaiting">Awaiting</option>
-          <option value="confirmed">Confirmed</option>
-          <option value="declined">Declined</option>
-        </select>
-        <input id="g-plus1-${sec.replace(/\s/g,'_')}" placeholder="+1?" style="max-width:60px;"/>
-        <input id="g-notes-${sec.replace(/\s/g,'_')}" placeholder="Notes"/>
-        <button onclick="addGuest('${sec}')">Add</button>
-      </div>
-    </div>`;
-  }).join('');
-  updateRsvpSummary();
-}
-
-function addGuest(sec) {
-  const key = sec.replace(/\s/g,'_');
-  const name = document.getElementById(`g-name-${key}`).value.trim();
-  if (!name) return;
-  guestData[sec].push({
-    name,
-    rsvp: document.getElementById(`g-rsvp-${key}`).value,
-    plus1: document.getElementById(`g-plus1-${key}`).value.trim(),
-    notes: document.getElementById(`g-notes-${key}`).value.trim(),
-    table: '',
-  });
-  renderGuests();
-  updateStats();
-}
-
-function cycleRsvp(sec, gi) {
-  const states = ['awaiting','confirmed','declined'];
-  const g = guestData[sec][gi];
-  g.rsvp = states[(states.indexOf(g.rsvp)+1)%states.length];
-  renderGuests();
-  updateStats();
-}
-
-function updateRsvpSummary() {
-  let confirmed=0, awaiting=0, declined=0, total=0;
-  Object.values(guestData).forEach(list => {
-    list.forEach(g => {
-      total++;
-      if (g.rsvp==='confirmed') confirmed++;
-      else if (g.rsvp==='declined') declined++;
-      else awaiting++;
+        <thead><tr>
+          <th style="width:28%">First Name</th>
+          <th style="width:28%">Last Name</th>
+          <th style="width:18%">Event</th>
+          <th style="width:18%">RSVP</th>
+          <th style="width:40px"></th>
+        </tr></thead>
+        <tbody>
+    `;
+    cat.items.forEach(item => {
+      html += `<tr>
+        <td><input class="editable-cell" value="${esc(item.firstName||'')}" onchange="updateGuestField(${cat.id},${item.id},'firstName',this.value)" placeholder="First name"/></td>
+        <td><input class="editable-cell" value="${esc(item.lastName||'')}" onchange="updateGuestField(${cat.id},${item.id},'lastName',this.value)" placeholder="Last name"/></td>
+        <td><span onclick="cycleEvent(${cat.id},${item.id})" style="cursor:pointer">${eventPill(item.event||'both')}</span></td>
+        <td><span onclick="cycleRsvp(${cat.id},${item.id})" style="cursor:pointer">${rsvpPill(item.rsvp||'awaiting')}</span></td>
+        <td><button class="btn-icon" onclick="deleteGuest(${cat.id},${item.id})" title="Delete">&#215;</button></td>
+      </tr>`;
     });
+    html += `
+        <tr class="add-row">
+          <td><input class="add-input" id="add-guest-fn-${cat.id}" placeholder="First name..." onkeydown="if(event.key==='Enter')document.getElementById('add-guest-ln-${cat.id}').focus()"/></td>
+          <td><input class="add-input" id="add-guest-ln-${cat.id}" placeholder="Last name..." onkeydown="if(event.key==='Enter')addGuest(${cat.id})"/></td>
+          <td colspan="2" style="color:var(--muted);font-size:12px;">Enter to add</td>
+          <td><button class="btn btn-gold" onclick="addGuest(${cat.id})" style="padding:7px 12px;">+</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>`;
   });
-  document.getElementById('rsvp-confirmed').textContent = confirmed;
-  document.getElementById('rsvp-awaiting').textContent = awaiting;
-  document.getElementById('rsvp-declined').textContent = declined;
-  document.getElementById('rsvp-total').textContent = total;
+  document.getElementById('guest-sections').innerHTML = html;
 }
 
-/* ════════════ RENDER TIMELINE ════════════ */
-function renderTimeline() {
-  const list = document.getElementById("timeline-list");
-  list.innerHTML = timelineData.map((t,i) => {
-    const statusLabel = t.status==='done' ? 'Completed' : t.status==='upcoming' ? 'Upcoming' : 'TBD';
-    const tag = t.status==='done' ? 'DONE' : t.status==='upcoming' ? 'UPCOMING' : 'TBD';
-    return `<div class="timeline-item" style="${i===0?'border-radius:12px 12px 0 0':''};${i===timelineData.length-1?'border-radius:0 0 12px 12px;border-bottom:1px solid var(--cream-border)':''}">
-      <div class="tl-dot-col"><div class="tl-dot ${t.status}"></div></div>
-      <div class="tl-body">
-        <div class="tl-title">${t.title}</div>
-        <div class="tl-note">${t.note}</div>
-      </div>
-      <div class="tl-right">
-        <div class="tl-status ${t.status}">${statusLabel}</div>
-        <div class="tl-tag">${tag}</div>
-      </div>
-    </div>`;
-  }).join('');
+// ─────────────────────────────────────────────
+// CHECKLIST
+// ─────────────────────────────────────────────
+function toggleCheck(catId, itemId) {
+  const cat = checklistData.find(c=>c.id===catId);
+  const item = cat.items.find(i=>i.id===itemId);
+  item.done = !item.done;
+  renderAll();
+}
+function updateCheckText(catId, itemId, val) {
+  const cat = checklistData.find(c=>c.id===catId);
+  const item = cat.items.find(i=>i.id===itemId);
+  item.text = val;
+}
+function deleteCheckItem(catId, itemId) {
+  const cat = checklistData.find(c=>c.id===catId);
+  cat.items = cat.items.filter(i=>i.id!==itemId);
+  renderAll();
+}
+function addCheckItem(catId) {
+  const cat = checklistData.find(c=>c.id===catId);
+  const el = document.getElementById(`add-check-${catId}`);
+  const text = el.value.trim();
+  if (!text) return;
+  cat.items.push({ id: ++_clitId, text, done: false });
+  el.value = '';
+  renderAll();
 }
 
-/* ════════════ OVERVIEW ════════════ */
-function renderOverview() {
-  // Category progress
-  const sections = [...new Set(vendors.map(v => v.section))];
-  const catDiv = document.getElementById("overview-categories");
-  catDiv.innerHTML = sections.map(sec => {
-    const vv = vendors.filter(v => v.section === sec);
-    const avg = Math.round(vv.reduce((s,v) => s+v.pct, 0) / vv.length);
-    const col = avg>=75?"bar-green":avg>=40?"bar-amber":"bar-red";
-    return `<div class="category-row">
-      <div class="category-row-head">
-        <span class="category-name">${sec}</span>
-        <span class="category-pct">${avg}%</span>
-      </div>
-      <div class="bar-track"><div class="bar-fill ${col}" style="width:${avg}%"></div></div>
-    </div>`;
-  }).join('');
-
-  // Checklist progress
-  const clDiv = document.getElementById("overview-checklist");
-  clDiv.innerHTML = checklistData.map(cat => {
+function renderChecklist() {
+  let html = '';
+  checklistData.forEach(cat => {
     const done = cat.items.filter(i=>i.done).length;
     const total = cat.items.length;
     const pct = total ? Math.round(done/total*100) : 0;
-    const col = pct>=75?"bar-green":pct>=40?"bar-amber":"bar-red";
-    return `<div class="category-row">
-      <div class="category-row-head">
-        <span class="category-name">${cat.title}</span>
-        <span class="category-pct">${done}/${total}</span>
+    html += `
+    <div class="section-card" style="margin-bottom:24px;">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <input class="section-title-input" value="${esc(cat.title)}" onchange="updateCategoryTitle(${cat.id},this.value,'checklist')" title="Click to rename"/>
+          <span class="section-count">${done}/${total}</span>
+        </div>
       </div>
-      <div class="bar-track"><div class="bar-fill ${col}" style="width:${pct}%"></div></div>
+      <div class="progress-label"><span>${pct}% complete</span><span>${done} of ${total} done</span></div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+    `;
+    cat.items.forEach(item => {
+      html += `
+      <div class="checklist-item">
+        <div class="check-box ${item.done?'checked':''}" onclick="toggleCheck(${cat.id},${item.id})"></div>
+        <span class="check-label ${item.done?'done':''}" contenteditable="true"
+          onblur="updateCheckText(${cat.id},${item.id},this.innerText)"
+          spellcheck="false">${esc(item.text)}</span>
+        <button class="btn-icon" onclick="deleteCheckItem(${cat.id},${item.id})" title="Delete">&#215;</button>
+      </div>`;
+    });
+    html += `
+      <div class="checklist-add">
+        <input class="add-input" id="add-check-${cat.id}" placeholder="Add new task..." style="flex:1"
+          onkeydown="if(event.key==='Enter')addCheckItem(${cat.id})"/>
+        <button class="btn btn-gold" onclick="addCheckItem(${cat.id})">+ Add</button>
+      </div>
     </div>`;
-  }).join('');
-}
-
-function updateStats() {
-  const booked = vendors.filter(v => v.progress==='complete'||v.progress==='booked').length;
-  const inprog = vendors.filter(v => v.progress==='in-progress'||v.progress==='confirmed'||v.progress==='shortlisted').length;
-  const ns = vendors.filter(v => v.progress==='not-started').length;
-  const totalGuests = Object.values(guestData).reduce((s,l)=>s+l.length,0);
-  document.getElementById('stat-booked').textContent = booked;
-  document.getElementById('stat-progress').textContent = inprog;
-  document.getElementById('stat-notstarted').textContent = ns;
-  document.getElementById('stat-guests').textContent = totalGuests;
-}
-
-function updateCountdown() {
-  const today = new Date();
-  const wedding = new Date(WEDDING_DATE);
-  const diff = Math.ceil((wedding - today) / (1000*60*60*24));
-  document.getElementById('countdown-num').textContent = diff > 0 ? diff : 'Today!';
-}
-
-/* ════════════ MODALS ════════════ */
-function openAddVendorModal() { document.getElementById('vendor-modal').classList.add('open'); }
-function openAddChecklistModal() { document.getElementById('checklist-modal').classList.add('open'); }
-function openAddTimelineModal() { document.getElementById('timeline-modal').classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-
-let pendingChecklistIndex = null;
-function openAddItemModal(ci) {
-  pendingChecklistIndex = ci;
-  document.getElementById('item-input').value = '';
-  document.getElementById('item-modal').classList.add('open');
-  document.getElementById('item-save-btn').onclick = () => {
-    const val = document.getElementById('item-input').value.trim();
-    if (!val) return;
-    checklistData[pendingChecklistIndex].items.push({ text: val, done: false });
-    closeModal('item-modal');
-    renderChecklist();
-  };
-}
-
-function saveVendor() {
-  const name = document.getElementById('m-name').value.trim();
-  if (!name) return;
-  vendors.push({
-    id: Date.now(),
-    section: document.getElementById('m-cat').value,
-    name, type: document.getElementById('m-cat').value,
-    booked:"no", deposit:"no", reserved:"no",
-    balance: document.getElementById('m-balance').value || "—",
-    due: document.getElementById('m-due').value || "—",
-    progress:"not-started", pct:0,
-    notes: document.getElementById('m-notes').value || "",
   });
-  closeModal('vendor-modal');
-  renderVendors();
-  renderOverview();
+  document.getElementById('checklist-sections').innerHTML = html;
 }
 
-function saveChecklist() {
-  const cat = document.getElementById('cl-cat').value.trim();
-  if (!cat) return;
-  const firstItem = document.getElementById('cl-item').value.trim();
-  const items = firstItem ? [{ text: firstItem, done: false }] : [];
-  checklistData.push({ id: Date.now(), title: cat, items });
-  closeModal('checklist-modal');
+// ─────────────────────────────────────────────
+// TABS & RENDER
+// ─────────────────────────────────────────────
+function esc(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderAll() {
+  renderOverview();
+  renderVendors();
+  renderGuests();
   renderChecklist();
 }
 
-function saveTimeline() {
-  const title = document.getElementById('tl-title').value.trim();
-  if (!title) return;
-  timelineData.push({
-    id: Date.now(),
-    title,
-    note: document.getElementById('tl-note').value.trim() || "",
-    status: document.getElementById('tl-status').value,
-  });
-  closeModal('timeline-modal');
-  renderTimeline();
-}
-
-/* ════════════ TAB SWITCHING ════════════ */
-function showTab(tab, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-'+tab).classList.add('active');
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
   btn.classList.add('active');
 }
 
-/* ════════════ CLOSE MODALS ON OVERLAY CLICK ════════════ */
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) overlay.classList.remove('open');
-  });
-});
-
-/* ════════════ INIT ════════════ */
-updateCountdown();
-renderVendors();
-renderChecklist();
-renderGuests();
-renderTimeline();
-renderOverview();
-updateStats();
+renderAll();
 </script>
 </body>
 </html>
