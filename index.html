@@ -30,7 +30,6 @@
     overflow-x: hidden;
   }
 
-  /* HERO HEADER */
   .hero {
     background: var(--deep);
     padding: 52px 32px 44px;
@@ -146,7 +145,6 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* NAV TABS */
   .nav-wrap {
     background: var(--card);
     border-bottom: 1px solid var(--border);
@@ -183,12 +181,10 @@
     border-bottom-color: var(--gold);
   }
 
-  /* CONTENT */
   .content { padding: 36px 32px; max-width: 1200px; margin: 0 auto; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* OVERVIEW STATS */
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -223,7 +219,6 @@
     margin-top: 4px;
   }
 
-  /* SECTION CARD */
   .section-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -270,7 +265,6 @@
   }
   .section-actions { display: flex; gap: 8px; align-items: center; }
 
-  /* BUTTONS */
   .btn {
     font-family: 'DM Sans', sans-serif;
     font-size: 12px;
@@ -314,7 +308,6 @@
   }
   .btn-icon:hover { background: #fde8e8; color: #c07070; }
 
-  /* VENDOR TABLE */
   .table-scroll-wrap {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -379,7 +372,6 @@
   .pill-blue   { background: #e6f0f8; color: #3a7aaa; }
   .pill-rose   { background: #fdeaea; color: #b05a5a; }
 
-  /* ADD ROW */
   .add-row td { background: #fdfaf7; }
   .add-input {
     font-family: 'DM Sans', sans-serif;
@@ -396,7 +388,6 @@
   }
   .add-input:focus { border-color: var(--gold); }
 
-  /* GUEST TABLE */
   .guest-table { width: 100%; border-collapse: collapse; min-width: 380px; }
   .guest-table th {
     font-size: 10px;
@@ -419,7 +410,6 @@
   .guest-table tr:last-child td { border-bottom: none; }
   .guest-table tr:hover td { background: #fdfaf7; }
 
-  /* RSVP SUMMARY */
   .rsvp-summary {
     background: var(--deep);
     border-radius: 16px;
@@ -460,7 +450,6 @@
     transition: width 0.4s ease;
   }
 
-  /* CHECKLIST */
   .checklist-item {
     display: flex;
     align-items: center;
@@ -526,7 +515,6 @@
     gap: 4px;
   }
 
-  /* ADD CHECKLIST */
   .checklist-add {
     display: flex;
     gap: 10px;
@@ -537,7 +525,6 @@
   }
   .checklist-add .add-input { flex: 1; min-width: 160px; }
 
-  /* ADD VENDOR CATEGORY */
   .add-category-row {
     display: flex;
     gap: 10px;
@@ -549,7 +536,6 @@
   }
   .add-category-row .add-input { flex: 1; min-width: 160px; }
 
-  /* MOBILE RESPONSIVE */
   @media (max-width: 640px) {
     .content { padding: 16px 12px; }
     .hero { padding: 36px 16px 32px; }
@@ -602,7 +588,6 @@
 </head>
 <body>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-dot"></div>
   <div class="hero-dot"></div>
@@ -619,7 +604,6 @@
   </div>
 </div>
 
-<!-- NAV -->
 <div class="nav-wrap">
   <button class="tab-btn active" onclick="switchTab('overview', this)">Overview</button>
   <button class="tab-btn" onclick="switchTab('vendors', this)">Vendors</button>
@@ -627,15 +611,10 @@
   <button class="tab-btn" onclick="switchTab('checklist', this)">Checklist</button>
 </div>
 
-<!-- CONTENT -->
 <div class="content">
-
-  <!-- OVERVIEW TAB -->
   <div class="tab-panel active" id="tab-overview">
     <div class="stats-grid" id="overview-stats"></div>
   </div>
-
-  <!-- VENDORS TAB -->
   <div class="tab-panel" id="tab-vendors">
     <div id="vendor-sections"></div>
     <div class="add-category-row" style="border-radius:16px;border:1px solid var(--border);">
@@ -643,22 +622,16 @@
       <button class="btn btn-gold" onclick="addVendorCategory()">+ Add Category</button>
     </div>
   </div>
-
-  <!-- GUESTS TAB -->
   <div class="tab-panel" id="tab-guests">
     <div class="rsvp-summary" id="rsvp-summary"></div>
     <div id="guest-sections"></div>
   </div>
-
-  <!-- CHECKLIST TAB -->
   <div class="tab-panel" id="tab-checklist">
     <div id="checklist-sections"></div>
   </div>
-
 </div>
 
 <script>
-// COUNTDOWN
 function updateCountdown() {
   const wedding = new Date('2026-07-31T00:00:00');
   const now = new Date();
@@ -669,7 +642,6 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 60000);
 
-// STATE
 let vendorData = [
   {
     id: 1, title: 'Venue',
@@ -705,8 +677,8 @@ let vendorData = [
   {
     id: 5, title: 'Music & Entertainment',
     items: [
-      { id: 1, name: "Venue's Plug and Play", booked: 'not booked', deposit: 'none' },
-      { id: 2, name: 'Playlists', booked: 'not booked', deposit: 'none' },
+      { id: 1, name: 'DJ Nasrina',  booked: 'booked',     deposit: 'pending' },
+      { id: 2, name: 'Playlists',   booked: 'not booked', deposit: 'none'    },
     ]
   },
   {
@@ -718,10 +690,10 @@ let vendorData = [
   {
     id: 7, title: 'Logistics',
     items: [
-      { id: 1, name: 'Enterprise Markham', booked: 'booked', deposit: 'paid' },
-      { id: 2, name: 'Radisson Hotel', booked: 'booked', deposit: 'none' },
-      { id: 3, name: 'Nikkah Certificate', booked: 'not booked', deposit: 'none' },
-      { id: 4, name: 'Officiant (Imam)', booked: 'not booked', deposit: 'none' },
+      { id: 1, name: 'Enterprise Markham',  booked: 'booked',     deposit: 'paid' },
+      { id: 2, name: 'Radisson Hotel',      booked: 'booked',     deposit: 'none' },
+      { id: 3, name: 'Nikkah Certificate',  booked: 'not booked', deposit: 'none' },
+      { id: 4, name: 'Officiant (Imam)',    booked: 'not booked', deposit: 'none' },
     ]
   },
 ];
@@ -731,7 +703,7 @@ let guestData = [
     id: 1, title: "Bride's Family",
     items: [
       { id: 1,  firstName: 'Istanbul', lastName: 'Ali',    rsvp: 'confirmed', event: 'both' },
-      { id: 2,  firstName: 'Lul',      lastName: 'Osman',  rsvp: 'confirmed', event: 'both' },
+      { id: 2,  firstName: 'Luul',     lastName: 'Osman',  rsvp: 'confirmed', event: 'both' },
       { id: 3,  firstName: 'Nadia',    lastName: 'Ghedi',  rsvp: 'confirmed', event: 'both' },
       { id: 4,  firstName: 'Nawal',    lastName: 'Ghedi',  rsvp: 'confirmed', event: 'both' },
       { id: 5,  firstName: 'Ayoub',    lastName: 'Osman',  rsvp: 'confirmed', event: 'both' },
@@ -742,7 +714,6 @@ let guestData = [
   {
     id: 2, title: "Groom's Family",
     items: [
-      // Original 17
       { id: 1,  firstName: 'Hodan',       lastName: 'Hali',           rsvp: 'confirmed', event: 'both' },
       { id: 2,  firstName: 'Dek',         lastName: 'Mohamed',        rsvp: 'confirmed', event: 'both' },
       { id: 3,  firstName: 'Arafa',       lastName: 'Kumbuka',        rsvp: 'confirmed', event: 'both' },
@@ -760,32 +731,31 @@ let guestData = [
       { id: 15, firstName: 'Hodan',       lastName: 'Burhan Dalmar',  rsvp: 'confirmed', event: 'both' },
       { id: 16, firstName: 'Samatar',     lastName: 'Burhan Dalmar',  rsvp: 'confirmed', event: 'both' },
       { id: 17, firstName: 'Sakariye',    lastName: 'Burhan Dalmar',  rsvp: 'confirmed', event: 'both' },
-      // NEW Family list - 25 guests
-      { id: 18, firstName: 'Ruqiyo',      lastName: 'Aden Shire',      rsvp: 'pending', event: 'both' },
-      { id: 19, firstName: 'Mona',        lastName: 'Hassan',          rsvp: 'pending', event: 'both' },
-      { id: 20, firstName: 'Mahad',       lastName: 'Hassan',          rsvp: 'pending', event: 'both' },
-      { id: 21, firstName: 'Abas',        lastName: 'Hassan',          rsvp: 'pending', event: 'both' },
-      { id: 22, firstName: 'Seham',       lastName: 'Jama',            rsvp: 'pending', event: 'both' },
-      { id: 23, firstName: 'Sagal',       lastName: 'Abdullahi Haji',  rsvp: 'pending', event: 'both' },
-      { id: 24, firstName: 'Surer',       lastName: 'Khaliif',         rsvp: 'pending', event: 'both' },
-      { id: 25, firstName: 'Ilyas',       lastName: 'Ali',             rsvp: 'pending', event: 'both' },
-      { id: 26, firstName: 'Abdullahi',   lastName: 'Ali',             rsvp: 'pending', event: 'both' },
-      { id: 27, firstName: 'Shuayb',      lastName: 'Ali',             rsvp: 'pending', event: 'both' },
-      { id: 28, firstName: 'Sagal',       lastName: 'Jimcale',         rsvp: 'pending', event: 'both' },
-      { id: 29, firstName: 'Amiira',      lastName: 'Jesse Jordan',    rsvp: 'pending', event: 'both' },
-      { id: 30, firstName: 'Igraam',      lastName: 'Jesse Jordan',    rsvp: 'pending', event: 'both' },
-      { id: 31, firstName: 'Yasmin',      lastName: 'Jesse Jordan',    rsvp: 'pending', event: 'both' },
-      { id: 32, firstName: 'Suad',        lastName: 'Khalif',          rsvp: 'pending', event: 'both' },
-      { id: 33, firstName: 'Hoodo',       lastName: 'Cabdullahi',      rsvp: 'pending', event: 'both' },
-      { id: 34, firstName: 'Galad',       lastName: 'Shire Farah',     rsvp: 'pending', event: 'both' },
-      { id: 35, firstName: 'Hibo',        lastName: 'Shire Farah',     rsvp: 'pending', event: 'both' },
-      { id: 36, firstName: 'Saciido',     lastName: 'Khalif',          rsvp: 'pending', event: 'both' },
-      { id: 37, firstName: 'Amaar',       lastName: 'Mohamed',         rsvp: 'pending', event: 'both' },
-      { id: 38, firstName: 'Ashaar',      lastName: 'Mohamed',         rsvp: 'pending', event: 'both' },
-      { id: 39, firstName: 'Amran',       lastName: 'Mohamed',         rsvp: 'pending', event: 'both' },
-      { id: 40, firstName: 'Ruqiyo',      lastName: 'Baddel',          rsvp: 'pending', event: 'both' },
-      { id: 41, firstName: 'Nasra',       lastName: 'Baddel',          rsvp: 'pending', event: 'both' },
-      { id: 42, firstName: 'Amina',       lastName: 'Mohamed Islaweyn',rsvp: 'pending', event: 'both' },
+      { id: 18, firstName: 'Ruqiyo',      lastName: 'Aden Shire',     rsvp: 'pending',   event: 'both' },
+      { id: 19, firstName: 'Mona',        lastName: 'Hassan',         rsvp: 'pending',   event: 'both' },
+      { id: 20, firstName: 'Mahad',       lastName: 'Hassan',         rsvp: 'pending',   event: 'both' },
+      { id: 21, firstName: 'Abas',        lastName: 'Hassan',         rsvp: 'pending',   event: 'both' },
+      { id: 22, firstName: 'Seham',       lastName: 'Jama',           rsvp: 'pending',   event: 'both' },
+      { id: 23, firstName: 'Sagal',       lastName: 'Abdullahi Haji', rsvp: 'pending',   event: 'both' },
+      { id: 24, firstName: 'Surer',       lastName: 'Khaliif',        rsvp: 'pending',   event: 'both' },
+      { id: 25, firstName: 'Ilyas',       lastName: 'Ali',            rsvp: 'pending',   event: 'both' },
+      { id: 26, firstName: 'Abdullahi',   lastName: 'Ali',            rsvp: 'pending',   event: 'both' },
+      { id: 27, firstName: 'Shuayb',      lastName: 'Ali',            rsvp: 'pending',   event: 'both' },
+      { id: 28, firstName: 'Sagal',       lastName: 'Jimcale',        rsvp: 'pending',   event: 'both' },
+      { id: 29, firstName: 'Amiira',      lastName: 'Jesse Jordan',   rsvp: 'pending',   event: 'both' },
+      { id: 30, firstName: 'Igraam',      lastName: 'Jesse Jordan',   rsvp: 'pending',   event: 'both' },
+      { id: 31, firstName: 'Yasmin',      lastName: 'Jesse Jordan',   rsvp: 'pending',   event: 'both' },
+      { id: 32, firstName: 'Suad',        lastName: 'Khalif',         rsvp: 'pending',   event: 'both' },
+      { id: 33, firstName: 'Hoodo',       lastName: 'Cabdullahi',     rsvp: 'pending',   event: 'both' },
+      { id: 34, firstName: 'Galad',       lastName: 'Shire Farah',    rsvp: 'pending',   event: 'both' },
+      { id: 35, firstName: 'Hibo',        lastName: 'Shire Farah',    rsvp: 'pending',   event: 'both' },
+      { id: 36, firstName: 'Saciido',     lastName: 'Khalif',         rsvp: 'pending',   event: 'both' },
+      { id: 37, firstName: 'Amaar',       lastName: 'Mohamed',        rsvp: 'pending',   event: 'both' },
+      { id: 38, firstName: 'Ashaar',      lastName: 'Mohamed',        rsvp: 'pending',   event: 'both' },
+      { id: 39, firstName: 'Amran',       lastName: 'Mohamed',        rsvp: 'pending',   event: 'both' },
+      { id: 40, firstName: 'Ruqiyo',      lastName: 'Baddel',         rsvp: 'pending',   event: 'both' },
+      { id: 41, firstName: 'Nasra',       lastName: 'Baddel',         rsvp: 'pending',   event: 'both' },
+      { id: 42, firstName: 'Amina',       lastName: 'Mohamed Islaweyn', rsvp: 'pending', event: 'both' },
     ]
   },
   {
@@ -795,22 +765,21 @@ let guestData = [
   {
     id: 4, title: "Groom's Guest",
     items: [
-      // NEW Friends list - 15 guests
-      { id: 1,  firstName: 'Saciido',  lastName: 'Hassan',        rsvp: 'pending', event: 'both' },
-      { id: 2,  firstName: 'Duniya',   lastName: 'Farah Guure',   rsvp: 'pending', event: 'both' },
-      { id: 3,  firstName: 'Hawa',     lastName: 'Farah',         rsvp: 'pending', event: 'both' },
-      { id: 4,  firstName: 'Faduma',   lastName: 'Farah',         rsvp: 'pending', event: 'both' },
-      { id: 5,  firstName: 'Ruun',     lastName: 'Cigal',         rsvp: 'pending', event: 'both' },
-      { id: 6,  firstName: 'Ubaxa',    lastName: 'Cabdulqaadir',  rsvp: 'pending', event: 'both' },
-      { id: 7,  firstName: 'Halimo',   lastName: 'Yasiin',        rsvp: 'pending', event: 'both' },
-      { id: 8,  firstName: 'Xalawi',   lastName: 'Yasiin',        rsvp: 'pending', event: 'both' },
-      { id: 9,  firstName: 'Suleqa',   lastName: 'Aden',          rsvp: 'pending', event: 'both' },
-      { id: 10, firstName: 'Hawa',     lastName: 'Yusuf',         rsvp: 'pending', event: 'both' },
-      { id: 11, firstName: 'Hawa',     lastName: 'Cigaal',        rsvp: 'pending', event: 'both' },
-      { id: 12, firstName: 'Suleqo',   lastName: 'Aden',          rsvp: 'pending', event: 'both' },
-      { id: 13, firstName: 'Dayaxa',   lastName: 'Abshir',        rsvp: 'pending', event: 'both' },
-      { id: 14, firstName: 'Naima',    lastName: 'Cawale',        rsvp: 'pending', event: 'both' },
-      { id: 15, firstName: 'Saido',    lastName: 'Hasan Muse',    rsvp: 'pending', event: 'both' },
+      { id: 1,  firstName: 'Saciido',  lastName: 'Hassan',         rsvp: 'pending', event: 'both' },
+      { id: 2,  firstName: 'Duniya',   lastName: 'Farah Guure',    rsvp: 'pending', event: 'both' },
+      { id: 3,  firstName: 'Hawa',     lastName: 'Farah',          rsvp: 'pending', event: 'both' },
+      { id: 4,  firstName: 'Faduma',   lastName: 'Farah',          rsvp: 'pending', event: 'both' },
+      { id: 5,  firstName: 'Ruun',     lastName: 'Cigal',          rsvp: 'pending', event: 'both' },
+      { id: 6,  firstName: 'Ubaxa',    lastName: 'Cabdulqaadir',   rsvp: 'pending', event: 'both' },
+      { id: 7,  firstName: 'Halimo',   lastName: 'Yasiin',         rsvp: 'pending', event: 'both' },
+      { id: 8,  firstName: 'Xalawi',   lastName: 'Yasiin',         rsvp: 'pending', event: 'both' },
+      { id: 9,  firstName: 'Suleqa',   lastName: 'Aden',           rsvp: 'pending', event: 'both' },
+      { id: 10, firstName: 'Hawa',     lastName: 'Yusuf',          rsvp: 'pending', event: 'both' },
+      { id: 11, firstName: 'Hawa',     lastName: 'Cigaal',         rsvp: 'pending', event: 'both' },
+      { id: 12, firstName: 'Suleqo',   lastName: 'Aden',           rsvp: 'pending', event: 'both' },
+      { id: 13, firstName: 'Dayaxa',   lastName: 'Abshir',         rsvp: 'pending', event: 'both' },
+      { id: 14, firstName: 'Naima',    lastName: 'Cawale',         rsvp: 'pending', event: 'both' },
+      { id: 15, firstName: 'Saido',    lastName: 'Hasan Muse',     rsvp: 'pending', event: 'both' },
     ]
   },
 ];
@@ -866,7 +835,6 @@ let checklistData = [
 
 let _vcatId = 10, _vitId = 100, _gcatId = 10, _gitId = 200, _clitId = 100;
 
-// HELPERS
 function guestStats() {
   let invited = 0, confirmed = 0, declined = 0, awaiting = 0;
   guestData.forEach(cat => cat.items.forEach(g => {
@@ -888,7 +856,6 @@ function checklistStats() {
   return { total, done };
 }
 
-// OVERVIEW
 function renderOverview() {
   const gs = guestStats();
   const vs = vendorStats();
@@ -912,13 +879,12 @@ function renderOverview() {
   `;
 }
 
-// VENDORS
 function bookedPill(status) {
   if (status === 'booked') return `<span class="pill pill-green">Booked</span>`;
   return `<span class="pill pill-red">Not Booked</span>`;
 }
 function depositPill(status) {
-  if (status === 'paid') return `<span class="pill pill-green">Paid</span>`;
+  if (status === 'paid')    return `<span class="pill pill-green">Paid</span>`;
   if (status === 'pending') return `<span class="pill pill-amber">Pending</span>`;
   return `<span class="pill pill-grey">No Deposit</span>`;
 }
@@ -995,11 +961,9 @@ function renderVendors() {
   document.getElementById('vendor-sections').innerHTML = html;
 }
 
-// GUESTS
 function rsvpPill(status) {
   if (status === 'confirmed') return `<span class="pill pill-green">Confirmed</span>`;
   if (status === 'declined')  return `<span class="pill pill-rose">Declined</span>`;
-  if (status === 'pending')   return `<span class="pill pill-amber">Pending</span>`;
   return `<span class="pill pill-grey">Awaiting</span>`;
 }
 function eventPill(status) {
@@ -1010,9 +974,8 @@ function eventPill(status) {
 function cycleRsvp(catId, itemId) {
   const cat = guestData.find(c=>c.id===catId);
   const item = cat.items.find(i=>i.id===itemId);
-  const seq = ['awaiting','pending','confirmed','declined'];
-  const cur = item.rsvp || 'awaiting';
-  item.rsvp = seq[(seq.indexOf(cur)+1)%seq.length];
+  const seq = ['awaiting','confirmed','declined'];
+  item.rsvp = seq[(seq.indexOf(item.rsvp||'awaiting')+1)%3];
   renderAll();
 }
 function cycleEvent(catId, itemId) {
@@ -1115,7 +1078,6 @@ function renderGuests() {
   document.getElementById('guest-sections').innerHTML = html;
 }
 
-// CHECKLIST
 function toggleCheck(catId, itemId) {
   const cat = checklistData.find(c=>c.id===catId);
   const item = cat.items.find(i=>i.id===itemId);
@@ -1180,7 +1142,6 @@ function renderChecklist() {
   document.getElementById('checklist-sections').innerHTML = html;
 }
 
-// UTILITY
 function esc(str) {
   if (!str) return '';
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
