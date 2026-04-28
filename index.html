@@ -689,7 +689,7 @@ let vendorData = [
   {
     id: 6, title: 'Decor',
     items: [
-      { id: 1, name: 'JN Events and Decor', booked: 'not booked', deposit: 'none' },
+      { id: 1, name: 'JN Events and Decor', booked: 'booked', deposit: 'none' }, // UPDATED: booked, no deposit
     ]
   },
   {
@@ -798,19 +798,19 @@ let guestData = [
       { id: 40, firstName: 'Ruqiyo',      lastName: 'Baddel',           rsvp: 'confirmed', event: 'both' },
       { id: 41, firstName: 'Nasra',       lastName: 'Baddel',           rsvp: 'confirmed', event: 'both' },
       { id: 42, firstName: 'Amina',       lastName: 'Mohamed Islaweyn', rsvp: 'confirmed', event: 'both' },
-      { id: 43, firstName: 'Abdiwali',    lastName: 'Nuur Shaie',       rsvp: 'confirmed', event: 'both' },
-      { id: 44, firstName: 'Abdiftah',    lastName: 'Nuur Shaie',       rsvp: 'confirmed', event: 'both' },
-      { id: 45, firstName: 'Asha',        lastName: 'Haashi Ahme',      rsvp: 'confirmed', event: 'both' },
-      { id: 46, firstName: 'Sakariya',    lastName: 'Cali',             rsvp: 'confirmed', event: 'both' },
-      { id: 47, firstName: 'Huda',        lastName: 'Cali',             rsvp: 'confirmed', event: 'both' },
-      { id: 48, firstName: 'Sumeya',      lastName: 'Cali',             rsvp: 'confirmed', event: 'both' },
-      { id: 49, firstName: 'Nasra',       lastName: 'Abdinaasir Shaie', rsvp: 'confirmed', event: 'both' },
-      { id: 50, firstName: 'Liban',       lastName: 'Mahad Shaie',      rsvp: 'confirmed', event: 'both' },
-      { id: 51, firstName: 'Ladan',       lastName: 'Mahad Shaie',      rsvp: 'confirmed', event: 'both' },
-      { id: 52, firstName: 'Layla',       lastName: 'Mahad Shaie',      rsvp: 'confirmed', event: 'both' },
-      { id: 53, firstName: 'Luul',        lastName: 'Abdi Cali',        rsvp: 'confirmed', event: 'both' },
-      { id: 54, firstName: 'Ruun',        lastName: 'Goonyare',         rsvp: 'confirmed', event: 'both' },
-      { id: 55, firstName: 'Luki',        lastName: 'Mohamuud Goon',    rsvp: 'confirmed', event: 'both' },
+      { id: 43, firstName: 'Faadumo',     lastName: 'Cali',             rsvp: 'confirmed', event: 'both' },
+      { id: 44, firstName: 'Khadra',      lastName: 'Yuusuf',           rsvp: 'confirmed', event: 'both' },
+      { id: 45, firstName: 'Sahra',       lastName: 'Maxamed',          rsvp: 'confirmed', event: 'both' },
+      { id: 46, firstName: 'Caasha',      lastName: 'Ibraahim',         rsvp: 'confirmed', event: 'both' },
+      { id: 47, firstName: 'Luul',        lastName: 'Axmed',            rsvp: 'confirmed', event: 'both' },
+      { id: 48, firstName: 'Hindia',      lastName: 'Cabdalle',         rsvp: 'confirmed', event: 'both' },
+      { id: 49, firstName: 'Cawo',        lastName: 'Xasan',            rsvp: 'confirmed', event: 'both' },
+      { id: 50, firstName: 'Nuurto',      lastName: 'Muuse',            rsvp: 'confirmed', event: 'both' },
+      { id: 51, firstName: 'Sacdiya',     lastName: 'Daahir',           rsvp: 'confirmed', event: 'both' },
+      { id: 52, firstName: 'Farhiyo',     lastName: 'Cabdi',            rsvp: 'confirmed', event: 'both' },
+      { id: 53, firstName: 'Hodan',       lastName: 'Xirsi',            rsvp: 'confirmed', event: 'both' },
+      { id: 54, firstName: 'Asad',        lastName: 'Warsame',          rsvp: 'confirmed', event: 'both' },
+      { id: 55, firstName: 'Jawaahir',    lastName: 'Cabdullaahi',      rsvp: 'confirmed', event: 'both' },
     ]
   },
   {
@@ -993,7 +993,7 @@ let checklistData = [
   }
 ];
 
-let _vcatId = 10, _vitId = 100, _gcatId = 10, _gitId = 400, _clitId = 100;
+let _vcatId = 10, _vitId = 100, _gcatId = 10, _gitId = 300, _clitId = 100;
 
 function guestStats() {
   let invited = 0, confirmed = 0, declined = 0, awaiting = 0;
