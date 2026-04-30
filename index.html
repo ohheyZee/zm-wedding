@@ -646,11 +646,18 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 60000);
 
+// CHANGE 1: Decor moved to position 2 (right below Venue)
 let vendorData = [
   {
     id: 1, title: 'Venue',
     items: [
       { id: 1, name: 'Royal King Event Centre', booked: 'booked', deposit: 'paid' },
+    ]
+  },
+  {
+    id: 6, title: 'Decor',
+    items: [
+      { id: 1, name: 'JN Events and Decor', booked: 'booked', deposit: 'none' },
     ]
   },
   {
@@ -684,12 +691,6 @@ let vendorData = [
     items: [
       { id: 1, name: 'DJ',       booked: 'not booked', deposit: 'none' },
       { id: 2, name: 'Playlists', booked: 'not booked', deposit: 'none' },
-    ]
-  },
-  {
-    id: 6, title: 'Decor',
-    items: [
-      { id: 1, name: 'JN Events and Decor', booked: 'booked', deposit: 'none' }, // UPDATED: booked, no deposit
     ]
   },
   {
@@ -939,6 +940,7 @@ let guestData = [
   },
 ];
 
+// CHANGE 2: "Book Decor Rental" (id 13) and "Tour Venue & Bridal Suite" (id 23) set to done: true
 let checklistData = [
   {
     id: 1, title: 'Overall Checklist',
@@ -955,7 +957,7 @@ let checklistData = [
       { id: 10, text: 'Order Wedding Suit',                done: false },
       { id: 11, text: 'Book Car Rental',                   done: true  },
       { id: 12, text: 'Book Hotel',                        done: true  },
-      { id: 13, text: 'Book Decor Rental',                 done: false },
+      { id: 13, text: 'Book Decor Rental',                 done: true  },
       { id: 14, text: 'Create Playlist(s)',                done: false },
       { id: 15, text: 'Confirm RSVPs',                     done: false },
       { id: 16, text: 'Confirm Catering Menu',             done: false },
@@ -965,7 +967,7 @@ let checklistData = [
       { id: 20, text: 'Order Ceremony Dress',              done: false },
       { id: 21, text: 'Order Nikkah Certificate',          done: false },
       { id: 22, text: 'Book Imam',                         done: false },
-      { id: 23, text: 'Tour Venue & Bridal Suite',         done: false },
+      { id: 23, text: 'Tour Venue & Bridal Suite',         done: true  },
       { id: 24, text: 'Order Bridal Heels',                done: false },
       { id: 25, text: 'Order Hair Extensions',             done: false },
       { id: 26, text: 'Confirm Mehr Details',              done: false },
