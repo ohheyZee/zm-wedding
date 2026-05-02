@@ -285,28 +285,6 @@
     border: 1px solid var(--border);
   }
   .btn-ghost:hover { background: #252118; color: var(--deep); }
-  .btn-danger {
-    background: transparent;
-    color: #c07070;
-    border: 1px solid #4a2a2a;
-    font-size: 11px;
-    padding: 6px 12px;
-  }
-  .btn-danger:hover { background: #2e1a1a; }
-  .btn-icon {
-    width: 28px; height: 28px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 6px;
-    font-size: 16px;
-    line-height: 1;
-    border: none;
-    cursor: pointer;
-    background: transparent;
-    color: var(--muted);
-    transition: all 0.15s;
-    flex-shrink: 0;
-  }
-  .btn-icon:hover { background: #3a1e1e; color: #c07070; }
 
   .table-scroll-wrap {
     overflow-x: auto;
@@ -529,17 +507,6 @@
   }
   .checklist-add .add-input { flex: 1; min-width: 160px; }
 
-  .add-category-row {
-    display: flex;
-    gap: 10px;
-    padding: 16px;
-    background: #1e1b18;
-    border-top: 1px solid var(--border);
-    border-radius: 0 0 16px 16px;
-    flex-wrap: wrap;
-  }
-  .add-category-row .add-input { flex: 1; min-width: 160px; }
-
   @media (max-width: 640px) {
     .content { padding: 16px 12px; }
     .hero { padding: 36px 16px 32px; }
@@ -573,7 +540,6 @@
     .progress-label { padding: 8px 14px 4px; font-size: 11px; }
     .progress-bar-wrap { margin: 0 14px 14px; }
     .checklist-add { padding: 12px 14px; }
-    .add-category-row { padding: 12px; }
     .add-input { font-size: 13px; padding: 7px 10px; }
   }
 
@@ -621,10 +587,6 @@
   </div>
   <div class="tab-panel" id="tab-vendors">
     <div id="vendor-sections"></div>
-    <div class="add-category-row" style="border-radius:16px;border:1px solid var(--border);">
-      <input class="add-input" id="new-cat-name" placeholder="New vendor category name..."/>
-      <button class="btn btn-gold" onclick="addVendorCategory()">+ Add Category</button>
-    </div>
   </div>
   <div class="tab-panel" id="tab-guests">
     <div class="rsvp-summary" id="rsvp-summary"></div>
@@ -670,18 +632,18 @@ let vendorData = [
     id: 2, title: 'Photography & Film',
     items: [
       { id: 1, name: 'Gali Weddings Photography', booked: 'booked', deposit: 'paid' },
-      { id: 2, name: 'Gali Weddings Videography',  booked: 'booked', deposit: 'paid' },
+      { id: 2, name: 'Gali Weddings Videography', booked: 'booked', deposit: 'paid' },
       { id: 3, name: 'Sol Photobooth',             booked: 'booked', deposit: 'paid' },
     ]
   },
   {
     id: 4, title: 'Bride & Groom',
     items: [
-      { id: 1, name: 'Bridal Dress',        booked: 'booked', deposit: 'paid' },
-      { id: 2, name: 'NatebyBeauty Hair',   booked: 'booked', deposit: 'paid' },
-      { id: 3, name: 'Makeup by HQ',        booked: 'booked', deposit: 'paid' },
-      { id: 4, name: "Groom's Suit",        booked: 'not booked', deposit: 'none' },
-      { id: 5, name: "Groom's Hair Cut",    booked: 'not booked', deposit: 'none' },
+      { id: 1, name: 'Ilwad Shop Bridal Dress',  booked: 'booked',     deposit: 'paid' },
+      { id: 2, name: 'NatebyBeauty Hair',         booked: 'booked',     deposit: 'paid' },
+      { id: 3, name: 'Makeup by HQ',              booked: 'booked',     deposit: 'paid' },
+      { id: 4, name: "Groom's Suit",              booked: 'not booked', deposit: 'none' },
+      { id: 5, name: "Groom's Hair Cut",          booked: 'not booked', deposit: 'none' },
     ]
   },
   {
@@ -706,234 +668,234 @@ let guestData = [
   {
     id: 1, title: "Bride's Family",
     items: [
-      { id: 1,  firstName: 'Istanbul',  lastName: 'Ali',            rsvp: 'confirmed', event: 'both' },
-      { id: 2,  firstName: 'Luul',      lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 3,  firstName: 'Nadia',     lastName: 'Ghedi',          rsvp: 'confirmed', event: 'both' },
-      { id: 4,  firstName: 'Nawal',     lastName: 'Ghedi',          rsvp: 'confirmed', event: 'both' },
-      { id: 5,  firstName: 'Ayoub',     lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 6,  firstName: 'Amin',      lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 7,  firstName: 'Ismahan',   lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 8,  firstName: 'Diriye',    lastName: '',               rsvp: 'confirmed', event: 'both' },
-      { id: 9,  firstName: 'Abdirashid',lastName: 'Diriye',         rsvp: 'confirmed', event: 'both' },
-      { id: 10, firstName: 'Ayub',      lastName: 'Diriye',         rsvp: 'confirmed', event: 'both' },
-      { id: 11, firstName: 'Ilyas',     lastName: 'Diriye',         rsvp: 'confirmed', event: 'both' },
-      { id: 12, firstName: 'Muna',      lastName: 'Diriye',         rsvp: 'confirmed', event: 'both' },
-      { id: 13, firstName: 'Safiyo',    lastName: 'Abdisamed',      rsvp: 'confirmed', event: 'both' },
-      { id: 14, firstName: 'Mohamed',   lastName: 'Januune',        rsvp: 'confirmed', event: 'both' },
-      { id: 15, firstName: 'Khalid',    lastName: 'Januune',        rsvp: 'confirmed', event: 'both' },
-      { id: 16, firstName: 'Samia',     lastName: 'Januune',        rsvp: 'confirmed', event: 'both' },
-      { id: 17, firstName: 'Anisa',     lastName: 'Januune',        rsvp: 'confirmed', event: 'both' },
-      { id: 18, firstName: 'Abdullahi', lastName: 'Januune',        rsvp: 'confirmed', event: 'both' },
-      { id: 19, firstName: 'Anisa',     lastName: 'Hassan',         rsvp: 'confirmed', event: 'both' },
-      { id: 20, firstName: 'Faiza',     lastName: 'Hassan',         rsvp: 'confirmed', event: 'both' },
-      { id: 21, firstName: 'Sahra',     lastName: 'Hassan',         rsvp: 'confirmed', event: 'both' },
-      { id: 22, firstName: 'Ismail',    lastName: 'Hassan',         rsvp: 'confirmed', event: 'both' },
-      { id: 23, firstName: 'Mohamed',   lastName: 'Hassan',         rsvp: 'confirmed', event: 'both' },
-      { id: 24, firstName: 'Leyla',     lastName: "Hassan (Mohamed's wife)", rsvp: 'confirmed', event: 'both' },
-      { id: 25, firstName: 'Svetlana',  lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 26, firstName: 'Aleena',    lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 27, firstName: 'Ismail',    lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 28, firstName: 'Asha',      lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 29, firstName: 'Deqa',      lastName: 'Geele',          rsvp: 'confirmed', event: 'both' },
-      { id: 30, firstName: 'Ilhan',     lastName: 'Hagi',           rsvp: 'confirmed', event: 'both' },
-      { id: 31, firstName: 'Omar',      lastName: "(Ilhan's husband)", rsvp: 'confirmed', event: 'both' },
-      { id: 32, firstName: 'Adna',      lastName: 'Hagi',           rsvp: 'confirmed', event: 'both' },
-      { id: 33, firstName: 'Afia',      lastName: 'Hagi',           rsvp: 'confirmed', event: 'both' },
-      { id: 34, firstName: 'Alia',      lastName: 'Hagi',           rsvp: 'confirmed', event: 'both' },
-      { id: 35, firstName: 'Anas',      lastName: 'Hagi',           rsvp: 'confirmed', event: 'both' },
-      { id: 36, firstName: 'Ibrahim',   lastName: 'Hagi',           rsvp: 'confirmed', event: 'both' },
-      { id: 37, firstName: 'Halimo',    lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 38, firstName: 'Sundus',    lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 39, firstName: 'Asha',      lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 40, firstName: 'Hamdi',     lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 41, firstName: 'Zeinab',    lastName: 'Osman',          rsvp: 'confirmed', event: 'both' },
-      { id: 42, firstName: 'Anab',      lastName: 'Abdullahi',      rsvp: 'confirmed', event: 'both' },
-      { id: 43, firstName: 'Zaki',      lastName: 'Abdullahi',      rsvp: 'confirmed', event: 'both' },
-      { id: 44, firstName: 'Sadaq',     lastName: 'Abdullahi',      rsvp: 'confirmed', event: 'both' },
+      { id: 1,  firstName: 'Istanbul',   lastName: 'Ali',                    rsvp: 'confirmed', event: 'both' },
+      { id: 2,  firstName: 'Luul',       lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 3,  firstName: 'Nadia',      lastName: 'Ghedi',                  rsvp: 'confirmed', event: 'both' },
+      { id: 4,  firstName: 'Nawal',      lastName: 'Ghedi',                  rsvp: 'confirmed', event: 'both' },
+      { id: 5,  firstName: 'Ayoub',      lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 6,  firstName: 'Amin',       lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 7,  firstName: 'Ismahan',    lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 8,  firstName: 'Dirie',      lastName: 'Bile',                   rsvp: 'confirmed', event: 'both' },
+      { id: 9,  firstName: 'Abdirashid', lastName: 'Dirie',                  rsvp: 'confirmed', event: 'both' },
+      { id: 10, firstName: 'Ayub',       lastName: 'Dirie',                  rsvp: 'confirmed', event: 'both' },
+      { id: 11, firstName: 'Ilyas',      lastName: 'Dirie',                  rsvp: 'confirmed', event: 'both' },
+      { id: 12, firstName: 'Muna',       lastName: 'Dirie',                  rsvp: 'confirmed', event: 'both' },
+      { id: 13, firstName: 'Safiyo',     lastName: 'Abdisamed',              rsvp: 'confirmed', event: 'both' },
+      { id: 14, firstName: 'Mohamed',    lastName: 'Januune',                rsvp: 'confirmed', event: 'both' },
+      { id: 15, firstName: 'Khalid',     lastName: 'Januune',                rsvp: 'confirmed', event: 'both' },
+      { id: 16, firstName: 'Samia',      lastName: 'Januune',                rsvp: 'confirmed', event: 'both' },
+      { id: 17, firstName: 'Anisa',      lastName: 'Januune',                rsvp: 'confirmed', event: 'both' },
+      { id: 18, firstName: 'Abdullahi',  lastName: 'Januune',                rsvp: 'confirmed', event: 'both' },
+      { id: 19, firstName: 'Anisa',      lastName: 'Hassan',                 rsvp: 'confirmed', event: 'both' },
+      { id: 20, firstName: 'Faiza',      lastName: 'Hassan',                 rsvp: 'confirmed', event: 'both' },
+      { id: 21, firstName: 'Sahra',      lastName: 'Hassan',                 rsvp: 'confirmed', event: 'both' },
+      { id: 22, firstName: 'Ismail',     lastName: 'Hassan',                 rsvp: 'confirmed', event: 'both' },
+      { id: 23, firstName: 'Mohamed',    lastName: 'Hassan',                 rsvp: 'confirmed', event: 'both' },
+      { id: 24, firstName: 'Layla',      lastName: 'Ibrahim',                rsvp: 'confirmed', event: 'both' },
+      { id: 25, firstName: 'Svetlana',   lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 26, firstName: 'Aleena',     lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 27, firstName: 'Ismail',     lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 28, firstName: 'Asha',       lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 29, firstName: 'Deqa',       lastName: 'Geele',                  rsvp: 'confirmed', event: 'both' },
+      { id: 30, firstName: 'Ilhan',      lastName: 'Hagi',                   rsvp: 'confirmed', event: 'both' },
+      { id: 31, firstName: 'Omar',       lastName: "(Ilhan's husband)",       rsvp: 'confirmed', event: 'both' },
+      { id: 32, firstName: 'Adna',       lastName: 'Hagi',                   rsvp: 'confirmed', event: 'both' },
+      { id: 33, firstName: 'Afia',       lastName: 'Hagi',                   rsvp: 'confirmed', event: 'both' },
+      { id: 34, firstName: 'Alia',       lastName: 'Hagi',                   rsvp: 'confirmed', event: 'both' },
+      { id: 35, firstName: 'Anas',       lastName: 'Hagi',                   rsvp: 'confirmed', event: 'both' },
+      { id: 36, firstName: 'Ibrahim',    lastName: 'Hagi',                   rsvp: 'confirmed', event: 'both' },
+      { id: 37, firstName: 'Halimo',     lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 38, firstName: 'Sundus',     lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 39, firstName: 'Asha',       lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 40, firstName: 'Hamdi',      lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 41, firstName: 'Zeinab',     lastName: 'Osman',                  rsvp: 'confirmed', event: 'both' },
+      { id: 42, firstName: 'Anab',       lastName: 'Abdullahi',              rsvp: 'confirmed', event: 'both' },
+      { id: 43, firstName: 'Zaki',       lastName: 'Abdullahi',              rsvp: 'confirmed', event: 'both' },
+      { id: 44, firstName: 'Sadaq',      lastName: 'Abdullahi',              rsvp: 'confirmed', event: 'both' },
     ]
   },
   {
     id: 2, title: "Groom's Family",
     items: [
-      { id: 1,  firstName: 'Hodan',       lastName: 'Hali',             rsvp: 'confirmed', event: 'both' },
-      { id: 2,  firstName: 'Dek',         lastName: 'Mohamed',          rsvp: 'confirmed', event: 'both' },
-      { id: 3,  firstName: 'Arafa',       lastName: 'Kumbuka',          rsvp: 'confirmed', event: 'both' },
-      { id: 4,  firstName: 'Liban',       lastName: 'Mohamed',          rsvp: 'confirmed', event: 'both' },
-      { id: 5,  firstName: 'Abdikhadar',  lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
-      { id: 6,  firstName: 'Idil',        lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
-      { id: 7,  firstName: 'Ladan',       lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
-      { id: 8,  firstName: 'Warfa',       lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
-      { id: 9,  firstName: 'Warsame',     lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
-      { id: 10, firstName: 'Abdirisak',   lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
-      { id: 11, firstName: 'Jamal',       lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
-      { id: 12, firstName: 'Amal',        lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
-      { id: 13, firstName: 'Nawal',       lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
-      { id: 14, firstName: 'Ilwad',       lastName: 'Burhan Dalmar',    rsvp: 'confirmed', event: 'both' },
-      { id: 15, firstName: 'Hodan',       lastName: 'Burhan Dalmar',    rsvp: 'confirmed', event: 'both' },
-      { id: 16, firstName: 'Samatar',     lastName: 'Burhan Dalmar',    rsvp: 'confirmed', event: 'both' },
-      { id: 17, firstName: 'Sakariye',    lastName: 'Burhan Dalmar',    rsvp: 'confirmed', event: 'both' },
-      { id: 18, firstName: 'Ruqiyo',      lastName: 'Aden Shire',       rsvp: 'confirmed', event: 'both' },
-      { id: 19, firstName: 'Mona',        lastName: 'Hassan',           rsvp: 'confirmed', event: 'both' },
-      { id: 20, firstName: 'Mahad',       lastName: 'Hassan',           rsvp: 'confirmed', event: 'both' },
-      { id: 21, firstName: 'Abas',        lastName: 'Hassan',           rsvp: 'confirmed', event: 'both' },
-      { id: 22, firstName: 'Seham',       lastName: 'Jama',             rsvp: 'confirmed', event: 'both' },
-      { id: 23, firstName: 'Sagal',       lastName: 'Abdullahi Haji',   rsvp: 'confirmed', event: 'both' },
-      { id: 24, firstName: 'Surer',       lastName: 'Khaliif',          rsvp: 'confirmed', event: 'both' },
-      { id: 25, firstName: 'Ilyas',       lastName: 'Ali',              rsvp: 'confirmed', event: 'both' },
-      { id: 26, firstName: 'Abdullahi',   lastName: 'Ali',              rsvp: 'confirmed', event: 'both' },
-      { id: 27, firstName: 'Shuayb',      lastName: 'Ali',              rsvp: 'confirmed', event: 'both' },
-      { id: 28, firstName: 'Sagal',       lastName: 'Jimcale',          rsvp: 'confirmed', event: 'both' },
-      { id: 29, firstName: 'Amiira',      lastName: 'Jesse Jordan',     rsvp: 'confirmed', event: 'both' },
-      { id: 30, firstName: 'Igraam',      lastName: 'Jesse Jordan',     rsvp: 'confirmed', event: 'both' },
-      { id: 31, firstName: 'Yasmin',      lastName: 'Jesse Jordan',     rsvp: 'confirmed', event: 'both' },
-      { id: 32, firstName: 'Suad',        lastName: 'Khalif',           rsvp: 'confirmed', event: 'both' },
-      { id: 33, firstName: 'Hoodo',       lastName: 'Cabdullahi',       rsvp: 'confirmed', event: 'both' },
-      { id: 34, firstName: 'Galad',       lastName: 'Shire Farah',      rsvp: 'confirmed', event: 'both' },
-      { id: 35, firstName: 'Hibo',        lastName: 'Shire Farah',      rsvp: 'confirmed', event: 'both' },
-      { id: 36, firstName: 'Saciido',     lastName: 'Khalif',           rsvp: 'confirmed', event: 'both' },
-      { id: 37, firstName: 'Amaar',       lastName: 'Mohamed',          rsvp: 'confirmed', event: 'both' },
-      { id: 38, firstName: 'Ashaar',      lastName: 'Mohamed',          rsvp: 'confirmed', event: 'both' },
-      { id: 39, firstName: 'Amran',       lastName: 'Mohamed',          rsvp: 'confirmed', event: 'both' },
-      { id: 40, firstName: 'Ruqiyo',      lastName: 'Baddel',           rsvp: 'confirmed', event: 'both' },
-      { id: 41, firstName: 'Nasra',       lastName: 'Baddel',           rsvp: 'confirmed', event: 'both' },
-      { id: 42, firstName: 'Amina',       lastName: 'Mohamed Islaweyn', rsvp: 'confirmed', event: 'both' },
-      { id: 43, firstName: 'Faadumo',     lastName: 'Cali',             rsvp: 'confirmed', event: 'both' },
-      { id: 44, firstName: 'Khadra',      lastName: 'Yuusuf',           rsvp: 'confirmed', event: 'both' },
-      { id: 45, firstName: 'Sahra',       lastName: 'Maxamed',          rsvp: 'confirmed', event: 'both' },
-      { id: 46, firstName: 'Caasha',      lastName: 'Ibraahim',         rsvp: 'confirmed', event: 'both' },
-      { id: 47, firstName: 'Luul',        lastName: 'Axmed',            rsvp: 'confirmed', event: 'both' },
-      { id: 48, firstName: 'Hindia',      lastName: 'Cabdalle',         rsvp: 'confirmed', event: 'both' },
-      { id: 49, firstName: 'Cawo',        lastName: 'Xasan',            rsvp: 'confirmed', event: 'both' },
-      { id: 50, firstName: 'Nuurto',      lastName: 'Muuse',            rsvp: 'confirmed', event: 'both' },
-      { id: 51, firstName: 'Sacdiya',     lastName: 'Daahir',           rsvp: 'confirmed', event: 'both' },
-      { id: 52, firstName: 'Farhiyo',     lastName: 'Cabdi',            rsvp: 'confirmed', event: 'both' },
-      { id: 53, firstName: 'Hodan',       lastName: 'Xirsi',            rsvp: 'confirmed', event: 'both' },
-      { id: 54, firstName: 'Asad',        lastName: 'Warsame',          rsvp: 'confirmed', event: 'both' },
-      { id: 55, firstName: 'Jawaahir',    lastName: 'Cabdullaahi',      rsvp: 'confirmed', event: 'both' },
-      { id: 56, firstName: 'Ayan',        lastName: 'Badal',            rsvp: 'confirmed', event: 'both' },
+      { id: 1,  firstName: 'Hodan',      lastName: 'Hali',             rsvp: 'confirmed', event: 'both' },
+      { id: 2,  firstName: 'Dek',        lastName: 'Mohamed',          rsvp: 'confirmed', event: 'both' },
+      { id: 3,  firstName: 'Arafa',      lastName: 'Kumbuka',          rsvp: 'confirmed', event: 'both' },
+      { id: 4,  firstName: 'Liban',      lastName: 'Mohamed',          rsvp: 'confirmed', event: 'both' },
+      { id: 5,  firstName: 'Abdikhadar', lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
+      { id: 6,  firstName: 'Idil',       lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
+      { id: 7,  firstName: 'Ladan',      lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
+      { id: 8,  firstName: 'Warfa',      lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
+      { id: 9,  firstName: 'Warsame',    lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
+      { id: 10, firstName: 'Abdirisak',  lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
+      { id: 11, firstName: 'Jamal',      lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
+      { id: 12, firstName: 'Amal',       lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
+      { id: 13, firstName: 'Nawal',      lastName: 'Shaie',            rsvp: 'confirmed', event: 'both' },
+      { id: 14, firstName: 'Ilwad',      lastName: 'Burhan Dalmar',    rsvp: 'confirmed', event: 'both' },
+      { id: 15, firstName: 'Hodan',      lastName: 'Burhan Dalmar',    rsvp: 'confirmed', event: 'both' },
+      { id: 16, firstName: 'Samatar',    lastName: 'Burhan Dalmar',    rsvp: 'confirmed', event: 'both' },
+      { id: 17, firstName: 'Sakariye',   lastName: 'Burhan Dalmar',    rsvp: 'confirmed', event: 'both' },
+      { id: 18, firstName: 'Ruqiyo',     lastName: 'Aden Shire',       rsvp: 'confirmed', event: 'both' },
+      { id: 19, firstName: 'Mona',       lastName: 'Hassan',           rsvp: 'confirmed', event: 'both' },
+      { id: 20, firstName: 'Mahad',      lastName: 'Hassan',           rsvp: 'confirmed', event: 'both' },
+      { id: 21, firstName: 'Abas',       lastName: 'Hassan',           rsvp: 'confirmed', event: 'both' },
+      { id: 22, firstName: 'Seham',      lastName: 'Jama',             rsvp: 'confirmed', event: 'both' },
+      { id: 23, firstName: 'Sagal',      lastName: 'Abdullahi Haji',   rsvp: 'confirmed', event: 'both' },
+      { id: 24, firstName: 'Surer',      lastName: 'Khaliif',          rsvp: 'confirmed', event: 'both' },
+      { id: 25, firstName: 'Ilyas',      lastName: 'Ali',              rsvp: 'confirmed', event: 'both' },
+      { id: 26, firstName: 'Abdullahi',  lastName: 'Ali',              rsvp: 'confirmed', event: 'both' },
+      { id: 27, firstName: 'Shuayb',     lastName: 'Ali',              rsvp: 'confirmed', event: 'both' },
+      { id: 28, firstName: 'Sagal',      lastName: 'Jimcale',          rsvp: 'confirmed', event: 'both' },
+      { id: 29, firstName: 'Amiira',     lastName: 'Jesse Jordan',     rsvp: 'confirmed', event: 'both' },
+      { id: 30, firstName: 'Igraam',     lastName: 'Jesse Jordan',     rsvp: 'confirmed', event: 'both' },
+      { id: 31, firstName: 'Yasmin',     lastName: 'Jesse Jordan',     rsvp: 'confirmed', event: 'both' },
+      { id: 32, firstName: 'Suad',       lastName: 'Khalif',           rsvp: 'confirmed', event: 'both' },
+      { id: 33, firstName: 'Hoodo',      lastName: 'Cabdullahi',       rsvp: 'confirmed', event: 'both' },
+      { id: 34, firstName: 'Galad',      lastName: 'Shire Farah',      rsvp: 'confirmed', event: 'both' },
+      { id: 35, firstName: 'Hibo',       lastName: 'Shire Farah',      rsvp: 'confirmed', event: 'both' },
+      { id: 36, firstName: 'Saciido',    lastName: 'Khalif',           rsvp: 'confirmed', event: 'both' },
+      { id: 37, firstName: 'Amaar',      lastName: 'Mohamed',          rsvp: 'confirmed', event: 'both' },
+      { id: 38, firstName: 'Ashaar',     lastName: 'Mohamed',          rsvp: 'confirmed', event: 'both' },
+      { id: 39, firstName: 'Amran',      lastName: 'Mohamed',          rsvp: 'confirmed', event: 'both' },
+      { id: 40, firstName: 'Ruqiyo',     lastName: 'Baddel',           rsvp: 'confirmed', event: 'both' },
+      { id: 41, firstName: 'Nasra',      lastName: 'Baddel',           rsvp: 'confirmed', event: 'both' },
+      { id: 42, firstName: 'Amina',      lastName: 'Mohamed Islaweyn', rsvp: 'confirmed', event: 'both' },
+      { id: 43, firstName: 'Faadumo',    lastName: 'Cali',             rsvp: 'confirmed', event: 'both' },
+      { id: 44, firstName: 'Khadra',     lastName: 'Yuusuf',           rsvp: 'confirmed', event: 'both' },
+      { id: 45, firstName: 'Sahra',      lastName: 'Maxamed',          rsvp: 'confirmed', event: 'both' },
+      { id: 46, firstName: 'Caasha',     lastName: 'Ibraahim',         rsvp: 'confirmed', event: 'both' },
+      { id: 47, firstName: 'Luul',       lastName: 'Axmed',            rsvp: 'confirmed', event: 'both' },
+      { id: 48, firstName: 'Hindia',     lastName: 'Cabdalle',         rsvp: 'confirmed', event: 'both' },
+      { id: 49, firstName: 'Cawo',       lastName: 'Xasan',            rsvp: 'confirmed', event: 'both' },
+      { id: 50, firstName: 'Nuurto',     lastName: 'Muuse',            rsvp: 'confirmed', event: 'both' },
+      { id: 51, firstName: 'Sacdiya',    lastName: 'Daahir',           rsvp: 'confirmed', event: 'both' },
+      { id: 52, firstName: 'Farhiyo',    lastName: 'Cabdi',            rsvp: 'confirmed', event: 'both' },
+      { id: 53, firstName: 'Hodan',      lastName: 'Xirsi',            rsvp: 'confirmed', event: 'both' },
+      { id: 54, firstName: 'Asad',       lastName: 'Warsame',          rsvp: 'confirmed', event: 'both' },
+      { id: 55, firstName: 'Jawaahir',   lastName: 'Cabdullaahi',      rsvp: 'confirmed', event: 'both' },
+      { id: 56, firstName: 'Ayan',       lastName: 'Badal',            rsvp: 'confirmed', event: 'both' },
     ]
   },
   {
     id: 3, title: "Bride's Guest",
     items: [
-      { id: 1,   firstName: 'Abdi',      lastName: 'Awil',          rsvp: 'pending', event: 'both' },
-      { id: 2,   firstName: 'Ayaanle',   lastName: 'Awil',          rsvp: 'pending', event: 'both' },
-      { id: 3,   firstName: 'Fatha',     lastName: '',              rsvp: 'pending', event: 'both' },
-      { id: 4,   firstName: 'Maryan',    lastName: 'Awil',          rsvp: 'pending', event: 'both' },
-      { id: 5,   firstName: 'Yahya',     lastName: 'Chow',          rsvp: 'pending', event: 'both' },
-      { id: 6,   firstName: 'Fatima',    lastName: 'Isse',          rsvp: 'pending', event: 'both' },
-      { id: 7,   firstName: 'Mahmoud',   lastName: 'Awil',          rsvp: 'pending', event: 'both' },
-      { id: 8,   firstName: 'Mohamed',   lastName: 'Awil',          rsvp: 'pending', event: 'both' },
-      { id: 9,   firstName: 'Nadifo',    lastName: 'Ali',           rsvp: 'pending', event: 'both' },
-      { id: 10,  firstName: 'Zeena',     lastName: 'Abdulle',       rsvp: 'pending', event: 'both' },
-      { id: 11,  firstName: 'Farhia',    lastName: 'Kukay',         rsvp: 'pending', event: 'both' },
-      { id: 12,  firstName: 'Zehra',     lastName: 'Hufane',        rsvp: 'pending', event: 'both' },
-      { id: 13,  firstName: 'Huda',      lastName: '',              rsvp: 'pending', event: 'both' },
-      { id: 14,  firstName: 'Nimco',     lastName: 'Sabriye',       rsvp: 'pending', event: 'both' },
+      { id: 1,   firstName: 'Abdi',      lastName: 'Awil',               rsvp: 'pending', event: 'both' },
+      { id: 2,   firstName: 'Ayaanle',   lastName: 'Awil',               rsvp: 'pending', event: 'both' },
+      { id: 3,   firstName: 'Fatha',     lastName: '',                   rsvp: 'pending', event: 'both' },
+      { id: 4,   firstName: 'Maryan',    lastName: 'Awil',               rsvp: 'pending', event: 'both' },
+      { id: 5,   firstName: 'Yahya',     lastName: 'Chow',               rsvp: 'pending', event: 'both' },
+      { id: 6,   firstName: 'Fatima',    lastName: 'Isse',               rsvp: 'pending', event: 'both' },
+      { id: 7,   firstName: 'Mahmoud',   lastName: 'Awil',               rsvp: 'pending', event: 'both' },
+      { id: 8,   firstName: 'Mohamed',   lastName: 'Awil',               rsvp: 'pending', event: 'both' },
+      { id: 9,   firstName: 'Nadifo',    lastName: 'Ali',                rsvp: 'pending', event: 'both' },
+      { id: 10,  firstName: 'Zeena',     lastName: 'Abdulle',            rsvp: 'pending', event: 'both' },
+      { id: 11,  firstName: 'Farhia',    lastName: 'Kukay',              rsvp: 'pending', event: 'both' },
+      { id: 12,  firstName: 'Zehra',     lastName: 'Hufane',             rsvp: 'pending', event: 'both' },
+      { id: 13,  firstName: 'Huda',      lastName: '',                   rsvp: 'pending', event: 'both' },
+      { id: 14,  firstName: 'Nimco',     lastName: 'Sabriye',            rsvp: 'pending', event: 'both' },
       { id: 15,  firstName: 'Ismael',    lastName: "(Shukri's Husband)", rsvp: 'pending', event: 'both' },
-      { id: 16,  firstName: 'Ruuney',    lastName: 'Ali',           rsvp: 'pending', event: 'both' },
-      { id: 17,  firstName: 'Ifrah',     lastName: '',              rsvp: 'pending', event: 'both' },
-      { id: 18,  firstName: 'Hamdi',     lastName: '',              rsvp: 'pending', event: 'both' },
-      { id: 19,  firstName: 'Ibrahim',   lastName: 'Ashkir',        rsvp: 'pending', event: 'both' },
-      { id: 20,  firstName: 'Roda',      lastName: 'Shaxari',       rsvp: 'pending', event: 'both' },
-      { id: 21,  firstName: 'Faiza',     lastName: 'Shaxari',       rsvp: 'pending', event: 'both' },
-      { id: 22,  firstName: 'Leyla',     lastName: 'Khalif',        rsvp: 'pending', event: 'both' },
-      { id: 23,  firstName: 'Ilhan',     lastName: 'Indoy',         rsvp: 'pending', event: 'both' },
-      { id: 24,  firstName: 'Ikran',     lastName: 'Indoy',         rsvp: 'pending', event: 'both' },
-      { id: 25,  firstName: 'Shamso',    lastName: 'Iman',          rsvp: 'pending', event: 'both' },
-      { id: 26,  firstName: 'Kiin',      lastName: 'Sheikhdon',     rsvp: 'pending', event: 'both' },
-      { id: 27,  firstName: 'Gacalo',    lastName: 'Odowa',         rsvp: 'pending', event: 'both' },
-      { id: 28,  firstName: 'Farxiyo',   lastName: 'H Hussein',     rsvp: 'pending', event: 'both' },
-      { id: 29,  firstName: 'Asha',      lastName: 'M Ali',         rsvp: 'pending', event: 'both' },
-      { id: 30,  firstName: 'Khadija',   lastName: 'M Ali',         rsvp: 'pending', event: 'both' },
-      { id: 31,  firstName: 'Amina',     lastName: 'Suju',          rsvp: 'pending', event: 'both' },
-      { id: 32,  firstName: 'Asha',      lastName: '',              rsvp: 'pending', event: 'both' },
-      { id: 33,  firstName: 'Asia',      lastName: '',              rsvp: 'pending', event: 'both' },
-      { id: 34,  firstName: 'Fartun',    lastName: 'Ibrahim',       rsvp: 'pending', event: 'both' },
-      { id: 35,  firstName: 'Zamzam',    lastName: 'Egal',          rsvp: 'pending', event: 'both' },
-      { id: 36,  firstName: 'Dairo',     lastName: 'Mohamud',       rsvp: 'pending', event: 'both' },
-      { id: 37,  firstName: 'Deqa',      lastName: 'Ladane',        rsvp: 'pending', event: 'both' },
-      { id: 38,  firstName: 'Amina',     lastName: 'Iman',          rsvp: 'pending', event: 'both' },
-      { id: 39,  firstName: 'Aasho',     lastName: 'Ali',           rsvp: 'pending', event: 'both' },
-      { id: 40,  firstName: 'Nimco',     lastName: 'Ali',           rsvp: 'pending', event: 'both' },
-      { id: 41,  firstName: 'Ruqiyo',    lastName: 'Barre',         rsvp: 'pending', event: 'both' },
-      { id: 42,  firstName: 'Lul',       lastName: 'Ashkir',        rsvp: 'pending', event: 'both' },
-      { id: 43,  firstName: 'Bashir',    lastName: 'M Alim',        rsvp: 'pending', event: 'both' },
-      { id: 44,  firstName: 'Mohamed',   lastName: 'Abdi',          rsvp: 'pending', event: 'both' },
-      { id: 45,  firstName: 'Ikram',     lastName: 'Ibrahim',       rsvp: 'pending', event: 'both' },
-      { id: 46,  firstName: 'Zahra',     lastName: "(Ikram's Mom)", rsvp: 'pending', event: 'both' },
-      { id: 47,  firstName: 'Anab',      lastName: 'Omar',          rsvp: 'pending', event: 'both' },
-      { id: 48,  firstName: 'Hawa',      lastName: 'Camalow',       rsvp: 'pending', event: 'both' },
-      { id: 49,  firstName: 'Zahra',     lastName: 'Camalow',       rsvp: 'pending', event: 'both' },
-      { id: 50,  firstName: 'Faiza',     lastName: 'Carabeta',      rsvp: 'pending', event: 'both' },
-      { id: 51,  firstName: 'Istahil',   lastName: 'Omar',          rsvp: 'pending', event: 'both' },
-      { id: 52,  firstName: 'Caagan',    lastName: 'Omar',          rsvp: 'pending', event: 'both' },
-      { id: 53,  firstName: 'Hali',      lastName: '',              rsvp: 'pending', event: 'both' },
-      { id: 54,  firstName: 'Jameela',   lastName: '',              rsvp: 'pending', event: 'both' },
-      { id: 55,  firstName: 'Fatuma',    lastName: 'Khalif',        rsvp: 'pending', event: 'both' },
-      { id: 56,  firstName: 'Halimo',    lastName: 'Suthi',         rsvp: 'pending', event: 'both' },
-      { id: 57,  firstName: 'Halimo',    lastName: 'Shiino',        rsvp: 'pending', event: 'both' },
-      { id: 58,  firstName: 'Saciido',   lastName: 'Osman',         rsvp: 'pending', event: 'both' },
-      { id: 59,  firstName: 'Safiyo',    lastName: 'Brampton',      rsvp: 'pending', event: 'both' },
-      { id: 61,  firstName: 'Faduma',    lastName: 'Sheikh',        rsvp: 'pending', event: 'both' },
-      { id: 62,  firstName: 'Haweeya',   lastName: 'Tiir',          rsvp: 'pending', event: 'both' },
-      { id: 63,  firstName: 'Dahabo',    lastName: 'Hassan',        rsvp: 'pending', event: 'both' },
-      { id: 64,  firstName: 'Sirad',     lastName: 'Tiir',          rsvp: 'pending', event: 'both' },
-      { id: 65,  firstName: 'Amina',     lastName: 'Isaq',          rsvp: 'pending', event: 'both' },
-      { id: 66,  firstName: 'Raxma',     lastName: 'Ilka Digir',    rsvp: 'pending', event: 'both' },
-      { id: 67,  firstName: 'Farxiya',   lastName: 'Abukar',        rsvp: 'pending', event: 'both' },
-      { id: 68,  firstName: 'Deeqa',     lastName: 'Rooble',        rsvp: 'pending', event: 'both' },
-      { id: 69,  firstName: 'Deeqa',     lastName: 'Shuriye',       rsvp: 'pending', event: 'both' },
-      { id: 70,  firstName: 'Luul',      lastName: 'Fiidow',        rsvp: 'pending', event: 'both' },
-      { id: 71,  firstName: 'Hani',      lastName: 'Muse',          rsvp: 'pending', event: 'both' },
-      { id: 72,  firstName: 'Batuulo',   lastName: '',              rsvp: 'pending', event: 'both' },
-      { id: 73,  firstName: 'Nasro',     lastName: 'Caraale',       rsvp: 'pending', event: 'both' },
-      { id: 74,  firstName: 'Luul',      lastName: 'Abdi',          rsvp: 'pending', event: 'both' },
-      { id: 75,  firstName: 'Maryan',    lastName: 'Buuthaye',      rsvp: 'pending', event: 'both' },
-      { id: 76,  firstName: 'Suban',     lastName: 'Feytaan',       rsvp: 'pending', event: 'both' },
-      { id: 77,  firstName: 'Anab',      lastName: 'Tawane',        rsvp: 'pending', event: 'both' },
-      { id: 78,  firstName: 'Shukri',    lastName: 'Islow',         rsvp: 'pending', event: 'both' },
+      { id: 16,  firstName: 'Ruuney',    lastName: 'Ali',                rsvp: 'pending', event: 'both' },
+      { id: 17,  firstName: 'Ifrah',     lastName: '',                   rsvp: 'pending', event: 'both' },
+      { id: 18,  firstName: 'Hamdi',     lastName: '',                   rsvp: 'pending', event: 'both' },
+      { id: 19,  firstName: 'Ibrahim',   lastName: 'Ashkir',             rsvp: 'pending', event: 'both' },
+      { id: 20,  firstName: 'Roda',      lastName: 'Shaxari',            rsvp: 'pending', event: 'both' },
+      { id: 21,  firstName: 'Faiza',     lastName: 'Shaxari',            rsvp: 'pending', event: 'both' },
+      { id: 22,  firstName: 'Leyla',     lastName: 'Khalif',             rsvp: 'pending', event: 'both' },
+      { id: 23,  firstName: 'Ilhan',     lastName: 'Indoy',              rsvp: 'pending', event: 'both' },
+      { id: 24,  firstName: 'Ikran',     lastName: 'Indoy',              rsvp: 'pending', event: 'both' },
+      { id: 25,  firstName: 'Shamso',    lastName: 'Iman',               rsvp: 'pending', event: 'both' },
+      { id: 26,  firstName: 'Kiin',      lastName: 'Sheikhdon',          rsvp: 'pending', event: 'both' },
+      { id: 27,  firstName: 'Gacalo',    lastName: 'Odowa',              rsvp: 'pending', event: 'both' },
+      { id: 28,  firstName: 'Farxiyo',   lastName: 'H Hussein',          rsvp: 'pending', event: 'both' },
+      { id: 29,  firstName: 'Asha',      lastName: 'M Ali',              rsvp: 'pending', event: 'both' },
+      { id: 30,  firstName: 'Khadija',   lastName: 'M Ali',              rsvp: 'pending', event: 'both' },
+      { id: 31,  firstName: 'Amina',     lastName: 'Suju',               rsvp: 'pending', event: 'both' },
+      { id: 32,  firstName: 'Asha',      lastName: '',                   rsvp: 'pending', event: 'both' },
+      { id: 33,  firstName: 'Asia',      lastName: '',                   rsvp: 'pending', event: 'both' },
+      { id: 34,  firstName: 'Fartun',    lastName: 'Ibrahim',            rsvp: 'pending', event: 'both' },
+      { id: 35,  firstName: 'Zamzam',    lastName: 'Egal',               rsvp: 'pending', event: 'both' },
+      { id: 36,  firstName: 'Dairo',     lastName: 'Mohamud',            rsvp: 'pending', event: 'both' },
+      { id: 37,  firstName: 'Deqa',      lastName: 'Ladane',             rsvp: 'pending', event: 'both' },
+      { id: 38,  firstName: 'Amina',     lastName: 'Iman',               rsvp: 'pending', event: 'both' },
+      { id: 39,  firstName: 'Aasho',     lastName: 'Ali',                rsvp: 'pending', event: 'both' },
+      { id: 40,  firstName: 'Nimco',     lastName: 'Ali',                rsvp: 'pending', event: 'both' },
+      { id: 41,  firstName: 'Ruqiyo',    lastName: 'Barre',              rsvp: 'pending', event: 'both' },
+      { id: 42,  firstName: 'Lul',       lastName: 'Ashkir',             rsvp: 'pending', event: 'both' },
+      { id: 43,  firstName: 'Bashir',    lastName: 'M Alim',             rsvp: 'pending', event: 'both' },
+      { id: 44,  firstName: 'Mohamed',   lastName: 'Abdi',               rsvp: 'pending', event: 'both' },
+      { id: 45,  firstName: 'Ikram',     lastName: 'Ibrahim',            rsvp: 'pending', event: 'both' },
+      { id: 46,  firstName: 'Zahra',     lastName: "(Ikram's Mom)",      rsvp: 'pending', event: 'both' },
+      { id: 47,  firstName: 'Anab',      lastName: 'Omar',               rsvp: 'pending', event: 'both' },
+      { id: 48,  firstName: 'Hawa',      lastName: 'Camalow',            rsvp: 'pending', event: 'both' },
+      { id: 49,  firstName: 'Zahra',     lastName: 'Camalow',            rsvp: 'pending', event: 'both' },
+      { id: 50,  firstName: 'Faiza',     lastName: 'Carabeta',           rsvp: 'pending', event: 'both' },
+      { id: 51,  firstName: 'Istahil',   lastName: 'Omar',               rsvp: 'pending', event: 'both' },
+      { id: 52,  firstName: 'Caagan',    lastName: 'Omar',               rsvp: 'pending', event: 'both' },
+      { id: 53,  firstName: 'Hali',      lastName: '',                   rsvp: 'pending', event: 'both' },
+      { id: 54,  firstName: 'Jameela',   lastName: '',                   rsvp: 'pending', event: 'both' },
+      { id: 55,  firstName: 'Fatuma',    lastName: 'Khalif',             rsvp: 'pending', event: 'both' },
+      { id: 56,  firstName: 'Halimo',    lastName: 'Suthi',              rsvp: 'pending', event: 'both' },
+      { id: 57,  firstName: 'Halimo',    lastName: 'Shiino',             rsvp: 'pending', event: 'both' },
+      { id: 58,  firstName: 'Saciido',   lastName: 'Osman',              rsvp: 'pending', event: 'both' },
+      { id: 59,  firstName: 'Safiyo',    lastName: 'Brampton',           rsvp: 'pending', event: 'both' },
+      { id: 61,  firstName: 'Faduma',    lastName: 'Sheikh',             rsvp: 'pending', event: 'both' },
+      { id: 62,  firstName: 'Haweeya',   lastName: 'Tiir',               rsvp: 'pending', event: 'both' },
+      { id: 63,  firstName: 'Dahabo',    lastName: 'Hassan',             rsvp: 'pending', event: 'both' },
+      { id: 64,  firstName: 'Sirad',     lastName: 'Tiir',               rsvp: 'pending', event: 'both' },
+      { id: 65,  firstName: 'Amina',     lastName: 'Isaq',               rsvp: 'pending', event: 'both' },
+      { id: 66,  firstName: 'Raxma',     lastName: 'Ilka Digir',         rsvp: 'pending', event: 'both' },
+      { id: 67,  firstName: 'Farxiya',   lastName: 'Abukar',             rsvp: 'pending', event: 'both' },
+      { id: 68,  firstName: 'Deeqa',     lastName: 'Rooble',             rsvp: 'pending', event: 'both' },
+      { id: 69,  firstName: 'Deeqa',     lastName: 'Shuriye',            rsvp: 'pending', event: 'both' },
+      { id: 70,  firstName: 'Luul',      lastName: 'Fiidow',             rsvp: 'pending', event: 'both' },
+      { id: 71,  firstName: 'Hani',      lastName: 'Muse',               rsvp: 'pending', event: 'both' },
+      { id: 72,  firstName: 'Batuulo',   lastName: '',                   rsvp: 'pending', event: 'both' },
+      { id: 73,  firstName: 'Nasro',     lastName: 'Caraale',            rsvp: 'pending', event: 'both' },
+      { id: 74,  firstName: 'Luul',      lastName: 'Abdi',               rsvp: 'pending', event: 'both' },
+      { id: 75,  firstName: 'Maryan',    lastName: 'Buuthaye',           rsvp: 'pending', event: 'both' },
+      { id: 76,  firstName: 'Suban',     lastName: 'Feytaan',            rsvp: 'pending', event: 'both' },
+      { id: 77,  firstName: 'Anab',      lastName: 'Tawane',             rsvp: 'pending', event: 'both' },
+      { id: 78,  firstName: 'Shukri',    lastName: 'Islow',              rsvp: 'pending', event: 'both' },
       { id: 79,  firstName: 'Abdifatah', lastName: "(Shukri's Husband)", rsvp: 'pending', event: 'both' },
-      { id: 80,  firstName: 'Halima',    lastName: 'Uptidon',       rsvp: 'pending', event: 'both' },
-      { id: 81,  firstName: 'Shamso',    lastName: 'Diire',         rsvp: 'pending', event: 'both' },
-      { id: 82,  firstName: 'Khadijo',   lastName: 'Goome',         rsvp: 'pending', event: 'both' },
-      { id: 83,  firstName: 'Nawal',     lastName: 'Hussein',       rsvp: 'pending', event: 'both' },
-      { id: 84,  firstName: 'Nadia',     lastName: 'Hussein',       rsvp: 'pending', event: 'both' },
-      { id: 85,  firstName: 'Zainab',    lastName: 'Santuur',       rsvp: 'pending', event: 'both' },
-      { id: 91,  firstName: 'Nabil',     lastName: 'Ali',           rsvp: 'pending', event: 'both' },
-      { id: 92,  firstName: 'Amaal',     lastName: 'Ali',           rsvp: 'pending', event: 'both' },
-      { id: 93,  firstName: 'Yasmin',    lastName: 'El-Hertani',    rsvp: 'pending', event: 'both' },
-      { id: 94,  firstName: 'Cara',      lastName: 'Julal',         rsvp: 'pending', event: 'both' },
-      { id: 95,  firstName: 'Zico',      lastName: 'Hassan',        rsvp: 'pending', event: 'both' },
-      { id: 96,  firstName: 'Tala',      lastName: 'Ramahi',        rsvp: 'pending', event: 'both' },
-      { id: 97,  firstName: 'Adam',      lastName: 'Masri',         rsvp: 'pending', event: 'both' },
-      { id: 98,  firstName: 'Nadeem',    lastName: 'Talat',         rsvp: 'pending', event: 'both' },
-      { id: 99,  firstName: 'Mohamed',   lastName: 'Abusamaan',     rsvp: 'pending', event: 'both' },
-      { id: 100, firstName: 'Diya',      lastName: '',              rsvp: 'pending', event: 'both' },
-      { id: 101, firstName: 'Niyash',    lastName: '',              rsvp: 'pending', event: 'both' },
-      { id: 102, firstName: 'Tara',      lastName: 'Caldwell',      rsvp: 'pending', event: 'both' },
-      { id: 103, firstName: 'Brent',     lastName: 'Marson',        rsvp: 'pending', event: 'both' },
-      { id: 104, firstName: 'Lisa',      lastName: 'Hogan',         rsvp: 'pending', event: 'both' },
-      { id: 105, firstName: 'Brendan',   lastName: '',              rsvp: 'pending', event: 'both' },
+      { id: 80,  firstName: 'Halima',    lastName: 'Uptidon',            rsvp: 'pending', event: 'both' },
+      { id: 81,  firstName: 'Shamso',    lastName: 'Diire',              rsvp: 'pending', event: 'both' },
+      { id: 82,  firstName: 'Khadijo',   lastName: 'Goome',              rsvp: 'pending', event: 'both' },
+      { id: 83,  firstName: 'Nawal',     lastName: 'Hussein',            rsvp: 'pending', event: 'both' },
+      { id: 84,  firstName: 'Nadia',     lastName: 'Hussein',            rsvp: 'pending', event: 'both' },
+      { id: 85,  firstName: 'Zainab',    lastName: 'Santuur',            rsvp: 'pending', event: 'both' },
+      { id: 91,  firstName: 'Nabil',     lastName: 'Ali',                rsvp: 'pending', event: 'both' },
+      { id: 92,  firstName: 'Amaal',     lastName: 'Ali',                rsvp: 'pending', event: 'both' },
+      { id: 93,  firstName: 'Yasmin',    lastName: 'El-Hertani',         rsvp: 'pending', event: 'both' },
+      { id: 94,  firstName: 'Cara',      lastName: 'Julal',              rsvp: 'pending', event: 'both' },
+      { id: 95,  firstName: 'Zico',      lastName: 'Hassan',             rsvp: 'pending', event: 'both' },
+      { id: 96,  firstName: 'Tala',      lastName: 'Ramahi',             rsvp: 'pending', event: 'both' },
+      { id: 97,  firstName: 'Adam',      lastName: 'Masri',              rsvp: 'pending', event: 'both' },
+      { id: 98,  firstName: 'Nadeem',    lastName: 'Talat',              rsvp: 'pending', event: 'both' },
+      { id: 99,  firstName: 'Mohamed',   lastName: 'Abusamaan',          rsvp: 'pending', event: 'both' },
+      { id: 100, firstName: 'Diya',      lastName: '',                   rsvp: 'pending', event: 'both' },
+      { id: 101, firstName: 'Niyash',    lastName: '',                   rsvp: 'pending', event: 'both' },
+      { id: 102, firstName: 'Tara',      lastName: 'Caldwell',           rsvp: 'pending', event: 'both' },
+      { id: 103, firstName: 'Brent',     lastName: 'Marson',             rsvp: 'pending', event: 'both' },
+      { id: 104, firstName: 'Lisa',      lastName: 'Hogan',              rsvp: 'pending', event: 'both' },
+      { id: 105, firstName: 'Brendan',   lastName: '',                   rsvp: 'pending', event: 'both' },
     ]
   },
   {
     id: 4, title: "Groom's Guest",
     items: [
-      { id: 1,  firstName: 'Saciido',  lastName: 'Hassan',         rsvp: 'pending', event: 'both' },
-      { id: 2,  firstName: 'Duniya',   lastName: 'Farah Guure',    rsvp: 'pending', event: 'both' },
-      { id: 3,  firstName: 'Hawa',     lastName: 'Farah',          rsvp: 'pending', event: 'both' },
-      { id: 4,  firstName: 'Faduma',   lastName: 'Farah',          rsvp: 'pending', event: 'both' },
-      { id: 5,  firstName: 'Ruun',     lastName: 'Cigal',          rsvp: 'pending', event: 'both' },
-      { id: 6,  firstName: 'Ubaxa',    lastName: 'Cabdulqaadir',   rsvp: 'pending', event: 'both' },
-      { id: 7,  firstName: 'Halimo',   lastName: 'Yasiin',         rsvp: 'pending', event: 'both' },
-      { id: 8,  firstName: 'Xalawi',   lastName: 'Yasiin',         rsvp: 'pending', event: 'both' },
-      { id: 9,  firstName: 'Suleqo',   lastName: 'Ibrahim',        rsvp: 'pending', event: 'both' },
-      { id: 10, firstName: 'Hawa',     lastName: 'Yusuf',          rsvp: 'pending', event: 'both' },
-      { id: 11, firstName: 'Hawa',     lastName: 'Cigaal',         rsvp: 'pending', event: 'both' },
-      { id: 13, firstName: 'Dayaxa',   lastName: 'Abshir',         rsvp: 'pending', event: 'both' },
-      { id: 14, firstName: 'Naima',    lastName: 'Cawale',         rsvp: 'pending', event: 'both' },
-      { id: 15, firstName: 'Saido',    lastName: 'Hasan Muse',     rsvp: 'pending', event: 'both' },
+      { id: 1,  firstName: 'Saciido', lastName: 'Hassan',       rsvp: 'pending', event: 'both' },
+      { id: 2,  firstName: 'Duniya',  lastName: 'Farah Guure',  rsvp: 'pending', event: 'both' },
+      { id: 3,  firstName: 'Hawa',    lastName: 'Farah',        rsvp: 'pending', event: 'both' },
+      { id: 4,  firstName: 'Faduma',  lastName: 'Farah',        rsvp: 'pending', event: 'both' },
+      { id: 5,  firstName: 'Ruun',    lastName: 'Cigal',        rsvp: 'pending', event: 'both' },
+      { id: 6,  firstName: 'Ubaxa',   lastName: 'Cabdulqaadir', rsvp: 'pending', event: 'both' },
+      { id: 7,  firstName: 'Halimo',  lastName: 'Yasiin',       rsvp: 'pending', event: 'both' },
+      { id: 8,  firstName: 'Xalawi',  lastName: 'Yasiin',       rsvp: 'pending', event: 'both' },
+      { id: 9,  firstName: 'Suleqo',  lastName: 'Ibrahim',      rsvp: 'pending', event: 'both' },
+      { id: 10, firstName: 'Hawa',    lastName: 'Yusuf',        rsvp: 'pending', event: 'both' },
+      { id: 11, firstName: 'Hawa',    lastName: 'Cigaal',       rsvp: 'pending', event: 'both' },
+      { id: 13, firstName: 'Dayaxa',  lastName: 'Abshir',       rsvp: 'pending', event: 'both' },
+      { id: 14, firstName: 'Naima',   lastName: 'Cawale',       rsvp: 'pending', event: 'both' },
+      { id: 15, firstName: 'Saido',   lastName: 'Hasan Muse',   rsvp: 'pending', event: 'both' },
     ]
   },
 ];
@@ -960,7 +922,7 @@ let checklistData = [
       { id: 16, text: 'Confirm Catering Menu',              done: false },
       { id: 17, text: 'Book Henna Artist',                  done: false },
       { id: 18, text: 'Book Makeup Artist',                 done: true  },
-      { id: 19, text: 'Book Hair Stylist',                  done: false },
+      { id: 19, text: 'Book Hair Stylist',                  done: true  },
       { id: 20, text: 'Order Ceremony Dress',               done: false },
       { id: 21, text: 'Order Nikkah Certificate',           done: false },
       { id: 22, text: 'Book Imam',                          done: false },
@@ -1066,19 +1028,6 @@ function updateVendorField(catId, itemId, field, val) {
   item[field] = val;
   renderOverview();
 }
-function deleteVendorItem(catId, itemId) {
-  const cat = vendorData.find(c=>c.id===catId);
-  cat.items = cat.items.filter(i=>i.id!==itemId);
-  renderAll();
-}
-function addVendorCategory() {
-  const nameEl = document.getElementById('new-cat-name');
-  const name = nameEl.value.trim();
-  if (!name) return;
-  vendorData.push({ id: ++_vcatId, title: name, items: [] });
-  nameEl.value = '';
-  renderAll();
-}
 function updateCategoryTitle(catId, val, type) {
   if (type === 'vendor') vendorData.find(c=>c.id===catId).title = val;
   else if (type === 'guest') guestData.find(c=>c.id===catId).title = val;
@@ -1103,7 +1052,6 @@ function renderVendors() {
           <th>Vendor</th>
           <th style="width:120px">Booked</th>
           <th style="width:120px">Deposit</th>
-          <th style="width:40px"></th>
         </tr></thead>
         <tbody>
     `;
@@ -1112,7 +1060,6 @@ function renderVendors() {
         <td><input class="editable-cell" value="${esc(item.name)}" onchange="updateVendorField(${cat.id},${item.id},'name',this.value)" placeholder="Vendor name"/></td>
         <td><span onclick="cycleBooked(${cat.id},${item.id})" style="cursor:pointer">${bookedPill(item.booked)}</span></td>
         <td><span onclick="cycleDeposit(${cat.id},${item.id})" style="cursor:pointer">${depositPill(item.deposit)}</span></td>
-        <td><button class="btn-icon" onclick="deleteVendorItem(${cat.id},${item.id})" title="Delete">&#215;</button></td>
       </tr>`;
     });
     html += `</tbody></table></div></div>`;
@@ -1149,11 +1096,6 @@ function updateGuestField(catId, itemId, field, val) {
   const item = cat.items.find(i=>i.id===itemId);
   item[field] = val;
   renderOverview();
-}
-function deleteGuest(catId, itemId) {
-  const cat = guestData.find(c=>c.id===catId);
-  cat.items = cat.items.filter(i=>i.id!==itemId);
-  renderAll();
 }
 function addGuest(catId) {
   const cat = guestData.find(c=>c.id===catId);
@@ -1209,7 +1151,6 @@ function renderGuests() {
           <th>Last Name</th>
           <th style="width:110px">Event</th>
           <th style="width:110px">RSVP</th>
-          <th style="width:40px"></th>
         </tr></thead>
         <tbody>
     `;
@@ -1219,15 +1160,13 @@ function renderGuests() {
         <td><input class="editable-cell" value="${esc(item.lastName||'')}" onchange="updateGuestField(${cat.id},${item.id},'lastName',this.value)" placeholder="Last name"/></td>
         <td><span onclick="cycleEvent(${cat.id},${item.id})" style="cursor:pointer">${eventPill(item.event||'both')}</span></td>
         <td><span onclick="cycleRsvp(${cat.id},${item.id})" style="cursor:pointer">${rsvpPill(item.rsvp||'awaiting')}</span></td>
-        <td><button class="btn-icon" onclick="deleteGuest(${cat.id},${item.id})" title="Delete">&#215;</button></td>
       </tr>`;
     });
     html += `
         <tr class="add-row">
           <td><input class="add-input" id="add-guest-fn-${cat.id}" placeholder="First name..." onkeydown="if(event.key==='Enter')document.getElementById('add-guest-ln-${cat.id}').focus()"/></td>
           <td><input class="add-input" id="add-guest-ln-${cat.id}" placeholder="Last name..." onkeydown="if(event.key==='Enter')addGuest(${cat.id})"/></td>
-          <td colspan="2" style="color:var(--muted);font-size:12px;">Enter to add</td>
-          <td><button class="btn btn-gold" onclick="addGuest(${cat.id})" style="padding:7px 12px;">+</button></td>
+          <td colspan="2" style="color:var(--muted);font-size:12px;padding-left:12px;">Press Enter to add</td>
         </tr>
         </tbody>
       </table>
@@ -1247,11 +1186,6 @@ function updateCheckText(catId, itemId, val) {
   const cat = checklistData.find(c=>c.id===catId);
   const item = cat.items.find(i=>i.id===itemId);
   item.text = val;
-}
-function deleteCheckItem(catId, itemId) {
-  const cat = checklistData.find(c=>c.id===catId);
-  cat.items = cat.items.filter(i=>i.id!==itemId);
-  renderAll();
 }
 function addCheckItem(catId) {
   const cat = checklistData.find(c=>c.id===catId);
@@ -1287,7 +1221,6 @@ function renderChecklist() {
         <span class="check-label ${item.done?'done':''}" contenteditable="true"
           onblur="updateCheckText(${cat.id},${item.id},this.innerText)"
           spellcheck="false">${esc(item.text)}</span>
-        <button class="btn-icon" onclick="deleteCheckItem(${cat.id},${item.id})" title="Delete">&#215;</button>
       </div>`;
     });
     html += `
