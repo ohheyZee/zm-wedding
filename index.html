@@ -625,7 +625,7 @@ let vendorData = [
     id: 3, title: 'Catering',
     items: [
       { id: 1, name: 'Maryan Afgooye Catering', booked: 'booked', deposit: 'none' },
-      { id: 2, name: 'Cake', booked: 'not booked', deposit: 'none' },
+      { id: 2, name: 'Something Sweet Cake',    booked: 'booked', deposit: 'paid' },
     ]
   },
   {
@@ -633,17 +633,17 @@ let vendorData = [
     items: [
       { id: 1, name: 'Gali Weddings Photography', booked: 'booked', deposit: 'paid' },
       { id: 2, name: 'Gali Weddings Videography', booked: 'booked', deposit: 'paid' },
-      { id: 3, name: 'Sol Photobooth', booked: 'booked', deposit: 'paid' },
+      { id: 3, name: 'Sol Photobooth',             booked: 'booked', deposit: 'paid' },
     ]
   },
   {
     id: 4, title: 'Bride & Groom',
     items: [
-      { id: 1, name: 'Ilwad Shop Bridal Dress',   booked: 'booked',     deposit: 'paid' },
-      { id: 2, name: 'NatebyBeauty Hair',          booked: 'booked',     deposit: 'paid' },
-      { id: 3, name: 'Makeup by HQ',               booked: 'booked',     deposit: 'paid' },
-      { id: 4, name: "Groom's Suit",               booked: 'not booked', deposit: 'none' },
-      { id: 5, name: "Groom's Hair Cut",           booked: 'not booked', deposit: 'none' },
+      { id: 1, name: 'Ilwad Shop Bridal Dress', booked: 'booked',     deposit: 'paid' },
+      { id: 2, name: 'NatebyBeauty Hair',        booked: 'booked',     deposit: 'paid' },
+      { id: 3, name: 'Makeup by HQ',             booked: 'booked',     deposit: 'paid' },
+      { id: 4, name: "Groom's Suit",             booked: 'not booked', deposit: 'none' },
+      { id: 5, name: "Groom's Hair Cut",         booked: 'not booked', deposit: 'none' },
     ]
   },
   {
@@ -656,16 +656,14 @@ let vendorData = [
   {
     id: 7, title: 'Logistics',
     items: [
-      { id: 1, name: 'Enterprise Markham',  booked: 'booked',     deposit: 'paid' },
-      { id: 2, name: 'Radisson Hotel',      booked: 'booked',     deposit: 'none' },
-      { id: 3, name: 'Nikkah Certificate',  booked: 'not booked', deposit: 'none' },
-      { id: 4, name: 'Officiant (Imam)',    booked: 'not booked', deposit: 'none' },
+      { id: 1, name: 'Enterprise Markham', booked: 'booked',     deposit: 'paid' },
+      { id: 2, name: 'Radisson Hotel',     booked: 'booked',     deposit: 'none' },
+      { id: 3, name: 'Nikkah Certificate', booked: 'not booked', deposit: 'none' },
+      { id: 4, name: 'Officiant (Imam)',   booked: 'not booked', deposit: 'none' },
     ]
   },
 ];
 
-// CHANGE 3: Deleted both "Asha Osman" entries (id 28 and id 39) from Bride's Family
-// CHANGE 2: Moved Zahra Dagane (id 115) and Maryan Dagane (id 116) from Bride's Guest to Bride's Family
 let guestData = [
   {
     id: 1, title: "Bride's Family",
@@ -697,7 +695,6 @@ let guestData = [
       { id: 25,  firstName: 'Svetlana',   lastName: 'Osman',           rsvp: 'confirmed', event: 'both' },
       { id: 26,  firstName: 'Aleena',     lastName: 'Osman',           rsvp: 'confirmed', event: 'both' },
       { id: 27,  firstName: 'Ismail',     lastName: 'Osman',           rsvp: 'confirmed', event: 'both' },
-      // id 28 "Asha Osman" DELETED
       { id: 29,  firstName: 'Deqa',       lastName: 'Geelle',          rsvp: 'confirmed', event: 'both' },
       { id: 30,  firstName: 'Ilhan',      lastName: 'Hagi',            rsvp: 'confirmed', event: 'both' },
       { id: 32,  firstName: 'Ilwad',      lastName: 'Hagi',            rsvp: 'confirmed', event: 'both' },
@@ -707,7 +704,6 @@ let guestData = [
       { id: 36,  firstName: 'Ibrahim',    lastName: 'Hagi',            rsvp: 'confirmed', event: 'both' },
       { id: 37,  firstName: 'Halimo',     lastName: 'Osman',           rsvp: 'confirmed', event: 'both' },
       { id: 38,  firstName: 'Sundus',     lastName: 'Osman',           rsvp: 'confirmed', event: 'both' },
-      // id 39 "Asha Osman" DELETED
       { id: 40,  firstName: 'Hamdi',      lastName: 'Osman',           rsvp: 'confirmed', event: 'both' },
       { id: 41,  firstName: 'Zeinab',     lastName: 'Osman',           rsvp: 'confirmed', event: 'both' },
       { id: 42,  firstName: 'Anab',       lastName: 'Abdullahi',       rsvp: 'confirmed', event: 'both' },
@@ -715,7 +711,6 @@ let guestData = [
       { id: 44,  firstName: 'Sadaq',      lastName: 'Abdullahi',       rsvp: 'confirmed', event: 'both' },
       { id: 113, firstName: 'Asha',       lastName: 'Abdullahi',       rsvp: 'confirmed', event: 'both' },
       { id: 114, firstName: 'Zahra',      lastName: 'Osman',           rsvp: 'confirmed', event: 'both' },
-      // MOVED from Bride's Guest
       { id: 115, firstName: 'Zahra',      lastName: 'Dagane',          rsvp: 'confirmed', event: 'both' },
       { id: 116, firstName: 'Maryan',     lastName: 'Dagane',          rsvp: 'confirmed', event: 'both' },
     ]
@@ -887,7 +882,6 @@ let guestData = [
       { id: 110, firstName: 'Warsan',    lastName: 'Abdidahir',          rsvp: 'pending', event: 'both' },
       { id: 111, firstName: 'Fatima',    lastName: 'Ahmed',              rsvp: 'pending', event: 'both' },
       { id: 112, firstName: 'Idil',      lastName: 'Abdi',               rsvp: 'pending', event: 'both' },
-      // id 115 & 116 MOVED to Bride's Family
     ]
   },
   {
@@ -911,7 +905,6 @@ let guestData = [
   },
 ];
 
-// CHANGE 1: "Book Hair Stylist" (id 19) set to done: true
 let checklistData = [
   {
     id: 1, title: 'Overall Checklist',
