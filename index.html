@@ -649,17 +649,17 @@ let vendorData = [
   {
     id: 5, title: 'Music & Entertainment',
     items: [
-      { id: 1, name: 'DJ HILKA',  booked: 'booked', deposit: 'paid' },
+      { id: 1, name: 'DJ HILKA',  booked: 'booked',     deposit: 'paid' },
       { id: 2, name: 'Playlists', booked: 'not booked', deposit: 'none' },
     ]
   },
   {
     id: 7, title: 'Logistics',
     items: [
-      { id: 1, name: 'Enterprise Markham', booked: 'booked',     deposit: 'paid'  },
-      { id: 2, name: 'Radisson Hotel',     booked: 'booked',     deposit: 'none'  },
-      { id: 3, name: 'Nikkah Certificate', booked: 'not booked', deposit: 'none'  },
-      { id: 4, name: 'Officiant (Imam)',   booked: 'booked',     deposit: 'paid'  },
+      { id: 1, name: 'Enterprise Markham', booked: 'booked',     deposit: 'paid' },
+      { id: 2, name: 'Radisson Hotel',     booked: 'booked',     deposit: 'paid' }, // CHANGED: none -> paid
+      { id: 3, name: 'Nikkah Certificate', booked: 'not booked', deposit: 'none' },
+      { id: 4, name: 'Officiant (Imam)',   booked: 'booked',     deposit: 'paid' },
     ]
   },
 ];
@@ -918,12 +918,6 @@ let guestData = [
   },
 ];
 
-// ─── ONLY THESE LINES CHANGED ───────────────────────────────────────────────
-// id:8  Print Invitations   → done: true
-// id:10 Order Wedding Suit  → done: true
-// id:22 Book Imam           → done: true
-// id:25 Order Hair Extensions → DELETED
-// ────────────────────────────────────────────────────────────────────────────
 let checklistData = [
   {
     id: 1, title: 'Overall Checklist',
