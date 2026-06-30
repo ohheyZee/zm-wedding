@@ -630,9 +630,9 @@ let guestData = [
   {
     id: 1, title: "Bride's Family",
     items: [
-      // ─── DELETED: Zahra Dagane (id:115), Maryan Dagane (id:116) ───
-      // ─── UPDATED: Sundus Osman→Hassan (id:38), Hamdi Osman→Hassan (id:40) ───
-      // ─── ADDED: Asha Hassan (id:126) after Hamdi Hassan ───
+      // DELETED: Anisa Hassan (id:19)
+      // ADDED: Istanbul Hassan (id:127) at end
+      // MOVED: Asha Abdullahi (id:113) now after Zahra Osman (id:114)
       { id: 1,   firstName: 'Istanbul',   lastName: 'Ali',       rsvp: 'confirmed', event: 'both' },
       { id: 2,   firstName: 'Luul',       lastName: 'Osman',     rsvp: 'confirmed', event: 'both' },
       { id: 3,   firstName: 'Nadia',      lastName: 'Ghedi',     rsvp: 'confirmed', event: 'both' },
@@ -649,7 +649,6 @@ let guestData = [
       { id: 16,  firstName: 'Samia',      lastName: 'Januune',   rsvp: 'confirmed', event: 'both' },
       { id: 17,  firstName: 'Anisa',      lastName: 'Januune',   rsvp: 'confirmed', event: 'both' },
       { id: 18,  firstName: 'Abdullahi',  lastName: 'Januune',   rsvp: 'confirmed', event: 'both' },
-      { id: 19,  firstName: 'Anisa',      lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
       { id: 20,  firstName: 'Faiza',      lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
       { id: 21,  firstName: 'Sahra',      lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
       { id: 22,  firstName: 'Ismail',     lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
@@ -672,8 +671,9 @@ let guestData = [
       { id: 42,  firstName: 'Anab',       lastName: 'Abdullahi', rsvp: 'confirmed', event: 'both' },
       { id: 43,  firstName: 'Zaki',       lastName: 'Abdullahi', rsvp: 'confirmed', event: 'both' },
       { id: 44,  firstName: 'Sadaq',      lastName: 'Abdullahi', rsvp: 'confirmed', event: 'both' },
-      { id: 113, firstName: 'Asha',       lastName: 'Abdullahi', rsvp: 'confirmed', event: 'both' },
       { id: 114, firstName: 'Zahra',      lastName: 'Osman',     rsvp: 'confirmed', event: 'both' },
+      { id: 113, firstName: 'Asha',       lastName: 'Abdullahi', rsvp: 'confirmed', event: 'both' },
+      { id: 127, firstName: 'Istanbul',   lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
     ]
   },
   {
@@ -753,6 +753,10 @@ let guestData = [
   {
     id: 3, title: "Bride's Guest",
     items: [
+      // MOVED: Sumaya Abdulle (id:123) now after Amina Iman (id:38)
+      // ADDED: Ayaan Buuthaye (id:128) after Maryan Buuthaye (id:75)
+      // ADDED: Sara Masri (id:130) after Adam Masri (id:97)
+      // ADDED: Khadra Hirsi (id:129) appended at end
       { id: 1,   firstName: 'Abdi',      lastName: 'Awil',               rsvp: 'confirmed', event: 'both' },
       { id: 2,   firstName: 'Ayaanle',   lastName: 'Awil',               rsvp: 'confirmed', event: 'both' },
       { id: 3,   firstName: 'Fatha',     lastName: '',                   rsvp: 'confirmed', event: 'both' },
@@ -791,6 +795,7 @@ let guestData = [
       { id: 36,  firstName: 'Dairo',     lastName: 'Mohamud',            rsvp: 'confirmed', event: 'both' },
       { id: 37,  firstName: 'Deqa',      lastName: 'Ladane',             rsvp: 'confirmed', event: 'both' },
       { id: 38,  firstName: 'Amina',     lastName: 'Iman',               rsvp: 'confirmed', event: 'both' },
+      { id: 123, firstName: 'Sumaya',    lastName: 'Abdulle',            rsvp: 'confirmed', event: 'both' },
       { id: 39,  firstName: 'Aasho',     lastName: 'Ali',                rsvp: 'confirmed', event: 'both' },
       { id: 40,  firstName: 'Nimco',     lastName: 'Ali',                rsvp: 'confirmed', event: 'both' },
       { id: 41,  firstName: 'Ruqiyo',    lastName: 'Barre',              rsvp: 'confirmed', event: 'both' },
@@ -827,6 +832,7 @@ let guestData = [
       { id: 73,  firstName: 'Nasro',     lastName: 'Caraale',            rsvp: 'confirmed', event: 'both' },
       { id: 74,  firstName: 'Luul',      lastName: 'Abdi',               rsvp: 'confirmed', event: 'both' },
       { id: 75,  firstName: 'Maryan',    lastName: 'Buuthaye',           rsvp: 'confirmed', event: 'both' },
+      { id: 128, firstName: 'Ayaan',     lastName: 'Buuthaye',           rsvp: 'confirmed', event: 'both' },
       { id: 76,  firstName: 'Suban',     lastName: 'Feytaan',            rsvp: 'confirmed', event: 'both' },
       { id: 77,  firstName: 'Anab',      lastName: 'Tawane',             rsvp: 'confirmed', event: 'both' },
       { id: 78,  firstName: 'Shukri',    lastName: 'Islow',              rsvp: 'confirmed', event: 'both' },
@@ -843,6 +849,7 @@ let guestData = [
       { id: 95,  firstName: 'Zico',      lastName: 'Hassan',             rsvp: 'confirmed', event: 'both' },
       { id: 96,  firstName: 'Tala',      lastName: 'Ramahi',             rsvp: 'confirmed', event: 'both' },
       { id: 97,  firstName: 'Adam',      lastName: 'Masri',              rsvp: 'confirmed', event: 'both' },
+      { id: 130, firstName: 'Sara',      lastName: 'Masri',              rsvp: 'confirmed', event: 'both' },
       { id: 98,  firstName: 'Nadeem',    lastName: 'Talat',              rsvp: 'confirmed', event: 'both' },
       { id: 99,  firstName: 'Mohamed',   lastName: 'Abusamaan',          rsvp: 'confirmed', event: 'both' },
       { id: 102, firstName: 'Tara',      lastName: 'Caldwell',           rsvp: 'confirmed', event: 'both' },
@@ -862,9 +869,9 @@ let guestData = [
       { id: 120, firstName: 'Celina',    lastName: 'Shamon',             rsvp: 'confirmed', event: 'both' },
       { id: 121, firstName: 'Raneem',    lastName: 'Shammas',            rsvp: 'confirmed', event: 'both' },
       { id: 122, firstName: 'Muhammad',  lastName: 'Yunus',              rsvp: 'confirmed', event: 'both' },
-      { id: 123, firstName: 'Sumaya',    lastName: 'Abdulle',            rsvp: 'confirmed', event: 'both' },
       { id: 124, firstName: 'Huda',      lastName: 'Muddei',             rsvp: 'confirmed', event: 'both' },
       { id: 125, firstName: 'Yahya',     lastName: 'Nur',                rsvp: 'confirmed', event: 'both' },
+      { id: 129, firstName: 'Khadra',    lastName: 'Hirsi',              rsvp: 'confirmed', event: 'both' },
     ]
   },
   {
