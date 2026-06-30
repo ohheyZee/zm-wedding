@@ -29,7 +29,6 @@
     min-height: 100vh;
     overflow-x: hidden;
   }
-
   .hero {
     background: #0d0b09;
     padding: 52px 32px 44px;
@@ -144,7 +143,6 @@
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
   .nav-wrap {
     background: #181410;
     border-bottom: 1px solid var(--border);
@@ -176,15 +174,10 @@
     flex-shrink: 0;
   }
   .tab-btn:hover { color: var(--deep); }
-  .tab-btn.active {
-    color: var(--deep);
-    border-bottom-color: var(--gold);
-  }
-
+  .tab-btn.active { color: var(--deep); border-bottom-color: var(--gold); }
   .content { padding: 36px 32px; max-width: 1200px; margin: 0 auto; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
-
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -213,12 +206,7 @@
     color: var(--deep);
     line-height: 1;
   }
-  .stat-sub {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-
+  .stat-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
   .section-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -251,9 +239,7 @@
     width: 100%;
     max-width: 260px;
   }
-  .section-title-input:hover, .section-title-input:focus {
-    border-bottom-color: var(--gold);
-  }
+  .section-title-input:hover, .section-title-input:focus { border-bottom-color: var(--gold); }
   .section-count {
     font-size: 11px;
     background: #3a2e22;
@@ -263,8 +249,6 @@
     font-weight: 500;
     flex-shrink: 0;
   }
-  .section-actions { display: flex; gap: 8px; align-items: center; }
-
   .btn {
     font-family: 'DM Sans', sans-serif;
     font-size: 12px;
@@ -279,18 +263,7 @@
   }
   .btn-gold { background: var(--gold); color: #1a1208; }
   .btn-gold:hover { background: #b8943d; }
-  .btn-ghost {
-    background: transparent;
-    color: var(--muted);
-    border: 1px solid var(--border);
-  }
-  .btn-ghost:hover { background: #252118; color: var(--deep); }
-
-  .table-scroll-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
-  }
+  .table-scroll-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
   .vendor-table { width: 100%; border-collapse: collapse; }
   .vendor-table th {
     font-size: 10px;
@@ -349,7 +322,6 @@
   .pill-grey   { background: #28221e; color: var(--muted); }
   .pill-blue   { background: #162030; color: #6a9ec0; }
   .pill-rose   { background: #351a1a; color: #c08080; }
-
   .add-row td { background: #252118; }
   .add-input {
     font-family: 'DM Sans', sans-serif;
@@ -366,7 +338,6 @@
   }
   .add-input:focus { border-color: var(--gold); }
   .add-input::placeholder { color: #5a504a; }
-
   .guest-table { width: 100%; border-collapse: collapse; min-width: 380px; }
   .guest-table th {
     font-size: 10px;
@@ -388,7 +359,6 @@
   }
   .guest-table tr:last-child td { border-bottom: none; }
   .guest-table tr:hover td { background: #252118; }
-
   .rsvp-summary {
     background: #0d0b09;
     border: 1px solid var(--border);
@@ -430,7 +400,6 @@
     border-radius: 4px;
     transition: width 0.4s ease;
   }
-
   .checklist-item {
     display: flex;
     align-items: center;
@@ -496,7 +465,6 @@
     flex-wrap: wrap;
     gap: 4px;
   }
-
   .checklist-add {
     display: flex;
     gap: 10px;
@@ -506,7 +474,6 @@
     flex-wrap: wrap;
   }
   .checklist-add .add-input { flex: 1; min-width: 160px; }
-
   @media (max-width: 640px) {
     .content { padding: 16px 12px; }
     .hero { padding: 36px 16px 32px; }
@@ -538,7 +505,6 @@
     .checklist-add { padding: 12px 14px; }
     .add-input { font-size: 13px; padding: 7px 10px; }
   }
-
   @media (max-width: 380px) {
     .hero-title { font-size: 20px; }
     .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -664,48 +630,50 @@ let guestData = [
   {
     id: 1, title: "Bride's Family",
     items: [
-      { id: 1,   firstName: 'Istanbul',   lastName: 'Ali',          rsvp: 'confirmed', event: 'both' },
-      { id: 2,   firstName: 'Luul',       lastName: 'Osman',        rsvp: 'confirmed', event: 'both' },
-      { id: 3,   firstName: 'Nadia',      lastName: 'Ghedi',        rsvp: 'confirmed', event: 'both' },
-      { id: 4,   firstName: 'Nawal',      lastName: 'Ghedi',        rsvp: 'confirmed', event: 'both' },
-      { id: 5,   firstName: 'Ayoub',      lastName: 'Osman',        rsvp: 'confirmed', event: 'both' },
-      { id: 6,   firstName: 'Amin',       lastName: 'Osman',        rsvp: 'confirmed', event: 'both' },
-      { id: 7,   firstName: 'Ismahan',    lastName: 'Osman',        rsvp: 'confirmed', event: 'both' },
-      { id: 10,  firstName: 'Ayub',       lastName: 'Dirie',        rsvp: 'confirmed', event: 'both' },
-      { id: 11,  firstName: 'Ilyas',      lastName: 'Dirie',        rsvp: 'confirmed', event: 'both' },
-      { id: 12,  firstName: 'Muna',       lastName: 'Dirie',        rsvp: 'confirmed', event: 'both' },
-      { id: 13,  firstName: 'Safiyo',     lastName: 'Abdisamed',    rsvp: 'confirmed', event: 'both' },
-      { id: 14,  firstName: 'Mohamed',    lastName: 'Januune',      rsvp: 'confirmed', event: 'both' },
-      { id: 15,  firstName: 'Khalid',     lastName: 'Januune',      rsvp: 'confirmed', event: 'both' },
-      { id: 16,  firstName: 'Samia',      lastName: 'Januune',      rsvp: 'confirmed', event: 'both' },
-      { id: 17,  firstName: 'Anisa',      lastName: 'Januune',      rsvp: 'confirmed', event: 'both' },
-      { id: 18,  firstName: 'Abdullahi',  lastName: 'Januune',      rsvp: 'confirmed', event: 'both' },
-      { id: 19,  firstName: 'Anisa',      lastName: 'Hassan',       rsvp: 'confirmed', event: 'both' },
-      { id: 20,  firstName: 'Faiza',      lastName: 'Hassan',       rsvp: 'confirmed', event: 'both' },
-      { id: 21,  firstName: 'Sahra',      lastName: 'Hassan',       rsvp: 'confirmed', event: 'both' },
-      { id: 22,  firstName: 'Ismail',     lastName: 'Hassan',       rsvp: 'confirmed', event: 'both' },
-      { id: 23,  firstName: 'Mohamed',    lastName: 'Hassan',       rsvp: 'confirmed', event: 'both' },
-      { id: 24,  firstName: 'Layla',      lastName: 'Ibrahim',      rsvp: 'confirmed', event: 'both' },
-      { id: 25,  firstName: 'Svetlana',   lastName: 'Osman',        rsvp: 'confirmed', event: 'both' },
-      { id: 26,  firstName: 'Aleena',     lastName: 'Osman',        rsvp: 'confirmed', event: 'both' },
-      { id: 27,  firstName: 'Ismail',     lastName: 'Osman',        rsvp: 'confirmed', event: 'both' },
-      { id: 29,  firstName: 'Deqa',       lastName: 'Geelle',       rsvp: 'confirmed', event: 'both' },
-      { id: 30,  firstName: 'Ilhan',      lastName: 'Hagi',         rsvp: 'confirmed', event: 'both' },
-      { id: 32,  firstName: 'Ilwad',      lastName: 'Hagi',         rsvp: 'confirmed', event: 'both' },
-      { id: 33,  firstName: 'Afia',       lastName: 'Hagi',         rsvp: 'confirmed', event: 'both' },
-      { id: 34,  firstName: 'Alia',       lastName: 'Hagi',         rsvp: 'confirmed', event: 'both' },
-      { id: 35,  firstName: 'Anas',       lastName: 'Hagi',         rsvp: 'confirmed', event: 'both' },
-      { id: 36,  firstName: 'Ibrahim',    lastName: 'Hagi',         rsvp: 'confirmed', event: 'both' },
-      { id: 37,  firstName: 'Halimo',     lastName: 'Osman',        rsvp: 'confirmed', event: 'both' },
-      { id: 38,  firstName: 'Sundus',     lastName: 'Osman',        rsvp: 'confirmed', event: 'both' },
-      { id: 40,  firstName: 'Hamdi',      lastName: 'Osman',        rsvp: 'confirmed', event: 'both' },
-      { id: 42,  firstName: 'Anab',       lastName: 'Abdullahi',    rsvp: 'confirmed', event: 'both' },
-      { id: 43,  firstName: 'Zaki',       lastName: 'Abdullahi',    rsvp: 'confirmed', event: 'both' },
-      { id: 44,  firstName: 'Sadaq',      lastName: 'Abdullahi',    rsvp: 'confirmed', event: 'both' },
-      { id: 113, firstName: 'Asha',       lastName: 'Abdullahi',    rsvp: 'confirmed', event: 'both' },
-      { id: 114, firstName: 'Zahra',      lastName: 'Osman',        rsvp: 'confirmed', event: 'both' },
-      { id: 115, firstName: 'Zahra',      lastName: 'Dagane',       rsvp: 'confirmed', event: 'both' },
-      { id: 116, firstName: 'Maryan',     lastName: 'Dagane',       rsvp: 'confirmed', event: 'both' },
+      // ─── DELETED: Zahra Dagane (id:115), Maryan Dagane (id:116) ───
+      // ─── UPDATED: Sundus Osman→Hassan (id:38), Hamdi Osman→Hassan (id:40) ───
+      // ─── ADDED: Asha Hassan (id:126) after Hamdi Hassan ───
+      { id: 1,   firstName: 'Istanbul',   lastName: 'Ali',       rsvp: 'confirmed', event: 'both' },
+      { id: 2,   firstName: 'Luul',       lastName: 'Osman',     rsvp: 'confirmed', event: 'both' },
+      { id: 3,   firstName: 'Nadia',      lastName: 'Ghedi',     rsvp: 'confirmed', event: 'both' },
+      { id: 4,   firstName: 'Nawal',      lastName: 'Ghedi',     rsvp: 'confirmed', event: 'both' },
+      { id: 5,   firstName: 'Ayoub',      lastName: 'Osman',     rsvp: 'confirmed', event: 'both' },
+      { id: 6,   firstName: 'Amin',       lastName: 'Osman',     rsvp: 'confirmed', event: 'both' },
+      { id: 7,   firstName: 'Ismahan',    lastName: 'Osman',     rsvp: 'confirmed', event: 'both' },
+      { id: 10,  firstName: 'Ayub',       lastName: 'Dirie',     rsvp: 'confirmed', event: 'both' },
+      { id: 11,  firstName: 'Ilyas',      lastName: 'Dirie',     rsvp: 'confirmed', event: 'both' },
+      { id: 12,  firstName: 'Muna',       lastName: 'Dirie',     rsvp: 'confirmed', event: 'both' },
+      { id: 13,  firstName: 'Safiyo',     lastName: 'Abdisamed', rsvp: 'confirmed', event: 'both' },
+      { id: 14,  firstName: 'Mohamed',    lastName: 'Januune',   rsvp: 'confirmed', event: 'both' },
+      { id: 15,  firstName: 'Khalid',     lastName: 'Januune',   rsvp: 'confirmed', event: 'both' },
+      { id: 16,  firstName: 'Samia',      lastName: 'Januune',   rsvp: 'confirmed', event: 'both' },
+      { id: 17,  firstName: 'Anisa',      lastName: 'Januune',   rsvp: 'confirmed', event: 'both' },
+      { id: 18,  firstName: 'Abdullahi',  lastName: 'Januune',   rsvp: 'confirmed', event: 'both' },
+      { id: 19,  firstName: 'Anisa',      lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
+      { id: 20,  firstName: 'Faiza',      lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
+      { id: 21,  firstName: 'Sahra',      lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
+      { id: 22,  firstName: 'Ismail',     lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
+      { id: 23,  firstName: 'Mohamed',    lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
+      { id: 24,  firstName: 'Layla',      lastName: 'Ibrahim',   rsvp: 'confirmed', event: 'both' },
+      { id: 25,  firstName: 'Svetlana',   lastName: 'Osman',     rsvp: 'confirmed', event: 'both' },
+      { id: 26,  firstName: 'Aleena',     lastName: 'Osman',     rsvp: 'confirmed', event: 'both' },
+      { id: 27,  firstName: 'Ismail',     lastName: 'Osman',     rsvp: 'confirmed', event: 'both' },
+      { id: 29,  firstName: 'Deqa',       lastName: 'Geelle',    rsvp: 'confirmed', event: 'both' },
+      { id: 30,  firstName: 'Ilhan',      lastName: 'Hagi',      rsvp: 'confirmed', event: 'both' },
+      { id: 32,  firstName: 'Ilwad',      lastName: 'Hagi',      rsvp: 'confirmed', event: 'both' },
+      { id: 33,  firstName: 'Afia',       lastName: 'Hagi',      rsvp: 'confirmed', event: 'both' },
+      { id: 34,  firstName: 'Alia',       lastName: 'Hagi',      rsvp: 'confirmed', event: 'both' },
+      { id: 35,  firstName: 'Anas',       lastName: 'Hagi',      rsvp: 'confirmed', event: 'both' },
+      { id: 36,  firstName: 'Ibrahim',    lastName: 'Hagi',      rsvp: 'confirmed', event: 'both' },
+      { id: 37,  firstName: 'Halimo',     lastName: 'Osman',     rsvp: 'confirmed', event: 'both' },
+      { id: 38,  firstName: 'Sundus',     lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
+      { id: 40,  firstName: 'Hamdi',      lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
+      { id: 126, firstName: 'Asha',       lastName: 'Hassan',    rsvp: 'confirmed', event: 'both' },
+      { id: 42,  firstName: 'Anab',       lastName: 'Abdullahi', rsvp: 'confirmed', event: 'both' },
+      { id: 43,  firstName: 'Zaki',       lastName: 'Abdullahi', rsvp: 'confirmed', event: 'both' },
+      { id: 44,  firstName: 'Sadaq',      lastName: 'Abdullahi', rsvp: 'confirmed', event: 'both' },
+      { id: 113, firstName: 'Asha',       lastName: 'Abdullahi', rsvp: 'confirmed', event: 'both' },
+      { id: 114, firstName: 'Zahra',      lastName: 'Osman',     rsvp: 'confirmed', event: 'both' },
     ]
   },
   {
@@ -895,7 +863,6 @@ let guestData = [
       { id: 121, firstName: 'Raneem',    lastName: 'Shammas',            rsvp: 'confirmed', event: 'both' },
       { id: 122, firstName: 'Muhammad',  lastName: 'Yunus',              rsvp: 'confirmed', event: 'both' },
       { id: 123, firstName: 'Sumaya',    lastName: 'Abdulle',            rsvp: 'confirmed', event: 'both' },
-      // ─── 2 NEW GUESTS ────────────────────────────────────────────────────────
       { id: 124, firstName: 'Huda',      lastName: 'Muddei',             rsvp: 'confirmed', event: 'both' },
       { id: 125, firstName: 'Yahya',     lastName: 'Nur',                rsvp: 'confirmed', event: 'both' },
     ]
