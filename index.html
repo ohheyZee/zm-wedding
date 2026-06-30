@@ -831,7 +831,6 @@ let guestData = [
       { id: 79,  firstName: 'Abdifatah', lastName: "(Shukri's Husband)", rsvp: 'confirmed', event: 'both' },
       { id: 80,  firstName: 'Halima',    lastName: 'Uptidon',            rsvp: 'confirmed', event: 'both' },
       { id: 81,  firstName: 'Shamso',    lastName: 'Diire',              rsvp: 'confirmed', event: 'both' },
-      // ─── Khadijo Goome (id:82) DELETED ───
       { id: 85,  firstName: 'Zainab',    lastName: 'Santuur',            rsvp: 'confirmed', event: 'both' },
       { id: 86,  firstName: 'Yusuf',     lastName: 'Santuur',            rsvp: 'confirmed', event: 'both' },
       { id: 91,  firstName: 'Nabil',     lastName: 'Ali',                rsvp: 'confirmed', event: 'both' },
@@ -864,6 +863,28 @@ let guestData = [
       { id: 124, firstName: 'Huda',      lastName: 'Muddei',             rsvp: 'confirmed', event: 'both' },
       { id: 125, firstName: 'Yahya',     lastName: 'Nur',                rsvp: 'confirmed', event: 'both' },
       { id: 129, firstName: 'Khadra',    lastName: 'Hirsi',              rsvp: 'confirmed', event: 'both' },
+      // ─── 21 NEW GUESTS ───────────────────────────────────────────────────────
+      { id: 131, firstName: 'Dahabo',    lastName: 'Kaxar',              rsvp: 'confirmed', event: 'both' },
+      { id: 132, firstName: 'Shukri',    lastName: 'Kaxar',              rsvp: 'confirmed', event: 'both' },
+      { id: 133, firstName: 'Bashir',    lastName: 'Ibbey',              rsvp: 'confirmed', event: 'both' },
+      { id: 134, firstName: 'Zamzam',    lastName: 'Xaayow',             rsvp: 'confirmed', event: 'both' },
+      { id: 135, firstName: 'Khadija',   lastName: 'Dhalin',             rsvp: 'confirmed', event: 'both' },
+      { id: 136, firstName: 'Nasro',     lastName: 'Ismail',             rsvp: 'confirmed', event: 'both' },
+      { id: 137, firstName: 'Sacdiyo',   lastName: 'Masale',             rsvp: 'confirmed', event: 'both' },
+      { id: 138, firstName: 'Feynus',    lastName: 'Masale',             rsvp: 'confirmed', event: 'both' },
+      { id: 139, firstName: 'Zahra',     lastName: 'A. Shukuur',         rsvp: 'confirmed', event: 'both' },
+      { id: 140, firstName: 'Sadaq',     lastName: 'Duale',              rsvp: 'confirmed', event: 'both' },
+      { id: 141, firstName: 'Mohamud',   lastName: 'Osman (Xerow)',      rsvp: 'confirmed', event: 'both' },
+      { id: 142, firstName: 'Macalin',   lastName: 'Adan',               rsvp: 'confirmed', event: 'both' },
+      { id: 143, firstName: 'Bashir',    lastName: 'Ibrahim',            rsvp: 'confirmed', event: 'both' },
+      { id: 144, firstName: 'Bashir',    lastName: 'M.',                 rsvp: 'confirmed', event: 'both' },
+      { id: 145, firstName: 'Xasan',     lastName: 'Haraye',             rsvp: 'confirmed', event: 'both' },
+      { id: 146, firstName: 'Abdirasaq', lastName: 'Shuriye',            rsvp: 'confirmed', event: 'both' },
+      { id: 147, firstName: 'Abdulahi',  lastName: 'Soolay',             rsvp: 'confirmed', event: 'both' },
+      { id: 148, firstName: 'Ahmed',     lastName: 'John',               rsvp: 'confirmed', event: 'both' },
+      { id: 149, firstName: 'Shiino',    lastName: '',                   rsvp: 'confirmed', event: 'both' },
+      { id: 150, firstName: 'Ali',       lastName: 'Yalaxowo',           rsvp: 'confirmed', event: 'both' },
+      { id: 151, firstName: 'Dr. Abukar',lastName: 'Mucalin',            rsvp: 'confirmed', event: 'both' },
     ]
   },
   {
@@ -940,7 +961,7 @@ let checklistData = [
   }
 ];
 
-let _vcatId = 10, _vitId = 100, _gcatId = 10, _gitId = 700, _clitId = 100;
+let _vcatId = 10, _vitId = 100, _gcatId = 10, _gitId = 800, _clitId = 100;
 
 function guestStats() {
   let invited = 0, confirmed = 0, declined = 0, awaiting = 0;
