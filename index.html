@@ -676,11 +676,6 @@ let guestData = [
   {
     id: 2, title: "Groom's Family",
     items: [
-      // ─── 13 MOVED TO GROOM'S GUEST: Faadumo Cali(43), Khadra Yuusuf(44),
-      //     Sahra Maxamed(45), Caasha Ibraahim(46), Luul Axmed(47),
-      //     Hindia Cabdalle(48), Cawo Xasan(49), Nuurto Muuse(50),
-      //     Sacdiya Daahir(51), Farhiyo Cabdi(52), Hodan Xirsi(53),
-      //     Asad Warsame(54), Jawaahir Cabdullaahi(55) ───
       { id: 1,  firstName: 'Hodan',      lastName: 'Hali',             rsvp: 'confirmed', event: 'both' },
       { id: 2,  firstName: 'Dek',        lastName: 'Mohamed',          rsvp: 'confirmed', event: 'both' },
       { id: 3,  firstName: 'Arafa',      lastName: 'Kumbuka',          rsvp: 'confirmed', event: 'both' },
@@ -865,6 +860,9 @@ let guestData = [
       { id: 149, firstName: 'Shiino',    lastName: '',                   rsvp: 'confirmed', event: 'both' },
       { id: 150, firstName: 'Ali',       lastName: 'Yalaxowo',           rsvp: 'confirmed', event: 'both' },
       { id: 151, firstName: 'Dr. Abukar',lastName: 'Mucalin',            rsvp: 'confirmed', event: 'both' },
+      // ─── 2 NEW GUESTS ───
+      { id: 152, firstName: 'Rahma',     lastName: 'Burale',             rsvp: 'confirmed', event: 'both' },
+      { id: 153, firstName: 'Habon',     lastName: 'Burale',             rsvp: 'confirmed', event: 'both' },
     ]
   },
   {
@@ -884,7 +882,6 @@ let guestData = [
       { id: 13, firstName: 'Dayaxa',    lastName: 'Abshir',       rsvp: 'confirmed', event: 'both' },
       { id: 14, firstName: 'Naima',     lastName: 'Cawale',       rsvp: 'confirmed', event: 'both' },
       { id: 15, firstName: 'Saido',     lastName: 'Hasan Muse',   rsvp: 'confirmed', event: 'both' },
-      // ─── 13 MOVED FROM GROOM'S FAMILY ───
       { id: 43, firstName: 'Faadumo',   lastName: 'Cali',         rsvp: 'confirmed', event: 'both' },
       { id: 44, firstName: 'Khadra',    lastName: 'Yuusuf',       rsvp: 'confirmed', event: 'both' },
       { id: 45, firstName: 'Sahra',     lastName: 'Maxamed',      rsvp: 'confirmed', event: 'both' },
@@ -955,7 +952,7 @@ let checklistData = [
   }
 ];
 
-let _vcatId = 10, _vitId = 100, _gcatId = 10, _gitId = 800, _clitId = 100;
+let _vcatId = 10, _vitId = 100, _gcatId = 10, _gitId = 900, _clitId = 100;
 
 function guestStats() {
   let invited = 0, confirmed = 0, declined = 0, awaiting = 0;
