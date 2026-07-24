@@ -264,7 +264,7 @@
   .btn-gold { background: var(--gold); color: #1a1208; }
   .btn-gold:hover { background: #b8943d; }
   .table-scroll-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
-  .vendor-table { width: 100%; border-collapse: collapse; }
+  .vendor-table { width: 100%; min-width: 820px; border-collapse: collapse; table-layout: auto; }
   .vendor-table th {
     font-size: 10px;
     font-weight: 500;
@@ -283,6 +283,9 @@
     vertical-align: middle;
     font-size: 14px;
   }
+  .vendor-table td.vendor-name-cell { min-width: 200px; }
+  .vendor-table td.vendor-phone-cell { min-width: 200px; }
+  .vendor-table .editable-cell { min-width: 140px; }
   .vendor-table tr:last-child td { border-bottom: none; }
   .vendor-table tr:hover td { background: #252118; }
   .editable-cell {
@@ -574,54 +577,54 @@ let vendorData = [
   {
     id: 1, title: 'Venue',
     items: [
-      { id: 1, name: 'Royal King Event Centre', booked: 'booked', deposit: 'paid' },
+      { id: 1, name: 'Royal King Event Centre', booked: 'booked', deposit: 'paid', phone: '+1 (647) 354-0346', balance: 'paid' },
     ]
   },
   {
     id: 6, title: 'Decor',
     items: [
-      { id: 1, name: 'JN Events and Decor', booked: 'booked', deposit: 'paid' },
+      { id: 1, name: 'JN Events and Decor', booked: 'booked', deposit: 'paid', phone: '+1 (647) 893-4322', balance: 'unpaid' },
     ]
   },
   {
     id: 3, title: 'Catering',
     items: [
-      { id: 1, name: 'Maryan Afgooye Catering', booked: 'booked', deposit: 'none' },
-      { id: 2, name: 'Something Sweet Cake',    booked: 'booked', deposit: 'paid' },
+      { id: 1, name: 'Maryan Afgooye Catering', booked: 'booked', deposit: 'none',  phone: '+1 (647) 562-3339', balance: 'unpaid' },
+      { id: 2, name: 'Something Sweet Cake',    booked: 'booked', deposit: 'paid',  phone: '+1 (647) 921-3239', balance: 'unpaid' },
     ]
   },
   {
     id: 2, title: 'Photography & Film',
     items: [
-      { id: 1, name: 'Gali Weddings Photography', booked: 'booked', deposit: 'paid' },
-      { id: 2, name: 'Gali Weddings Videography', booked: 'booked', deposit: 'paid' },
-      { id: 3, name: 'Sol Photobooth',             booked: 'booked', deposit: 'paid' },
+      { id: 1, name: 'Gali Weddings Photography', booked: 'booked', deposit: 'paid', phone: '+1 (416) 270-4085', balance: 'unpaid' },
+      { id: 2, name: 'Gali Weddings Videography', booked: 'booked', deposit: 'paid', phone: '+1 (416) 270-4085', balance: 'unpaid' },
+      { id: 3, name: 'Sol Photobooth',             booked: 'booked', deposit: 'paid', phone: '+1 (647) 513-0103', balance: 'unpaid' },
     ]
   },
   {
     id: 4, title: 'Bride & Groom',
     items: [
-      { id: 1, name: 'Ilwad Shop Bridal Dress', booked: 'booked',     deposit: 'paid' },
-      { id: 2, name: 'NatebyBeauty Hair',        booked: 'booked',     deposit: 'paid' },
-      { id: 3, name: 'Makeup by HQ',             booked: 'booked',     deposit: 'paid' },
-      { id: 4, name: "Groom's Suit",             booked: 'booked',     deposit: 'paid' },
-      { id: 5, name: "Groom's Hair Cut",         booked: 'not booked', deposit: 'none' },
+      { id: 1, name: 'Ilwad Shop Bridal Dress', booked: 'booked',     deposit: 'paid', phone: '', balance: '' },
+      { id: 2, name: 'NatebyBeauty Hair',        booked: 'booked',     deposit: 'paid', phone: '+1 (647) 707-2339', balance: 'unpaid' },
+      { id: 3, name: 'Makeup by HQ',             booked: 'booked',     deposit: 'paid', phone: '+1 (647) 936-3972', balance: 'unpaid' },
+      { id: 4, name: "Groom's Suit",             booked: 'booked',     deposit: 'paid', phone: '', balance: '' },
+      { id: 5, name: "Groom's Hair Cut",         booked: 'not booked', deposit: 'none', phone: '', balance: '' },
     ]
   },
   {
     id: 5, title: 'Music & Entertainment',
     items: [
-      { id: 1, name: 'DJ HILKA',  booked: 'booked',     deposit: 'paid' },
-      { id: 2, name: 'Playlists', booked: 'booked',     deposit: 'none' },
+      { id: 1, name: 'DJ HILKA',  booked: 'booked',     deposit: 'paid', phone: '+1 (437) 808-8855', balance: 'unpaid' },
+      { id: 2, name: 'Playlists', booked: 'booked',     deposit: 'none', phone: '', balance: '' },
     ]
   },
   {
     id: 7, title: 'Logistics',
     items: [
-      { id: 1, name: 'Enterprise Markham', booked: 'booked',     deposit: 'paid' },
-      { id: 2, name: 'Radisson Hotel',     booked: 'booked',     deposit: 'paid' },
-      { id: 3, name: 'Nikkah Certificate', booked: 'booked',     deposit: 'paid' },
-      { id: 4, name: 'Officiant (Imam)',   booked: 'booked',     deposit: 'paid' },
+      { id: 1, name: 'Enterprise Markham', booked: 'booked',     deposit: 'paid', phone: '+1 (905) 471-2335', balance: 'paid' },
+      { id: 2, name: 'Radisson Hotel',     booked: 'booked',     deposit: 'paid', phone: '+1 (905) 364-9999', balance: 'paid' },
+      { id: 3, name: 'Nikkah Certificate', booked: 'booked',     deposit: 'paid', phone: '', balance: '' },
+      { id: 4, name: 'Officiant (Imam)',   booked: 'booked',     deposit: 'paid', phone: '', balance: '' },
     ]
   },
 ];
@@ -1072,6 +1075,18 @@ function depositPill(status) {
   if (status === 'pending') return `<span class="pill pill-amber">Pending</span>`;
   return `<span class="pill pill-grey">No Deposit</span>`;
 }
+function balancePill(status) {
+  if (status === 'paid')   return `<span class="pill pill-green">Paid</span>`;
+  if (status === 'unpaid') return `<span class="pill pill-red">Unpaid</span>`;
+  return `<span class="pill pill-grey" style="opacity:0.35">—</span>`;
+}
+function cycleBalance(catId, itemId) {
+  const cat = vendorData.find(c=>c.id===catId);
+  const item = cat.items.find(i=>i.id===itemId);
+  const seq = ['', 'unpaid', 'paid'];
+  item.balance = seq[(seq.indexOf(item.balance)+1) % 3];
+  renderAll();
+}
 function cycleBooked(catId, itemId) {
   const cat = vendorData.find(c=>c.id===catId);
   const item = cat.items.find(i=>i.id===itemId);
@@ -1113,16 +1128,20 @@ function renderVendors() {
       <table class="vendor-table">
         <thead><tr>
           <th>Vendor</th>
-          <th style="width:120px">Booked</th>
+          <th style="width:210px">Phone</th>
+          <th style="width:110px">Booked</th>
           <th style="width:120px">Deposit</th>
+          <th style="width:110px">Balance</th>
         </tr></thead>
         <tbody>
     `;
     cat.items.forEach(item => {
       html += `<tr>
-        <td><input class="editable-cell" value="${esc(item.name)}" onchange="updateVendorField(${cat.id},${item.id},'name',this.value)" placeholder="Vendor name"/></td>
+        <td class="vendor-name-cell"><input class="editable-cell" value="${esc(item.name)}" onchange="updateVendorField(${cat.id},${item.id},'name',this.value)" placeholder="Vendor name"/></td>
+        <td class="vendor-phone-cell"><input class="editable-cell" value="${esc(item.phone||'')}" onchange="updateVendorField(${cat.id},${item.id},'phone',this.value)" placeholder="Phone..."/></td>
         <td><span onclick="cycleBooked(${cat.id},${item.id})" style="cursor:pointer">${bookedPill(item.booked)}</span></td>
         <td><span onclick="cycleDeposit(${cat.id},${item.id})" style="cursor:pointer">${depositPill(item.deposit)}</span></td>
+        <td><span onclick="cycleBalance(${cat.id},${item.id})" style="cursor:pointer">${balancePill(item.balance)}</span></td>
       </tr>`;
     });
     html += `</tbody></table></div></div>`;
